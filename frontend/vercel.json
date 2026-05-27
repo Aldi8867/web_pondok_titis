@@ -3,7 +3,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/user.html"
+      "destination": "/frontend/user.html"
+    },
+    {
+      "source": "/(css|js|images)/(.*)",
+      "destination": "/frontend/$1/$2"
     }
   ]
 }

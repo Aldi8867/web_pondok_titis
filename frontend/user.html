@@ -133,7 +133,8 @@
             gap: 16px;
         }
 
-        #btnThemeToggle, #btnLanguageToggle {
+        #btnThemeToggle,
+        #btnLanguageToggle {
             background: transparent;
             border: none;
             font-size: 1.1rem;
@@ -147,13 +148,15 @@
             transition: opacity 0.2s;
         }
 
-        #btnThemeToggle svg, #btnLanguageToggle svg {
+        #btnThemeToggle svg,
+        #btnLanguageToggle svg {
             width: 24px;
             height: 24px;
             display: block;
         }
 
-        #btnThemeToggle:hover, #btnLanguageToggle:hover {
+        #btnThemeToggle:hover,
+        #btnLanguageToggle:hover {
             opacity: 0.8;
         }
 
@@ -170,10 +173,10 @@
             border-radius: 60px;
             padding: 6px 12px;
             cursor: pointer;
-            transition: all 0.2s, 
-                        width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                        padding 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                        gap 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s,
+                width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                gap 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
             width: 84px;
             height: 44px;
@@ -189,9 +192,9 @@
             width: 20px;
             height: 20px;
             stroke: currentColor;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                        width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             flex-shrink: 0;
         }
 
@@ -321,7 +324,7 @@
         .location-hero {
             position: relative;
             background-color: var(--bg-card);
-            background-image: 
+            background-image:
                 linear-gradient(var(--border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border) 1px, transparent 1px);
             background-size: 44px 44px;
@@ -650,6 +653,7 @@
                 opacity: 0;
                 transform: translateY(30px) scale(0.98);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -1422,7 +1426,8 @@
             text-transform: uppercase;
         }
 
-        .form-group input, .form-group select {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 12px 16px;
             border-radius: 14px;
@@ -1436,7 +1441,8 @@
             transition: all 0.2s ease;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.15);
         }
@@ -1515,7 +1521,7 @@
             border-radius: 24px;
             padding: 12px;
             background: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             max-width: 280px;
             width: 100%;
             display: flex;
@@ -1666,7 +1672,7 @@
             width: 100%;
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
             position: relative;
@@ -1851,9 +1857,11 @@
                 background: white !important;
                 color: black !important;
             }
-            body > :not(#receiptModal) {
+
+            body> :not(#receiptModal) {
                 display: none !important;
             }
+
             #receiptModal {
                 position: static !important;
                 width: 100% !important;
@@ -1864,6 +1872,7 @@
                 margin: 0 !important;
                 box-shadow: none !important;
             }
+
             .modal-content.receipt-print-content {
                 background: white !important;
                 box-shadow: none !important;
@@ -1873,6 +1882,7 @@
                 padding: 0 !important;
                 margin: 0 !important;
             }
+
             .receipt-sheet {
                 border: none !important;
                 box-shadow: none !important;
@@ -1881,6 +1891,7 @@
                 max-width: 100% !important;
                 width: 100% !important;
             }
+
             .no-print {
                 display: none !important;
             }
@@ -1910,7 +1921,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 5;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             outline: none;
         }
 
@@ -1932,9 +1943,11 @@
             0% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.35);
             }
+
             100% {
                 transform: scale(1);
             }
@@ -1976,7 +1989,7 @@
             border: 1px solid var(--glass-border) !important;
             background: var(--bg-card) !important;
         }
-        
+
         .modal-left-split {
             flex: 1.1;
             background: linear-gradient(135deg, rgba(219, 39, 119, 0.93), rgba(249, 115, 22, 0.93)), url('images/titis_exterior.png');
@@ -1991,12 +2004,15 @@
             text-align: center;
             position: relative;
         }
-        
+
         .modal-left-split::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 80%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
             pointer-events: none;
         }
 
@@ -2005,7 +2021,7 @@
             font-weight: 900;
             letter-spacing: -1px;
             margin-bottom: 16px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         .modal-left-split p {
@@ -2033,9 +2049,11 @@
                 height: auto;
                 max-height: 90vh;
             }
+
             .modal-left-split {
                 display: none !important;
             }
+
             .modal-right-split {
                 padding: 32px 24px;
             }
@@ -2223,7 +2241,7 @@
             border-radius: 24px;
             overflow: hidden;
             height: 280px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border);
             cursor: pointer;
             transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -2238,7 +2256,7 @@
 
         .highlights-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(219,39,119,0.15);
+            box-shadow: 0 20px 40px rgba(219, 39, 119, 0.15);
             border-color: var(--primary);
         }
 
@@ -2248,7 +2266,9 @@
 
         .highlights-overlay {
             position: absolute;
-            left: 0; right: 0; bottom: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.3) 70%, transparent 100%);
             padding: 24px;
             color: white;
@@ -2286,7 +2306,10 @@
         /* ========== INTERACTIVE WEB ONBOARDING TOUR ========== */
         .tour-overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: transparent;
             backdrop-filter: blur(3px);
             z-index: 99999;
@@ -2294,10 +2317,12 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
+
         .tour-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
+
         .tour-spotlight {
             display: none;
             position: absolute;
@@ -2309,29 +2334,37 @@
             border: 2px solid var(--primary);
             opacity: 0;
         }
+
         .tour-spotlight.active {
             display: block;
             opacity: 1;
         }
+
         .tour-pulse-ring {
             position: absolute;
-            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
             border: 3px solid var(--primary);
             border-radius: 24px;
             animation: tourPulse 2s infinite ease-out;
             pointer-events: none;
         }
+
         @keyframes tourPulse {
             0% {
                 transform: scale(0.96);
                 opacity: 1;
             }
+
             100% {
                 transform: scale(1.15);
                 opacity: 0;
                 box-shadow: 0 0 20px var(--primary);
             }
         }
+
         .tour-tooltip {
             display: none;
             position: absolute;
@@ -2349,17 +2382,20 @@
             pointer-events: none;
             color: #0f172a;
         }
+
         [data-theme="dark"] .tour-tooltip {
             background: rgba(30, 41, 59, 0.92);
             border-color: rgba(255, 255, 255, 0.08);
             color: #f8fafc;
         }
+
         .tour-tooltip.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
         }
+
         .tour-step-badge {
             display: inline-block;
             background: rgba(219, 39, 119, 0.12);
@@ -2372,12 +2408,14 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .tour-title {
             font-size: 1.15rem;
             font-weight: 850;
             margin-bottom: 8px;
             letter-spacing: -0.4px;
         }
+
         .tour-desc {
             font-size: 0.85rem;
             line-height: 1.5;
@@ -2385,14 +2423,17 @@
             color: #475569;
             margin-bottom: 20px;
         }
+
         [data-theme="dark"] .tour-desc {
             color: #94a3b8;
         }
+
         .tour-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .tour-btn-skip {
             background: transparent;
             border: none;
@@ -2404,17 +2445,21 @@
             border-radius: 8px;
             transition: all 0.2s;
         }
+
         .tour-btn-skip:hover {
             color: var(--text);
             background: rgba(0, 0, 0, 0.05);
         }
+
         [data-theme="dark"] .tour-btn-skip:hover {
             background: rgba(255, 255, 255, 0.05);
         }
+
         .tour-nav-btns {
             display: flex;
             gap: 8px;
         }
+
         .tour-btn-nav {
             padding: 8px 16px;
             border-radius: 50px;
@@ -2426,20 +2471,24 @@
             color: var(--text);
             transition: all 0.2s;
         }
+
         .tour-btn-nav:hover {
             background: var(--bg-section);
         }
+
         .tour-btn-nav.primary {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
             box-shadow: 0 4px 10px rgba(219, 39, 119, 0.25);
         }
+
         .tour-btn-nav.primary:hover {
             background: var(--primary-dark);
             box-shadow: 0 6px 15px rgba(219, 39, 119, 0.4);
             transform: translateY(-1px);
         }
+
         /* Highlight active zoom styling with hardware acceleration */
         .tour-highlighted-element {
             transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.45s ease !important;
@@ -2448,6 +2497,7 @@
             z-index: 100002 !important;
             position: relative !important;
         }
+
         .tour-ancestor-highlight {
             z-index: 100001 !important;
             position: relative !important;
@@ -2459,7 +2509,10 @@
 
     <nav class="glass-navbar">
         <div class="nav-content">
-            <a href="#" class="logo" id="logoHome" style="display: flex; align-items: center; gap: 8px;">Pondok Titis <span style="font-size: 0.65rem; background: rgba(219, 39, 119, 0.12); color: #db2777; padding: 3px 10px; border-radius: 20px; font-weight: 800; border: 1px solid rgba(219,39,119,0.25); text-transform: uppercase; letter-spacing: 0.5px;">Khusus Putri</span></a>
+            <a href="#" class="logo" id="logoHome" style="display: flex; align-items: center; gap: 8px;">Pondok Titis
+                <span
+                    style="font-size: 0.65rem; background: rgba(219, 39, 119, 0.12); color: #db2777; padding: 3px 10px; border-radius: 20px; font-weight: 800; border: 1px solid rgba(219,39,119,0.25); text-transform: uppercase; letter-spacing: 0.5px;">Khusus
+                    Putri</span></a>
 
             <div class="nav-product-tabs">
                 <div class="nav-tab-slider"></div>
@@ -2468,8 +2521,44 @@
             </div>
 
             <div class="nav-utilities">
-                <button id="btnThemeToggle" aria-label="Toggle Theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path fill="#db2777" fill-opacity=".3" d="M12 6c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z"><animate fill="freeze" attributeName="d" dur="0.6s" values="M12 26c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z;M12 6c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z"/></path><g fill="none"><path d="M12 21v1M21 12h1M12 3v-1M3 12h-1" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.7s" to="1"/><animate fill="freeze" attributeName="d" begin="0.7s" dur="0.2s" values="M12 19v1M19 12h1M12 5v-1M5 12h-1;M12 21v1M21 12h1M12 3v-1M3 12h-1"/></path><path d="M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.9s" to="1"/><animate fill="freeze" attributeName="d" begin="0.9s" dur="0.2s" values="M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5;M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5"/></path></g></g></svg></button>
-                <button id="btnLanguageToggle" aria-label="Toggle Language"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-linecap="round" stroke-width="2"><path stroke-linejoin="round" d="M14 19c3.771 0 5.657 0 6.828-1.172S22 14.771 22 11s0-5.657-1.172-6.828S17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172S2 7.229 2 11s0 5.657 1.172 6.828c.653.654 1.528.943 2.828 1.07"/><path d="M14 19c-1.236 0-2.598.5-3.841 1.145c-1.998 1.037-2.997 1.556-3.489 1.225s-.399-1.355-.212-3.404L6.5 17.5"/><path stroke-linejoin="round" d="m5.5 13.5l1-2m0 0l1.106-2.211a1 1 0 0 1 1.788 0L10.5 11.5m-4 0h4m0 0l1 2m1-6h1.982V9c0 .5-.496 1.5-1.487 1.5m3.964-3v2m0 0v4m0-4H18.5"/></g></svg> ID</button>
+                <button id="btnThemeToggle" aria-label="Toggle Theme"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24">
+                        <g stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path fill="#db2777" fill-opacity=".3"
+                                d="M12 6c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z">
+                                <animate fill="freeze" attributeName="d" dur="0.6s"
+                                    values="M12 26c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z;M12 6c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z" />
+                            </path>
+                            <g fill="none">
+                                <path d="M12 21v1M21 12h1M12 3v-1M3 12h-1" opacity="0">
+                                    <animateTransform attributeName="transform" dur="30s" repeatCount="indefinite"
+                                        type="rotate" values="0 12 12;360 12 12" />
+                                    <set fill="freeze" attributeName="opacity" begin="0.7s" to="1" />
+                                    <animate fill="freeze" attributeName="d" begin="0.7s" dur="0.2s"
+                                        values="M12 19v1M19 12h1M12 5v-1M5 12h-1;M12 21v1M21 12h1M12 3v-1M3 12h-1" />
+                                </path>
+                                <path d="M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5"
+                                    opacity="0">
+                                    <animateTransform attributeName="transform" dur="30s" repeatCount="indefinite"
+                                        type="rotate" values="0 12 12;360 12 12" />
+                                    <set fill="freeze" attributeName="opacity" begin="0.9s" to="1" />
+                                    <animate fill="freeze" attributeName="d" begin="0.9s" dur="0.2s"
+                                        values="M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5;M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5" />
+                                </path>
+                            </g>
+                        </g>
+                    </svg></button>
+                <button id="btnLanguageToggle" aria-label="Toggle Language"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24">
+                        <g fill="none" stroke="#db2777" stroke-linecap="round" stroke-width="2">
+                            <path stroke-linejoin="round"
+                                d="M14 19c3.771 0 5.657 0 6.828-1.172S22 14.771 22 11s0-5.657-1.172-6.828S17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172S2 7.229 2 11s0 5.657 1.172 6.828c.653.654 1.528.943 2.828 1.07" />
+                            <path
+                                d="M14 19c-1.236 0-2.598.5-3.841 1.145c-1.998 1.037-2.997 1.556-3.489 1.225s-.399-1.355-.212-3.404L6.5 17.5" />
+                            <path stroke-linejoin="round"
+                                d="m5.5 13.5l1-2m0 0l1.106-2.211a1 1 0 0 1 1.788 0L10.5 11.5m-4 0h4m0 0l1 2m1-6h1.982V9c0 .5-.496 1.5-1.487 1.5m3.964-3v2m0 0v4m0-4H18.5" />
+                        </g>
+                    </svg> ID</button>
 
                 <div class="user-menu-wrapper">
                     <div class="user-menu-btn" id="btnUserMenu">
@@ -2477,7 +2566,15 @@
                             <path d="m2 16h28m-28 7h28m-28-14h28" fill="none" stroke="currentColor" stroke-width="3">
                             </path>
                         </svg>
-                        <div class="avatar-fallback" id="navAvatar" style="background: transparent;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none"><path stroke="#db2777" stroke-width="2" d="M21 12a8.96 8.96 0 0 1-1.526 5.016A8.99 8.99 0 0 1 12 21a8.99 8.99 0 0 1-7.474-3.984A9 9 0 1 1 21 12Z"/><path fill="#db2777" d="M13 9a1 1 0 0 1-1 1v2a3 3 0 0 0 3-3zm-1 1a1 1 0 0 1-1-1H9a3 3 0 0 0 3 3zm-1-1a1 1 0 0 1 1-1V6a3 3 0 0 0-3 3zm1-1a1 1 0 0 1 1 1h2a3 3 0 0 0-3-3zm-6.834 9.856l-.959-.285l-.155.523l.355.413zm13.668 0l.76.651l.354-.413l-.155-.523zM9 16h6v-2H9zm0-2a5 5 0 0 0-4.793 3.571l1.917.57A3 3 0 0 1 9 16zm3 6a7.98 7.98 0 0 1-6.075-2.795l-1.518 1.302A9.98 9.98 0 0 0 12 22zm3-4c1.357 0 2.506.902 2.876 2.142l1.916-.571A5 5 0 0 0 15 14zm3.075 1.205A7.98 7.98 0 0 1 12 20v2a9.98 9.98 0 0 0 7.593-3.493z"/></g></svg></div>
+                        <div class="avatar-fallback" id="navAvatar" style="background: transparent;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                <g fill="none">
+                                    <path stroke="#db2777" stroke-width="2"
+                                        d="M21 12a8.96 8.96 0 0 1-1.526 5.016A8.99 8.99 0 0 1 12 21a8.99 8.99 0 0 1-7.474-3.984A9 9 0 1 1 21 12Z" />
+                                    <path fill="#db2777"
+                                        d="M13 9a1 1 0 0 1-1 1v2a3 3 0 0 0 3-3zm-1 1a1 1 0 0 1-1-1H9a3 3 0 0 0 3 3zm-1-1a1 1 0 0 1 1-1V6a3 3 0 0 0-3 3zm1-1a1 1 0 0 1 1 1h2a3 3 0 0 0-3-3zm-6.834 9.856l-.959-.285l-.155.523l.355.413zm13.668 0l.76.651l.354-.413l-.155-.523zM9 16h6v-2H9zm0-2a5 5 0 0 0-4.793 3.571l1.917.57A3 3 0 0 1 9 16zm3 6a7.98 7.98 0 0 1-6.075-2.795l-1.518 1.302A9.98 9.98 0 0 0 12 22zm3-4c1.357 0 2.506.902 2.876 2.142l1.916-.571A5 5 0 0 0 15 14zm3.075 1.205A7.98 7.98 0 0 1 12 20v2a9.98 9.98 0 0 0 7.593-3.493z" />
+                                </g>
+                            </svg></div>
                     </div>
 
                     <div class="user-dropdown" id="userDropdown">
@@ -2488,18 +2585,73 @@
                                 <div class="dropdown-user-email" id="dropEmail">-</div>
                             </div>
                         </div>
-                        <button class="dropdown-menu-item" id="btnMyRoomMenu" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M2 19v-6q0-.675.275-1.225T3 10.8V8q0-1.25.875-2.125T6 5h4q.575 0 1.075.213T12 5.8q.425-.375.925-.587T14 5h4q1.25 0 2.125.875T21 8v2.8q.45.425.725.975T22 13v6h-2v-2H4v2zm11-9h6V8q0-.425-.288-.712T18 7h-4q-.425 0-.712.288T13 8zm-8 0h6V8q0-.425-.288-.712T10 7H6q-.425 0-.712.288T5 8z"/></svg> <span id="txtMyRoom">Kamar Saya</span></button>
-                        <button class="dropdown-menu-item" id="btnHistoryMenu" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16"><path fill="#db2777" d="M7 2H5a3.5 3.5 0 1 0 0 7h2v3H2.5v2H7v2h2v-2h2a3.5 3.5 0 1 0 0-7H9V4h4.5V2H9V0H7zm2 7h2a1.5 1.5 0 0 1 0 3H9zM7 7H5a1.5 1.5 0 1 1 0-3h2z"/></svg> <span id="txtHistory">Riwayat Pembayaran</span></button>
+                        <button class="dropdown-menu-item" id="btnMyRoomMenu" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                <path fill="#db2777"
+                                    d="M2 19v-6q0-.675.275-1.225T3 10.8V8q0-1.25.875-2.125T6 5h4q.575 0 1.075.213T12 5.8q.425-.375.925-.587T14 5h4q1.25 0 2.125.875T21 8v2.8q.45.425.725.975T22 13v6h-2v-2H4v2zm11-9h6V8q0-.425-.288-.712T18 7h-4q-.425 0-.712.288T13 8zm-8 0h6V8q0-.425-.288-.712T10 7H6q-.425 0-.712.288T5 8z" />
+                            </svg> <span id="txtMyRoom">Kamar Saya</span></button>
+                        <button class="dropdown-menu-item" id="btnHistoryMenu" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
+                                <path fill="#db2777"
+                                    d="M7 2H5a3.5 3.5 0 1 0 0 7h2v3H2.5v2H7v2h2v-2h2a3.5 3.5 0 1 0 0-7H9V4h4.5V2H9V0H7zm2 7h2a1.5 1.5 0 0 1 0 3H9zM7 7H5a1.5 1.5 0 1 1 0-3h2z" />
+                            </svg> <span id="txtHistory">Riwayat Pembayaran</span></button>
 
-                        <button class="dropdown-menu-item" id="btnWatchlist"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z"/></svg> <span id="txtWatchlist">Watchlist Tersimpan</span></button>
-                        <button class="dropdown-menu-item" id="btnProfileMenu" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-width="2"><path stroke-linejoin="round" d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="7" r="3"/></g></svg> <span id="txtProfile">Profil Saya</span></button>
-                        <button class="dropdown-menu-item" id="btnChangePasswordMenu" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M7 14c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2m5.6-4c-.8-2.3-3-4-5.6-4c-3.3 0-6 2.7-6 6s2.7 6 6 6c2.6 0 4.8-1.7 5.6-4H16v4h4v-4h3v-4z"/></svg> <span id="txtChangePassword">Ganti Password</span></button>
-                        <button class="dropdown-menu-item" id="btnReplayTour"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 12a9 9 0 1 0-9 9M3.6 9h3.6V5.4M3.6 9l4-4"/></g></svg> <span id="txtReplayTour">Mulai Tur Website</span></button>
-                        <a href="https://wa.me/6285128067691" target="_blank" class="dropdown-menu-item" id="btnHelp"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9h8m-8 4h6m4-9a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/></svg> <span id="txtHelp">Pusat Bantuan</span></a>
-                        <button class="dropdown-menu-item" id="btnTerms"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M11.675 21.875q-.15-.025-.3-.075Q8 20.675 6 17.637T4 11.1V6.375q0-.625.363-1.125t.937-.725l6-2.25q.35-.125.7-.125t.7.125l6 2.25q.575.225.938.725T20 6.375V9q0 .425-.288.713T19 10t-.712-.288T18 9V6.375l-6-2.25l-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3q.4-.125.788-.3t.762-.4q.35-.2.762-.15t.663.4t.162.75t-.437.625q-.5.3-1 .538t-1.075.437q-.15.05-.3.075T12 21.9t-.325-.025m8.613-.162Q20 21.425 20 21t.288-.712T21 20t.713.288T22 21t-.288.713T21 22t-.712-.288M20 17v-4q0-.425.288-.712T21 12t.713.288T22 13v4q0 .425-.288.713T21 18t-.712-.288T20 17m-6.587-3.587Q14 12.825 14 12t-.587-1.412T12 10t-1.412.588T10 12t.588 1.413T12 14t1.413-.587M12 16q-1.65 0-2.825-1.175T8 12t1.175-2.825T12 8t2.825 1.175T16 12q0 .55-.137 1.063t-.413.987l2.25 2.25q.3.3.3.713t-.3.712t-.7.3t-.7-.3L14 15.45q-.45.275-.962.413T12 16"/></svg> <span id="txtTerms">Syarat & Ketentuan</span></button>
-                        <button class="dropdown-menu-item" id="btnPrivacy"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20"><path fill="#db2777" d="M10 9.6c-.6 0-1 .4-1 1c0 .4.3.7.6.8l-.3 1.4h1.3l-.3-1.4c.4-.1.6-.4.6-.8c.1-.6-.3-1-.9-1m.1-4.3c-.7 0-1.4.5-1.4 1.2V8h2.7V6.5c-.1-.7-.6-1.2-1.3-1.2M10 2L3 5v3c.1 4.4 2.9 8.3 7 9.9c4.1-1.6 6.9-5.5 7-9.9V5zm4 11c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h.3V6.5C7.4 5.1 8.6 4 10 4s2.6 1.1 2.7 2.5V8h.3c.6 0 1 .4 1 1z"/></svg> <span id="txtPrivacy">Kebijakan Privasi</span></button>
-                        <button class="lc-btn lc-btn-login" id="dropBtnLogin"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8z"/></svg><span id="txtLogin">Daftar / Login</span></button>
-                        <button class="lc-btn lc-btn-logout" id="dropBtnLogout" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 2h11a3 3 0 0 1 3 3v14a1 1 0 0 1-1 1h-3"/><path d="m5 2l7.588 1.518A3 3 0 0 1 15 6.459V20.78a1 1 0 0 1-1.196.98l-7.196-1.438A2 2 0 0 1 5 18.36zm7 10v2"/></g></svg><span id="txtLogout">Keluar</span></button>
+                        <button class="dropdown-menu-item" id="btnWatchlist"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="18" height="18" viewBox="0 0 24 24">
+                                <path fill="#db2777"
+                                    d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z" />
+                            </svg> <span id="txtWatchlist">Watchlist Tersimpan</span></button>
+                        <button class="dropdown-menu-item" id="btnProfileMenu" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                <g fill="none" stroke="#db2777" stroke-width="2">
+                                    <path stroke-linejoin="round"
+                                        d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" />
+                                    <circle cx="12" cy="7" r="3" />
+                                </g>
+                            </svg> <span id="txtProfile">Profil Saya</span></button>
+                        <button class="dropdown-menu-item" id="btnChangePasswordMenu" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                <path fill="#db2777"
+                                    d="M7 14c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2m5.6-4c-.8-2.3-3-4-5.6-4c-3.3 0-6 2.7-6 6s2.7 6 6 6c2.6 0 4.8-1.7 5.6-4H16v4h4v-4h3v-4z" />
+                            </svg> <span id="txtChangePassword">Ganti Password</span></button>
+                        <button class="dropdown-menu-item" id="btnReplayTour"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="18" height="18" viewBox="0 0 24 24">
+                                <g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path d="M21 12a9 9 0 1 0-9 9M3.6 9h3.6V5.4M3.6 9l4-4" />
+                                </g>
+                            </svg> <span id="txtReplayTour">Mulai Tur Website</span></button>
+                        <a href="https://wa.me/6285128067691" target="_blank" class="dropdown-menu-item"
+                            id="btnHelp"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24">
+                                <path fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 9h8m-8 4h6m4-9a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" />
+                            </svg> <span id="txtHelp">Pusat Bantuan</span></a>
+                        <button class="dropdown-menu-item" id="btnTerms"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="18" height="18" viewBox="0 0 24 24">
+                                <path fill="#db2777"
+                                    d="M11.675 21.875q-.15-.025-.3-.075Q8 20.675 6 17.637T4 11.1V6.375q0-.625.363-1.125t.937-.725l6-2.25q.35-.125.7-.125t.7.125l6 2.25q.575.225.938.725T20 6.375V9q0 .425-.288.713T19 10t-.712-.288T18 9V6.375l-6-2.25l-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3q.4-.125.788-.3t.762-.4q.35-.2.762-.15t.663.4t.162.75t-.437.625q-.5.3-1 .538t-1.075.437q-.15.05-.3.075T12 21.9t-.325-.025m8.613-.162Q20 21.425 20 21t.288-.712T21 20t.713.288T22 21t-.288.713T21 22t-.712-.288M20 17v-4q0-.425.288-.712T21 12t.713.288T22 13v4q0 .425-.288.713T21 18t-.712-.288T20 17m-6.587-3.587Q14 12.825 14 12t-.587-1.412T12 10t-1.412.588T10 12t.588 1.413T12 14t1.413-.587M12 16q-1.65 0-2.825-1.175T8 12t1.175-2.825T12 8t2.825 1.175T16 12q0 .55-.137 1.063t-.413.987l2.25 2.25q.3.3.3.713t-.3.712t-.7.3t-.7-.3L14 15.45q-.45.275-.962.413T12 16" />
+                            </svg> <span id="txtTerms">Syarat & Ketentuan</span></button>
+                        <button class="dropdown-menu-item" id="btnPrivacy"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="18" height="18" viewBox="0 0 20 20">
+                                <path fill="#db2777"
+                                    d="M10 9.6c-.6 0-1 .4-1 1c0 .4.3.7.6.8l-.3 1.4h1.3l-.3-1.4c.4-.1.6-.4.6-.8c.1-.6-.3-1-.9-1m.1-4.3c-.7 0-1.4.5-1.4 1.2V8h2.7V6.5c-.1-.7-.6-1.2-1.3-1.2M10 2L3 5v3c.1 4.4 2.9 8.3 7 9.9c4.1-1.6 6.9-5.5 7-9.9V5zm4 11c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h.3V6.5C7.4 5.1 8.6 4 10 4s2.6 1.1 2.7 2.5V8h.3c.6 0 1 .4 1 1z" />
+                            </svg> <span id="txtPrivacy">Kebijakan Privasi</span></button>
+                        <button class="lc-btn lc-btn-login" id="dropBtnLogin"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="18" height="18" viewBox="0 0 24 24">
+                                <path fill="#db2777"
+                                    d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8z" />
+                            </svg><span id="txtLogin">Daftar / Login</span></button>
+                        <button class="lc-btn lc-btn-logout" id="dropBtnLogout" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                <g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2">
+                                    <path d="M5 2h11a3 3 0 0 1 3 3v14a1 1 0 0 1-1 1h-3" />
+                                    <path
+                                        d="m5 2l7.588 1.518A3 3 0 0 1 15 6.459V20.78a1 1 0 0 1-1.196.98l-7.196-1.438A2 2 0 0 1 5 18.36zm7 10v2" />
+                                </g>
+                            </svg><span id="txtLogout">Keluar</span></button>
                     </div>
                 </div>
             </div>
@@ -2510,18 +2662,22 @@
         <!-- Hidden elements to preserve compatibility with existing JS variables -->
         <img id="heroImg" src="" alt="" style="display: none;">
         <span id="heroTitle" style="display: none;"></span>
-        
+
         <div class="hero-content">
             <h1 class="hero-title" id="heroTitleVisible">Lokasi STRATEGIS, Pilihan EKONOMIS</h1>
-            <p class="hero-subtitle" id="heroSubtitle">Temukan kenyamanan hunian kos bersahabat dengan akses mudah dan fasilitas lengkap untuk produktivitas maksimal Anda.</p>
-            
+            <p class="hero-subtitle" id="heroSubtitle">Temukan kenyamanan hunian kos bersahabat dengan akses mudah dan
+                fasilitas lengkap untuk produktivitas maksimal Anda.</p>
+
             <div class="search-capsule" id="btnSearchCapsule">
                 <div class="search-capsule-text">
                     <span class="search-title" id="txtSearchCapsuleTitle">Cari Kamar Kos</span>
                     <span class="search-subtitle" id="txtSearchCapsuleSub">Pilih tipe & tanggal...</span>
                 </div>
                 <div class="search-circle-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M16 17h-1v1h-2v1H7v-1H5v-1H4v-1H3v-1H2v-2H1V7h1V5h1V4h1V3h1V2h2V1h6v1h2v1h1v1h1v1h1v2h1v6h-1v2h-1v1h-1zm7 3v2h-1v1h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h1v1z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M16 17h-1v1h-2v1H7v-1H5v-1H4v-1H3v-1H2v-2H1V7h1V5h1V4h1V3h1V2h2V1h6v1h2v1h1v1h1v1h1v2h1v6h-1v2h-1v1h-1zm7 3v2h-1v1h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h1v1z" />
+                    </svg>
                 </div>
             </div>
         </div>
@@ -2530,71 +2686,83 @@
     <main style="max-width: 1280px; margin: 0 auto; padding: 40px 24px;">
         <!-- Highlights Gallery Section -->
         <div class="highlights-section" id="highlightsSection" style="margin-top: 0; margin-bottom: 60px;">
-            <h2 class="locations-title" id="highlightsTitle" data-translate-key="highlightsTitle" style="text-align: center; margin-bottom: 8px;">Pondok Titis Highlights</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;" data-translate-key="highlightsSub">Galeri fasilitas terbaik dan kenyamanan hunian khusus putri Pondok Titis.</p>
-            
+            <h2 class="locations-title" id="highlightsTitle" data-translate-key="highlightsTitle"
+                style="text-align: center; margin-bottom: 8px;">Pondok Titis Highlights</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;"
+                data-translate-key="highlightsSub">Galeri fasilitas terbaik dan kenyamanan hunian khusus putri Pondok
+                Titis.</p>
+
             <div class="highlights-grid">
                 <div class="highlights-card">
                     <img src="images/halaman 1.jpeg" alt="Lokasi Strategis Dekat Kampus">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_1">Lokasi Strategis, Dekat Kampus</h3>
-                        <p data-translate-key="hlDesc_1">Terletak di area strategis dekat kampus-kampus ternama, akses mudah ke pusat kota &amp; transportasi umum.</p>
+                        <p data-translate-key="hlDesc_1">Terletak di area strategis dekat kampus-kampus ternama, akses
+                            mudah ke pusat kota &amp; transportasi umum.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 2.jpeg" alt="Halaman Luas dan Asri">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_2">Halaman Luas &amp; Asri</h3>
-                        <p data-translate-key="hlDesc_2">Halaman depan yang luas, rapi, dan teduh — cocok untuk bersantai setelah aktivitas padat.</p>
+                        <p data-translate-key="hlDesc_2">Halaman depan yang luas, rapi, dan teduh — cocok untuk
+                            bersantai setelah aktivitas padat.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 3.jpeg" alt="Toko Pribadi di Area Kos">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_3">Toko Pribadi di Area Kosan</h3>
-                        <p data-translate-key="hlDesc_3">Tersedia toko pribadi di dalam area kosan untuk kebutuhan sehari-hari tanpa perlu keluar jauh.</p>
+                        <p data-translate-key="hlDesc_3">Tersedia toko pribadi di dalam area kosan untuk kebutuhan
+                            sehari-hari tanpa perlu keluar jauh.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 4.jpeg" alt="Rumah Luas dan Bersih">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_4">Ruangan Luas &amp; Bersih</h3>
-                        <p data-translate-key="hlDesc_4">Interior bangunan yang luas, terawat, dan bersih — memberikan kenyamanan maksimal bagi penghuni.</p>
+                        <p data-translate-key="hlDesc_4">Interior bangunan yang luas, terawat, dan bersih — memberikan
+                            kenyamanan maksimal bagi penghuni.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 5.jpeg" alt="Dapur Bersama Lengkap">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_5">Dapur Bersama Lengkap</h3>
-                        <p data-translate-key="hlDesc_5">Dapur bersama yang bersih dan lengkap dengan peralatan masak, kulkas, serta dispenser air minum.</p>
+                        <p data-translate-key="hlDesc_5">Dapur bersama yang bersih dan lengkap dengan peralatan masak,
+                            kulkas, serta dispenser air minum.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 6.jpeg" alt="Mushola Bersama">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_6">Mushola Bersama</h3>
-                        <p data-translate-key="hlDesc_6">Fasilitas mushola bersama yang nyaman dan bersih untuk ibadah penghuni setiap waktu.</p>
+                        <p data-translate-key="hlDesc_6">Fasilitas mushola bersama yang nyaman dan bersih untuk ibadah
+                            penghuni setiap waktu.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 7.jpeg" alt="Balkon Bersama">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_7">Balkon Bersama</h3>
-                        <p data-translate-key="hlDesc_7">Area balkon bersama yang luas untuk bersantai, menjemur pakaian, dan menikmati udara segar.</p>
+                        <p data-translate-key="hlDesc_7">Area balkon bersama yang luas untuk bersantai, menjemur
+                            pakaian, dan menikmati udara segar.</p>
                     </div>
                 </div>
                 <div class="highlights-card">
                     <img src="images/halaman 8.jpeg" alt="Kamar Mandi Modern dan Bersih">
                     <div class="highlights-overlay">
                         <h3 data-translate-key="hlTitle_8">Kamar Mandi Modern &amp; Bersih</h3>
-                        <p data-translate-key="hlDesc_8">Kamar mandi dengan desain modern, bersih, dan terawat untuk kenyamanan sehari-hari Anda.</p>
+                        <p data-translate-key="hlDesc_8">Kamar mandi dengan desain modern, bersih, dan terawat untuk
+                            kenyamanan sehari-hari Anda.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="filter-bar-location">
-            <input type="text" id="searchRoomInput" placeholder="Cari nama kamar..." style="padding: 12px 20px; border-radius: 40px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 14px; flex: 1; min-width: 200px;">
+            <input type="text" id="searchRoomInput" placeholder="Cari nama kamar..."
+                style="padding: 12px 20px; border-radius: 40px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 14px; flex: 1; min-width: 200px;">
             <select id="filterLantai">
                 <option value="all">Semua Lantai</option>
                 <option value="1">Lantai 1</option>
@@ -2623,7 +2791,9 @@
         <div class="about-section">
             <div class="about-info">
                 <h2 class="about-title" id="aboutTitle">Tentang Kami</h2>
-                <p class="about-desc" id="aboutDesc">Pondok Titis berdiri sejak 2010, menyediakan hunian nyaman dengan fasilitas lengkap untuk mahasiswa dan pekerja. Kami berkomitmen memberikan pelayanan terbaik untuk kenyamanan Anda.</p>
+                <p class="about-desc" id="aboutDesc">Pondok Titis berdiri sejak 2010, menyediakan hunian nyaman dengan
+                    fasilitas lengkap untuk mahasiswa dan pekerja. Kami berkomitmen memberikan pelayanan terbaik untuk
+                    kenyamanan Anda.</p>
                 <div class="about-stats">
                     <!-- Stat 1: 16+ Tahun Pengalaman (2026 - 2010 = 16) -->
                     <div class="stat-col">
@@ -2659,11 +2829,17 @@
                         <p class="location-card-address">Jl. Jayasari No. 34, Bojongsoang, Bandung</p>
                     </div>
                     <div class="location-map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.51933210456357!2d107.63509847442991!3d-6.972787051880548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9b23c875a71%3A0x620136e5d548749d!2sPondok%20Titis%20%26%20GG%20Jayasari!5e0!3m2!1sid!2sid!4v1779553864533!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.51933210456357!2d107.63509847442991!3d-6.972787051880548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9b23c875a71%3A0x620136e5d548749d!2sPondok%20Titis%20%26%20GG%20Jayasari!5e0!3m2!1sid!2sid!4v1779553864533!5m2!1sid!2sid"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         <!-- Buka di Maps Floating Button Overlay -->
-                        <a href="https://www.google.com/maps/place/Pondok+Titis+%26+GG+Jayasari/@-6.9727871,107.6350985,19z/" target="_blank" class="buka-maps-btn">
+                        <a href="https://www.google.com/maps/place/Pondok+Titis+%26+GG+Jayasari/@-6.9727871,107.6350985,19z/"
+                            target="_blank" class="buka-maps-btn">
                             <!-- Maps SVG Pin Point Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
                             <span>Buka di Maps</span>
                         </a>
                     </div>
@@ -2676,16 +2852,22 @@
                         <p class="location-card-address">Ketinggilan, Jebres, Surakarta, Jawa Tengah</p>
                     </div>
                     <div class="location-map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63286.67148769744!2d110.8454407!3d-7.5294174!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a171bdccf99a5%3A0x305730521ef5cc80!2sPONDOK%20%22TITIS%22!5e0!3m2!1sid!2sid!4v1779553889627!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63286.67148769744!2d110.8454407!3d-7.5294174!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a171bdccf99a5%3A0x305730521ef5cc80!2sPONDOK%20%22TITIS%22!5e0!3m2!1sid!2sid!4v1779553889627!5m2!1sid!2sid"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         <!-- Buka di Maps Floating Button Overlay -->
-                        <a href="https://www.google.com/maps/place/PONDOK+%22TITIS%22/@-7.5294174,110.8454407,17z/" target="_blank" class="buka-maps-btn">
+                        <a href="https://www.google.com/maps/place/PONDOK+%22TITIS%22/@-7.5294174,110.8454407,17z/"
+                            target="_blank" class="buka-maps-btn">
                             <!-- Maps SVG Pin Point Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
                             <span>Buka di Maps</span>
                         </a>
                     </div>
                 </div>
-        </div>
+            </div>
     </main>
 
     <footer class="footer-light">
@@ -2693,16 +2875,41 @@
             <span>© 2026 Pondok Titis, Inc.</span>
             <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
                 <a href="https://wa.me/6285128067691" target="_blank"
-                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M21.99 6.547a11 11 0 0 0-.103-1.282a4.3 4.3 0 0 0-.363-1.09A3.85 3.85 0 0 0 19.83 2.48a4.3 4.3 0 0 0-1.083-.362a11 11 0 0 0-1.292-.105c-.183-.007-.42-.01-.53-.01L7.077 2c-.11 0-.347.003-.53.01a11 11 0 0 0-1.282.103a4.3 4.3 0 0 0-1.09.363A3.85 3.85 0 0 0 2.48 4.17a4.3 4.3 0 0 0-.362 1.083a11 11 0 0 0-.106 1.292c-.006.183-.01.42-.01.53L2 16.923c0 .11.003.347.01.53a11 11 0 0 0 .103 1.282a4.3 4.3 0 0 0 .363 1.09A3.85 3.85 0 0 0 4.17 21.52a4.3 4.3 0 0 0 1.083.362a11 11 0 0 0 1.292.105c.183.007.42.01.53.01l9.848.002c.11 0 .347-.003.53-.01a11 11 0 0 0 1.282-.103a4.3 4.3 0 0 0 1.09-.363a3.85 3.85 0 0 0 1.696-1.694a4.3 4.3 0 0 0 .362-1.083a11 11 0 0 0 .106-1.292c.006-.183.01-.42.01-.53L22 7.077c0-.11-.003-.347-.01-.53m-9.773 12.41h-.003a7.1 7.1 0 0 1-3.407-.868l-3.78.991l1.012-3.693a7.13 7.13 0 1 1 6.178 3.57"/><path fill="#db2777" d="M12.22 5.901a5.927 5.927 0 0 0-5.023 9.076l.141.224l-.599 2.186l2.243-.588l.216.128a5.9 5.9 0 0 0 3.016.826h.003A5.926 5.926 0 0 0 12.219 5.9Zm3.484 8.47a1.83 1.83 0 0 1-1.202.847a2.44 2.44 0 0 1-1.122-.07a10 10 0 0 1-1.015-.376a7.94 7.94 0 0 1-3.043-2.689a3.46 3.46 0 0 1-.728-1.842a2 2 0 0 1 .624-1.485a.66.66 0 0 1 .475-.223c.118 0 .237 0 .341.006c.11.005.256-.042.4.306c.15.356.506 1.233.55 1.322a.33.33 0 0 1 .015.312a1.2 1.2 0 0 1-.178.297c-.09.104-.187.232-.267.312c-.09.089-.182.185-.079.363a5.4 5.4 0 0 0 .991 1.234a4.9 4.9 0 0 0 1.433.884c.178.09.282.074.386-.045s.445-.52.564-.698s.237-.148.4-.089s1.04.49 1.218.58s.297.133.341.207a1.5 1.5 0 0 1-.104.847"/></svg> WhatsApp</a>
-                
+                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#db2777"
+                            d="M21.99 6.547a11 11 0 0 0-.103-1.282a4.3 4.3 0 0 0-.363-1.09A3.85 3.85 0 0 0 19.83 2.48a4.3 4.3 0 0 0-1.083-.362a11 11 0 0 0-1.292-.105c-.183-.007-.42-.01-.53-.01L7.077 2c-.11 0-.347.003-.53.01a11 11 0 0 0-1.282.103a4.3 4.3 0 0 0-1.09.363A3.85 3.85 0 0 0 2.48 4.17a4.3 4.3 0 0 0-.362 1.083a11 11 0 0 0-.106 1.292c-.006.183-.01.42-.01.53L2 16.923c0 .11.003.347.01.53a11 11 0 0 0 .103 1.282a4.3 4.3 0 0 0 .363 1.09A3.85 3.85 0 0 0 4.17 21.52a4.3 4.3 0 0 0 1.083.362a11 11 0 0 0 1.292.105c.183.007.42.01.53.01l9.848.002c.11 0 .347-.003.53-.01a11 11 0 0 0 1.282-.103a4.3 4.3 0 0 0 1.09-.363a3.85 3.85 0 0 0 1.696-1.694a4.3 4.3 0 0 0 .362-1.083a11 11 0 0 0 .106-1.292c.006-.183.01-.42.01-.53L22 7.077c0-.11-.003-.347-.01-.53m-9.773 12.41h-.003a7.1 7.1 0 0 1-3.407-.868l-3.78.991l1.012-3.693a7.13 7.13 0 1 1 6.178 3.57" />
+                        <path fill="#db2777"
+                            d="M12.22 5.901a5.927 5.927 0 0 0-5.023 9.076l.141.224l-.599 2.186l2.243-.588l.216.128a5.9 5.9 0 0 0 3.016.826h.003A5.926 5.926 0 0 0 12.219 5.9Zm3.484 8.47a1.83 1.83 0 0 1-1.202.847a2.44 2.44 0 0 1-1.122-.07a10 10 0 0 1-1.015-.376a7.94 7.94 0 0 1-3.043-2.689a3.46 3.46 0 0 1-.728-1.842a2 2 0 0 1 .624-1.485a.66.66 0 0 1 .475-.223c.118 0 .237 0 .341.006c.11.005.256-.042.4.306c.15.356.506 1.233.55 1.322a.33.33 0 0 1 .015.312a1.2 1.2 0 0 1-.178.297c-.09.104-.187.232-.267.312c-.09.089-.182.185-.079.363a5.4 5.4 0 0 0 .991 1.234a4.9 4.9 0 0 0 1.433.884c.178.09.282.074.386-.045s.445-.52.564-.698s.237-.148.4-.089s1.04.49 1.218.58s.297.133.341.207a1.5 1.5 0 0 1-.104.847" />
+                    </svg> WhatsApp</a>
+
                 <a href="https://instagram.com/pondoktitis" target="_blank"
-                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6zm14-2.9h.5"/><path d="M15.462 11.487a3.5 3.5 0 1 1-6.925 1.026a3.5 3.5 0 0 1 6.925-1.026"/></g></svg> Instagram</a>
-                
+                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5">
+                            <path
+                                d="M3 9.4c0-2.24 0-3.36.436-4.216a4 4 0 0 1 1.748-1.748C6.04 3 7.16 3 9.4 3h5.2c2.24 0 3.36 0 4.216.436a4 4 0 0 1 1.748 1.748C21 6.04 21 7.16 21 9.4v5.2c0 2.24 0 3.36-.436 4.216a4 4 0 0 1-1.748 1.748C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.436a4 4 0 0 1-1.748-1.748C3 17.96 3 16.84 3 14.6zm14-2.9h.5" />
+                            <path d="M15.462 11.487a3.5 3.5 0 1 1-6.925 1.026a3.5 3.5 0 0 1 6.925-1.026" />
+                        </g>
+                    </svg> Instagram</a>
+
                 <a href="https://www.facebook.com/pondok.titis" target="_blank"
-                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#db2777" d="M20.9 2H3.1A1.1 1.1 0 0 0 2 3.1v17.8A1.1 1.1 0 0 0 3.1 22h9.58v-7.75h-2.6v-3h2.6V9a3.64 3.64 0 0 1 3.88-4a20 20 0 0 1 2.33.12v2.7H17.3c-1.26 0-1.5.6-1.5 1.47v1.93h3l-.39 3H15.8V22h5.1a1.1 1.1 0 0 0 1.1-1.1V3.1A1.1 1.1 0 0 0 20.9 2"/></svg> Facebook</a>
-                
+                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#db2777"
+                            d="M20.9 2H3.1A1.1 1.1 0 0 0 2 3.1v17.8A1.1 1.1 0 0 0 3.1 22h9.58v-7.75h-2.6v-3h2.6V9a3.64 3.64 0 0 1 3.88-4a20 20 0 0 1 2.33.12v2.7H17.3c-1.26 0-1.5.6-1.5 1.47v1.93h3l-.39 3H15.8V22h5.1a1.1 1.1 0 0 0 1.1-1.1V3.1A1.1 1.1 0 0 0 20.9 2" />
+                    </svg> Facebook</a>
+
                 <a href="https://tiktok.com/@pondoktitis" target="_blank"
-                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M21 8v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5"/><path d="M10 12a3 3 0 1 0 3 3V6c.333 1 1.6 3 4 3"/></g></svg> TikTok</a>
+                    style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <g fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5">
+                            <path d="M21 8v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5" />
+                            <path d="M10 12a3 3 0 1 0 3 3V6c.333 1 1.6 3 4 3" />
+                        </g>
+                    </svg> TikTok</a>
             </div>
         </div>
     </footer>
@@ -2713,37 +2920,51 @@
             <button class="modal-close" onclick="closeModal('loginModal')" style="z-index: 100;">×</button>
             <div class="modal-left-split">
                 <h3>Pondok Titis</h3>
-                <p data-translate-key="heroSubtitle">Temukan kenyamanan hunian kos khusus putri terbaik dengan akses mudah dan fasilitas lengkap untuk produktivitas maksimal Anda.</p>
+                <p data-translate-key="heroSubtitle">Temukan kenyamanan hunian kos khusus putri terbaik dengan akses
+                    mudah dan fasilitas lengkap untuk produktivitas maksimal Anda.</p>
             </div>
             <div class="modal-right-split">
                 <div class="auth-tabs-container">
                     <button class="auth-tab-btn active" data-translate-key="loginTab">Login</button>
-                    <button class="auth-tab-btn" onclick="closeModal('loginModal'); openModal('registerModal');" data-translate-key="registerTab">Register</button>
+                    <button class="auth-tab-btn" onclick="closeModal('loginModal'); openModal('registerModal');"
+                        data-translate-key="registerTab">Register</button>
                 </div>
-                <h2 data-translate-key="loginTitle" style="margin-bottom: 8px; font-weight: 850; font-size: 1.8rem; letter-spacing: -0.5px;">Welcome Back</h2>
-                <p data-translate-key="loginDesc" style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Please enter your details to login.</p>
-                
+                <h2 data-translate-key="loginTitle"
+                    style="margin-bottom: 8px; font-weight: 850; font-size: 1.8rem; letter-spacing: -0.5px;">Welcome
+                    Back</h2>
+                <p data-translate-key="loginDesc"
+                    style="margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Please
+                    enter your details to login.</p>
+
                 <div class="form-group" style="margin-bottom: 16px;">
-                    <label for="loginEmail" data-translate-key="loginEmailPlaceholder" style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase;">Email</label>
+                    <label for="loginEmail" data-translate-key="loginEmailPlaceholder"
+                        style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase;">Email</label>
                     <input type="email" id="loginEmail" placeholder="Enter your email"
                         style="width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.95rem;">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 6px;">
-                    <label for="loginPassword" data-translate-key="loginPasswordPlaceholder" style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase;">Password</label>
+                    <label for="loginPassword" data-translate-key="loginPasswordPlaceholder"
+                        style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase;">Password</label>
                     <div class="password-input-wrapper" style="margin-bottom: 0;">
                         <input type="password" id="loginPassword" placeholder="Enter your password">
-                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('loginPassword', this)">
-                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z"/></svg>
+                        <button type="button" class="password-toggle-btn"
+                            onclick="togglePasswordVisibility('loginPassword', this)">
+                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="#db2777" fill-rule="evenodd"
+                                    d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <div class="forgot-password-link">
-                    <a href="#" onclick="forgotPassword(event)" data-translate-key="forgotPasswordText">Forgot Password?</a>
+                    <a href="#" onclick="forgotPassword(event)" data-translate-key="forgotPasswordText">Forgot
+                        Password?</a>
                 </div>
 
-                <button class="button-primary" id="doLogin" data-translate-key="loginBtn" style="width: 100%; padding: 14px; border-radius: 60px; font-weight: 750; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">Login</button>
+                <button class="button-primary" id="doLogin" data-translate-key="loginBtn"
+                    style="width: 100%; padding: 14px; border-radius: 60px; font-weight: 750; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">Login</button>
             </div>
         </div>
     </div>
@@ -2753,40 +2974,57 @@
             <button class="modal-close" onclick="closeModal('registerModal')" style="z-index: 100;">×</button>
             <div class="modal-left-split">
                 <h3>Pondok Titis</h3>
-                <p data-translate-key="heroSubtitle">Temukan kenyamanan hunian kos khusus putri terbaik dengan akses mudah dan fasilitas lengkap untuk produktivitas maksimal Anda.</p>
+                <p data-translate-key="heroSubtitle">Temukan kenyamanan hunian kos khusus putri terbaik dengan akses
+                    mudah dan fasilitas lengkap untuk produktivitas maksimal Anda.</p>
             </div>
             <div class="modal-right-split" style="padding: 36px 48px;">
                 <div class="auth-tabs-container" style="margin-bottom: 16px;">
-                    <button class="auth-tab-btn" onclick="closeModal('registerModal'); openModal('loginModal');" data-translate-key="loginTab">Login</button>
+                    <button class="auth-tab-btn" onclick="closeModal('registerModal'); openModal('loginModal');"
+                        data-translate-key="loginTab">Login</button>
                     <button class="auth-tab-btn active" data-translate-key="registerTab">Register</button>
                 </div>
-                <h2 data-translate-key="regTitle" style="margin-bottom: 4px; font-weight: 850; font-size: 1.8rem; letter-spacing: -0.5px;">Create an Account</h2>
-                <p data-translate-key="regDesc" style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Join Pondok Titis today.</p>
-                
+                <h2 data-translate-key="regTitle"
+                    style="margin-bottom: 4px; font-weight: 850; font-size: 1.8rem; letter-spacing: -0.5px;">Create an
+                    Account</h2>
+                <p data-translate-key="regDesc"
+                    style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Join
+                    Pondok Titis today.</p>
+
                 <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="regFullname" data-translate-key="regFullNamePlaceholder" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Full Name</label>
+                    <label for="regFullname" data-translate-key="regFullNamePlaceholder"
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Full
+                        Name</label>
                     <input type="text" id="regFullname" placeholder="Enter your full name"
                         style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.9rem;">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="regEmail" data-translate-key="regEmailPlaceholder" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Email</label>
+                    <label for="regEmail" data-translate-key="regEmailPlaceholder"
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Email</label>
                     <input type="email" id="regEmail" placeholder="Enter your email"
                         style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.9rem;">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 4px;">
-                    <label for="regPassword" data-translate-key="regPasswordPlaceholder" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Password</label>
+                    <label for="regPassword" data-translate-key="regPasswordPlaceholder"
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Password</label>
                     <div class="password-input-wrapper" style="margin-bottom: 0;">
-                        <input type="password" id="regPassword" placeholder="Enter your password" style="padding: 10px 48px 10px 14px !important;" oninput="checkPasswordStrength(this.value)">
-                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('regPassword', this)">
-                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z"/></svg>
+                        <input type="password" id="regPassword" placeholder="Enter your password"
+                            style="padding: 10px 48px 10px 14px !important;"
+                            oninput="checkPasswordStrength(this.value)">
+                        <button type="button" class="password-toggle-btn"
+                            onclick="togglePasswordVisibility('regPassword', this)">
+                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="#db2777" fill-rule="evenodd"
+                                    d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <div class="strength-indicator-container">
-                    <span><span data-translate-key="strengthLabel">Strength</span>: <span id="strengthText" style="color: var(--text-muted);">Too Short</span></span>
+                    <span><span data-translate-key="strengthLabel">Strength</span>: <span id="strengthText"
+                            style="color: var(--text-muted);">Too Short</span></span>
                     <div class="strength-meter-bar">
                         <div class="strength-meter-segment" id="strengthSeg1"></div>
                         <div class="strength-meter-segment" id="strengthSeg2"></div>
@@ -2795,22 +3033,32 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom: 12px;">
-                    <label for="regConfirmPass" data-translate-key="regConfirmPassPlaceholder" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Confirm Password</label>
+                    <label for="regConfirmPass" data-translate-key="regConfirmPassPlaceholder"
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Confirm
+                        Password</label>
                     <div class="password-input-wrapper" style="margin-bottom: 0;">
-                        <input type="password" id="regConfirmPass" placeholder="Confirm your password" style="padding: 10px 48px 10px 14px !important;">
-                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('regConfirmPass', this)">
-                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z"/></svg>
+                        <input type="password" id="regConfirmPass" placeholder="Confirm your password"
+                            style="padding: 10px 48px 10px 14px !important;">
+                        <button type="button" class="password-toggle-btn"
+                            onclick="togglePasswordVisibility('regConfirmPass', this)">
+                            <svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="#db2777" fill-rule="evenodd"
+                                    d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 18px;">
-                    <label for="regPhone" data-translate-key="regPhonePlaceholder" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Phone Number</label>
+                    <label for="regPhone" data-translate-key="regPhonePlaceholder"
+                        style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Phone
+                        Number</label>
                     <input type="tel" id="regPhone" placeholder="Enter your phone number"
                         style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.9rem;">
                 </div>
 
-                <button class="button-primary" id="doRegister" data-translate-key="regBtn" style="width: 100%; padding: 12px; border-radius: 60px; font-weight: 750; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">Register</button>
+                <button class="button-primary" id="doRegister" data-translate-key="regBtn"
+                    style="width: 100%; padding: 12px; border-radius: 60px; font-weight: 750; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">Register</button>
             </div>
         </div>
     </div>
@@ -2819,7 +3067,8 @@
         <div class="modal-content" style="max-width: 500px; padding: 32px;">
             <button class="modal-close" onclick="closeModal('profileModal')">×</button>
             <h2 data-translate-key="profileTitle" style="margin-bottom: 24px;">Profil Saya</h2>
-            <input type="text" id="profileFullName" data-translate-key="profileFullNamePlaceholder" placeholder="Nama Lengkap"
+            <input type="text" id="profileFullName" data-translate-key="profileFullNamePlaceholder"
+                placeholder="Nama Lengkap"
                 style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px;">
             <input type="tel" id="profilePhone" data-translate-key="profilePhonePlaceholder" placeholder="No. HP"
                 style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px;">
@@ -2827,7 +3076,8 @@
                 style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px;">
             <input type="text" id="profileCity" data-translate-key="profileCityPlaceholder" placeholder="Asal Kota"
                 style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px;">
-            <button class="button-primary" id="btnSaveProfile" data-translate-key="profileSaveBtn" style="width: 100%;">Simpan Profil</button>
+            <button class="button-primary" id="btnSaveProfile" data-translate-key="profileSaveBtn"
+                style="width: 100%;">Simpan Profil</button>
         </div>
     </div>
 
@@ -2843,7 +3093,8 @@
         <div class="modal-content" style="max-width: 600px; padding: 32px;">
             <button class="modal-close" onclick="closeModal('termsModal')">×</button>
             <h2 data-translate-key="termsTitle">Syarat & Ketentuan</h2>
-            <p data-translate-key="termsContent" data-translate-html style="margin-top: 16px;">1. Pembayaran dilakukan via QRIS atau cash.<br>2. Check-in sesuai tanggal yang
+            <p data-translate-key="termsContent" data-translate-html style="margin-top: 16px;">1. Pembayaran dilakukan
+                via QRIS atau cash.<br>2. Check-in sesuai tanggal yang
                 dipilih.<br>3. Dilarang membawa hewan peliharaan.<br>4. Hubungi admin untuk keluhan.</p>
         </div>
     </div>
@@ -2852,7 +3103,8 @@
         <div class="modal-content" style="max-width: 600px; padding: 32px;">
             <button class="modal-close" onclick="closeModal('privacyModal')">×</button>
             <h2 data-translate-key="privacyTitle">Kebijakan Privasi</h2>
-            <p data-translate-key="privacyContent" style="margin-top: 16px;">Data Anda aman dan tidak akan dibagikan ke pihak ketiga. Data disimpan secara
+            <p data-translate-key="privacyContent" style="margin-top: 16px;">Data Anda aman dan tidak akan dibagikan ke
+                pihak ketiga. Data disimpan secara
                 lokal di browser Anda.</p>
         </div>
     </div>
@@ -2862,20 +3114,23 @@
         <div class="modal-content search-modal-content">
             <button class="modal-close" onclick="closeModal('searchModal')">×</button>
             <h2 class="search-modal-title" data-translate-key="searchModalTitle">Cari Kamar Impian Anda</h2>
-            
+
             <!-- 1. Pilih Tipe Kamar -->
             <div class="search-modal-section-title" data-translate-key="searchModalStep1">1. Pilih Tipe Kamar</div>
             <div class="room-type-cards">
                 <div class="room-type-card selected" data-type="standar">
-                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80" alt="Standar">
+                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80"
+                        alt="Standar">
                     <span data-translate-key="typeStandar">Standar</span>
                 </div>
                 <div class="room-type-card" data-type="deluxe">
-                    <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=400&q=80" alt="Deluxe">
+                    <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=400&q=80"
+                        alt="Deluxe">
                     <span data-translate-key="typeDeluxe">Deluxe</span>
                 </div>
                 <div class="room-type-card" data-type="vip">
-                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80" alt="VIP">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80"
+                        alt="VIP">
                     <span data-translate-key="typeVIP">VIP</span>
                 </div>
             </div>
@@ -2902,13 +3157,16 @@
 
             <!-- 4. Durasi Sewa (Hanya Tahunan) -->
             <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                <div class="search-modal-section-title" data-translate-key="searchModalStep4" style="margin-bottom: 8px;">4. Durasi Sewa</div>
+                <div class="search-modal-section-title" data-translate-key="searchModalStep4"
+                    style="margin-bottom: 8px;">4. Durasi Sewa</div>
                 <div style="display: flex; align-items: center;">
-                    <div data-translate-key="searchModalDuration" style="background: var(--primary); color: white; font-weight: 700; padding: 10px 24px; border-radius: 60px; font-size: 0.95rem; display: inline-block; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);">
+                    <div data-translate-key="searchModalDuration"
+                        style="background: var(--primary); color: white; font-weight: 700; padding: 10px 24px; border-radius: 60px; font-size: 0.95rem; display: inline-block; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);">
                         Tahunan
                     </div>
                 </div>
-                <div data-translate-key="searchModalDurationNote" style="font-size: 0.825rem; font-style: italic; color: var(--text-muted); margin-top: 6px;">
+                <div data-translate-key="searchModalDurationNote"
+                    style="font-size: 0.825rem; font-style: italic; color: var(--text-muted); margin-top: 6px;">
                     *Saat ini Pondok Titis hanya menyediakan opsi tahunan.
                 </div>
             </div>
@@ -2922,12 +3180,17 @@
                 <div class="date-separator">—</div>
                 <div class="date-input-group">
                     <label for="checkoutDate" data-translate-key="searchModalCheckout">CHECK-OUT (OTOMATIS)</label>
-                    <input type="text" id="checkoutDate" placeholder="dd/mm/yyyy" readonly style="background: var(--bg-section); cursor: not-allowed;">
+                    <input type="text" id="checkoutDate" placeholder="dd/mm/yyyy" readonly
+                        style="background: var(--bg-section); cursor: not-allowed;">
                 </div>
             </div>
 
-            <button class="button-primary" id="btnExecuteSearch" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; border-radius: 60px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M16 17h-1v1h-2v1H7v-1H5v-1H4v-1H3v-1H2v-2H1V7h1V5h1V4h1V3h1V2h2V1h6v1h2v1h1v1h1v1h1v2h1v6h-1v2h-1v1h-1zm7 3v2h-1v1h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h1v1z"/></svg>
+            <button class="button-primary" id="btnExecuteSearch"
+                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; border-radius: 60px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M16 17h-1v1h-2v1H7v-1H5v-1H4v-1H3v-1H2v-2H1V7h1V5h1V4h1V3h1V2h2V1h6v1h2v1h1v1h1v1h1v2h1v6h-1v2h-1v1h-1zm7 3v2h-1v1h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h1v1z" />
+                </svg>
                 <span data-translate-key="searchModalBtn">Cari Kamar</span>
             </button>
         </div>
@@ -2936,41 +3199,66 @@
     <!-- Detail Kamar Modal -->
     <div class="modal-overlay" id="roomDetailModal">
         <div class="modal-content detail-modal-content">
-            <button class="modal-close" onclick="closeModal('roomDetailModal')" style="box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-weight: bold; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 20px;">×</button>
-            
+            <button class="modal-close" onclick="closeModal('roomDetailModal')"
+                style="box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-weight: bold; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 20px;">×</button>
+
             <img class="detail-modal-banner" id="detailBanner" src="" alt="Banner Kamar">
-            
+
             <div class="detail-modal-scrollable">
                 <!-- Status Badge -->
                 <div id="detailStatusBadge" class="status-badge tersedia">Tersedia</div>
-                
+
                 <!-- Title & Meta -->
                 <h2 class="detail-modal-title" id="detailTitle">Kamar Standard</h2>
                 <div class="detail-modal-meta">
-                    <span id="detailSubMeta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align: text-bottom; margin-right: 6px; display: inline-block;"><g fill="none"><path d="M12 2a8 8 0 0 1 8 8c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 0 1 8-8m0 5a3 3 0 1 0 0 6a3 3 0 0 0 0-6" clip-rule="evenodd"/><path stroke="#db2777" stroke-width="2" d="M20 10c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 1 1 16 0Z"/><path stroke="#db2777" stroke-width="2" d="M15 10a3 3 0 1 1-6 0a3 3 0 0 1 6 0Z"/></g></svg>Lokasi strategis</span>
+                    <span id="detailSubMeta"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24"
+                            style="vertical-align: text-bottom; margin-right: 6px; display: inline-block;">
+                            <g fill="none">
+                                <path
+                                    d="M12 2a8 8 0 0 1 8 8c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 0 1 8-8m0 5a3 3 0 1 0 0 6a3 3 0 0 0 0-6"
+                                    clip-rule="evenodd" />
+                                <path stroke="#db2777" stroke-width="2"
+                                    d="M20 10c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 1 1 16 0Z" />
+                                <path stroke="#db2777" stroke-width="2" d="M15 10a3 3 0 1 1-6 0a3 3 0 0 1 6 0Z" />
+                            </g>
+                        </svg>Lokasi strategis</span>
                     <span class="meta-divider">•</span>
-                    <span id="detailRatingText"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="vertical-align: text-bottom; margin-right: 6px; display: inline-block;"><path fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg>4.8 Rating</span>
+                    <span id="detailRatingText"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24"
+                            style="vertical-align: text-bottom; margin-right: 6px; display: inline-block;">
+                            <path fill="none" stroke="#db2777" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                        </svg>4.8 Rating</span>
                 </div>
-                
+
                 <!-- Keunggulan Kos Andalan -->
                 <div class="facilities-title" id="detailModalKeunggulanTitle">Keunggulan Kamar & Lantai Ini</div>
                 <div class="keunggulan-list" id="detailKeunggulanList">
                     <!-- Dynamic details will be injected here -->
                 </div>
-                
+
                 <!-- Spesifikasi Tipe Kamar -->
                 <div class="facilities-title" id="detailModalSpecTitle">Spesifikasi Tipe Kamar</div>
                 <div class="spec-grid">
                     <div class="spec-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="flex-shrink: 0;"><path fill="#db2777" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6v18zm8 0v-9h8v7q0 .825-.587 1.413T19 21zm0-11V3h6q.825 0 1.413.588T21 5v5z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            style="flex-shrink: 0;">
+                            <path fill="#db2777"
+                                d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6v18zm8 0v-9h8v7q0 .825-.587 1.413T19 21zm0-11V3h6q.825 0 1.413.588T21 5v5z" />
+                        </svg>
                         <span id="detailSpecSize">3x3 meter</span>
                     </div>
                     <div class="spec-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" style="flex-shrink: 0;"><path fill="#db2777" d="M376 211H256V16L136 301h120v195z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"
+                            style="flex-shrink: 0;">
+                            <path fill="#db2777" d="M376 211H256V16L136 301h120v195z" />
+                        </svg>
                         <span id="detailSpecInclude">Listrik, Air, & WiFi Include</span>
                     </div>
                 </div>
-                
+
                 <!-- Fasilitas Kamar -->
                 <div class="detail-facilities-section">
                     <div class="facilities-title" id="detailModalFurnishedTitle">Fasilitas Kamar (Furnished)</div>
@@ -2978,7 +3266,7 @@
                         <!-- Dynamic or mapped based on input -->
                     </div>
                 </div>
-                
+
                 <!-- Fasilitas Kamar Mandi -->
                 <div class="detail-facilities-section">
                     <div class="facilities-title" id="detailModalBathroomTitle">Fasilitas Kamar Mandi</div>
@@ -2986,16 +3274,17 @@
                         <!-- Dynamic or mapped -->
                     </div>
                 </div>
-                
+
                 <!-- Peraturan Khusus -->
-                <div class="detail-facilities-section" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
+                <div class="detail-facilities-section"
+                    style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
                     <div class="facilities-title" id="detailModalRulesTitle">Peraturan Khusus Kosan</div>
                     <div class="rules-list" id="detailRulesList">
                         <!-- Rules list -->
                     </div>
                 </div>
             </div>
-            
+
             <!-- Sticky Footer -->
             <div class="detail-modal-footer">
                 <div class="detail-modal-price-wrapper">
@@ -3012,63 +3301,88 @@
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content booking-modal-content" style="max-height: 90vh; overflow-y: auto;">
             <button class="modal-close" onclick="closeModal('bookingModal')">×</button>
-            <h2 class="search-modal-title" data-translate-key="bookingTitle" style="margin-bottom: 8px;">Form Pengajuan Sewa</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 24px; font-weight: 600; font-size: 0.9rem;">
-                <span data-translate-key="bookingDescText">Lengkapi data diri Anda untuk pengajuan sewa </span><span id="bookingRoomNameText" style="color: var(--primary); font-weight: 800;">Kamar</span>
+            <h2 class="search-modal-title" data-translate-key="bookingTitle" style="margin-bottom: 8px;">Form Pengajuan
+                Sewa</h2>
+            <p
+                style="text-align: center; color: var(--text-muted); margin-bottom: 24px; font-weight: 600; font-size: 0.9rem;">
+                <span data-translate-key="bookingDescText">Lengkapi data diri Anda untuk pengajuan sewa </span><span
+                    id="bookingRoomNameText" style="color: var(--primary); font-weight: 800;">Kamar</span>
             </p>
-            
+
             <div class="booking-form-grid">
                 <div class="form-group">
                     <label for="bookingFullname" data-translate-key="bookingFullnameLabel">Nama Lengkap</label>
-                    <input type="text" id="bookingFullname" data-translate-key="bookingFullnamePlaceholder" placeholder="Nama Lengkap sesuai KTP" required>
+                    <input type="text" id="bookingFullname" data-translate-key="bookingFullnamePlaceholder"
+                        placeholder="Nama Lengkap sesuai KTP" required>
                 </div>
                 <div class="form-group">
                     <label for="bookingEmail" data-translate-key="bookingEmailLabel">Email</label>
-                    <input type="email" id="bookingEmail" data-translate-key="bookingEmailPlaceholder" placeholder="Email aktif" required>
+                    <input type="email" id="bookingEmail" data-translate-key="bookingEmailPlaceholder"
+                        placeholder="Email aktif" required>
                 </div>
                 <div class="form-group">
                     <label for="bookingPhone" data-translate-key="bookingPhoneLabel">Nomor HP / WhatsApp</label>
-                    <input type="tel" id="bookingPhone" data-translate-key="bookingPhonePlaceholder" placeholder="Contoh: 0812XXXXXXXX" required>
+                    <input type="tel" id="bookingPhone" data-translate-key="bookingPhonePlaceholder"
+                        placeholder="Contoh: 0812XXXXXXXX" required>
                 </div>
                 <div class="form-group">
-                    <label for="bookingEmergencyPhone" data-translate-key="bookingEmergencyPhoneLabel">Nomor HP Darurat (Keluarga)</label>
-                    <input type="tel" id="bookingEmergencyPhone" data-translate-key="bookingEmergencyPhonePlaceholder" placeholder="Contoh: 0812XXXXXXXX" required>
+                    <label for="bookingEmergencyPhone" data-translate-key="bookingEmergencyPhoneLabel">Nomor HP Darurat
+                        (Keluarga)</label>
+                    <input type="tel" id="bookingEmergencyPhone" data-translate-key="bookingEmergencyPhonePlaceholder"
+                        placeholder="Contoh: 0812XXXXXXXX" required>
                 </div>
                 <div class="form-group">
-                    <label for="bookingOrigin" data-translate-key="bookingOriginLabel">Asal Daerah (Kota/Kabupaten)</label>
-                    <input type="text" id="bookingOrigin" data-translate-key="bookingOriginPlaceholder" placeholder="Asal daerah asal Anda" required>
+                    <label for="bookingOrigin" data-translate-key="bookingOriginLabel">Asal Daerah
+                        (Kota/Kabupaten)</label>
+                    <input type="text" id="bookingOrigin" data-translate-key="bookingOriginPlaceholder"
+                        placeholder="Asal daerah asal Anda" required>
                 </div>
                 <div class="form-group">
                     <label for="bookingJob" data-translate-key="bookingJobLabel">Pekerjaan</label>
-                    <input type="text" id="bookingJob" data-translate-key="bookingJobPlaceholder" placeholder="Mahasiswa / Pekerja" required>
+                    <input type="text" id="bookingJob" data-translate-key="bookingJobPlaceholder"
+                        placeholder="Mahasiswa / Pekerja" required>
                 </div>
                 <div class="form-group full-width">
-                    <label for="bookingCheckinDate" data-translate-key="bookingCheckinLabel">Tanggal Check-in Mulai Sewa</label>
+                    <label for="bookingCheckinDate" data-translate-key="bookingCheckinLabel">Tanggal Check-in Mulai
+                        Sewa</label>
                     <input type="date" id="bookingCheckinDate" required>
                 </div>
             </div>
 
-            <div class="search-modal-section-title" data-translate-key="bookingPaymentTitle" style="margin-top: 0; margin-bottom: 12px;">Pilih Nominal Pembayaran</div>
+            <div class="search-modal-section-title" data-translate-key="bookingPaymentTitle"
+                style="margin-top: 0; margin-bottom: 12px;">Pilih Nominal Pembayaran</div>
             <div class="payment-options-grid">
                 <div class="payment-card selected" id="optDP" onclick="selectPaymentOption('dp')">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="payment-card-title" data-translate-key="bookingOptDPTitle">Uang Muka (DP)</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" id="optDPIcon" style="color: var(--primary);"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            id="optDPIcon" style="color: var(--primary);">
+                            <path fill="currentColor"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
                     </div>
                     <div class="payment-card-price">Rp 2.000.000</div>
-                    <div class="payment-card-desc" data-translate-key="bookingOptDPDesc">Bayar tanda jadi untuk mengamankan kamar Anda sementara waktu.</div>
+                    <div class="payment-card-desc" data-translate-key="bookingOptDPDesc">Bayar tanda jadi untuk
+                        mengamankan kamar Anda sementara waktu.</div>
                 </div>
                 <div class="payment-card" id="optCash" onclick="selectPaymentOption('cash')">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="payment-card-title" data-translate-key="bookingOptCashTitle">Bayar Lunas (Cash)</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" id="optCashIcon" style="color: var(--border);"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z"/></svg>
+                        <span class="payment-card-title" data-translate-key="bookingOptCashTitle">Bayar Lunas
+                            (Cash)</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            id="optCashIcon" style="color: var(--border);">
+                            <path fill="currentColor"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z" />
+                        </svg>
                     </div>
                     <div class="payment-card-price" id="bookingCashPriceVal">Rp 13.500.000</div>
-                    <div class="payment-card-desc" data-translate-key="bookingOptCashDesc">Bayar penuh biaya sewa seharga 1 tahun untuk langsung lunas.</div>
+                    <div class="payment-card-desc" data-translate-key="bookingOptCashDesc">Bayar penuh biaya sewa
+                        seharga 1 tahun untuk langsung lunas.</div>
                 </div>
             </div>
 
-            <button class="button-primary" id="btnBookingContinue" data-translate-key="bookingContinueBtn" style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 1rem;">
+            <button class="button-primary" id="btnBookingContinue" data-translate-key="bookingContinueBtn"
+                style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 1rem;">
                 Lanjutkan Pembayaran
             </button>
         </div>
@@ -3078,8 +3392,10 @@
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-content" style="max-width: 440px; padding: 32px; text-align: center;">
             <button class="modal-close" onclick="closeModal('paymentModal')">×</button>
-            <h2 class="search-modal-title" data-translate-key="payTitle" style="margin-bottom: 4px;">Pembayaran QRIS</h2>
-            <p data-translate-key="payDesc" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 16px;">
+            <h2 class="search-modal-title" data-translate-key="payTitle" style="margin-bottom: 4px;">Pembayaran QRIS
+            </h2>
+            <p data-translate-key="payDesc"
+                style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 16px;">
                 Silakan scan QRIS di bawah ini untuk menyelesaikan pembayaran sewa kos.
             </p>
 
@@ -3087,7 +3403,8 @@
                 <div class="qris-img-container">
                     <img src="images/titis_qris.png" alt="QRIS Pondok Titis">
                 </div>
-                <div data-translate-key="payTotalLabel" style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase;">
+                <div data-translate-key="payTotalLabel"
+                    style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase;">
                     Total Tagihan Pembayaran
                 </div>
                 <div class="payment-amount-badge" id="paymentTotalBadge">
@@ -3095,7 +3412,8 @@
                 </div>
             </div>
 
-            <button class="button-primary" id="btnConfirmPayment" data-translate-key="payConfirmBtn" style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 0.95rem; margin-top: 12px; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">
+            <button class="button-primary" id="btnConfirmPayment" data-translate-key="payConfirmBtn"
+                style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 0.95rem; margin-top: 12px; box-shadow: 0 4px 15px rgba(219,39,119,0.3);">
                 Telah Bayar, Konfirmasi ke Admin
             </button>
         </div>
@@ -3114,10 +3432,13 @@
 
     <!-- 5. Payment History Modal -->
     <div class="modal-overlay" id="paymentHistoryModal">
-        <div class="modal-content" style="max-width: 700px; width: 95%; padding: 32px; max-height: 85vh; overflow-y: auto;">
+        <div class="modal-content"
+            style="max-width: 700px; width: 95%; padding: 32px; max-height: 85vh; overflow-y: auto;">
             <button class="modal-close" onclick="closeModal('paymentHistoryModal')">×</button>
-            <h2 class="search-modal-title" data-translate-key="historyTitle" style="margin-bottom: 4px; text-align: left;">Riwayat Pembayaran Anda</h2>
-            <p data-translate-key="historyDesc" style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 24px;">
+            <h2 class="search-modal-title" data-translate-key="historyTitle"
+                style="margin-bottom: 4px; text-align: left;">Riwayat Pembayaran Anda</h2>
+            <p data-translate-key="historyDesc"
+                style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-bottom: 24px;">
                 Berikut adalah daftar kuitansi dan riwayat transaksi pengajuan sewa Anda.
             </p>
 
@@ -3131,15 +3452,20 @@
     <div class="modal-overlay" id="remainingPaymentModal">
         <div class="modal-content" style="max-width: 500px; padding: 32px; border-radius: 24px;">
             <button class="modal-close" onclick="closeModal('remainingPaymentModal')">×</button>
-            <h2 class="search-modal-title" id="remTitle" data-translate-key="remTitle" style="margin-bottom: 4px; text-align: center;">Pelunasan Sisa Pembayaran</h2>
-            <p id="remDesc" data-translate-key="remDesc" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-align: center;">
+            <h2 class="search-modal-title" id="remTitle" data-translate-key="remTitle"
+                style="margin-bottom: 4px; text-align: center;">Pelunasan Sisa Pembayaran</h2>
+            <p id="remDesc" data-translate-key="remDesc"
+                style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-align: center;">
                 Silakan pilih metode untuk melunasi sisa tagihan sewa kamar Anda.
             </p>
 
             <!-- Outstanding Balance Badge -->
-            <div style="background: var(--bg-section); border: 1px solid var(--border); border-radius: 20px; padding: 16px; margin-bottom: 20px; text-align: center;">
-                <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase;" data-translate-key="remTotalLabel">Sisa Tagihan Pelunasan</div>
-                <div class="payment-amount-badge" id="remainingTotalBadge" style="margin-top: 4px; display: inline-block; font-size: 1.5rem; font-weight: 850; color: var(--primary);">
+            <div
+                style="background: var(--bg-section); border: 1px solid var(--border); border-radius: 20px; padding: 16px; margin-bottom: 20px; text-align: center;">
+                <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase;"
+                    data-translate-key="remTotalLabel">Sisa Tagihan Pelunasan</div>
+                <div class="payment-amount-badge" id="remainingTotalBadge"
+                    style="margin-top: 4px; display: inline-block; font-size: 1.5rem; font-weight: 850; color: var(--primary);">
                     Rp 11.500.000
                 </div>
             </div>
@@ -3149,30 +3475,43 @@
                 <div class="payment-card selected" id="remOptCashCard" onclick="selectRemainingPaymentOption('cash')">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="payment-card-title" data-translate-key="remOptCashTitle">Sisa Tunai (Cash)</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" id="remOptCashIcon" style="color: var(--primary);"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            id="remOptCashIcon" style="color: var(--primary);">
+                            <path fill="currentColor"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
                     </div>
-                    <div class="payment-card-desc" data-translate-key="remOptCashDesc">Pembayaran tunai langsung ke Admin di lokasi. Sistem akan langsung menghubungkan Anda ke WhatsApp Admin.</div>
+                    <div class="payment-card-desc" data-translate-key="remOptCashDesc">Pembayaran tunai langsung ke
+                        Admin di lokasi. Sistem akan langsung menghubungkan Anda ke WhatsApp Admin.</div>
                 </div>
                 <div class="payment-card" id="remOptQrisCard" onclick="selectRemainingPaymentOption('qris')">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="payment-card-title" data-translate-key="remOptQrisTitle">Transfer QRIS</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" id="remOptQrisIcon" style="color: var(--border);"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            id="remOptQrisIcon" style="color: var(--border);">
+                            <path fill="currentColor"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z" />
+                        </svg>
                     </div>
-                    <div class="payment-card-desc" data-translate-key="remOptQrisDesc">Pindai kode QRIS Pondok Titis secara virtual dan kirim bukti bayar untuk ditinjau Admin.</div>
+                    <div class="payment-card-desc" data-translate-key="remOptQrisDesc">Pindai kode QRIS Pondok Titis
+                        secara virtual dan kirim bukti bayar untuk ditinjau Admin.</div>
                 </div>
             </div>
 
             <!-- QRIS Section -->
-            <div id="remQrisSection" style="display: none; text-align: center; margin-bottom: 20px; background: var(--bg-section); border: 1px solid var(--border); border-radius: 20px; padding: 16px;">
+            <div id="remQrisSection"
+                style="display: none; text-align: center; margin-bottom: 20px; background: var(--bg-section); border: 1px solid var(--border); border-radius: 20px; padding: 16px;">
                 <div class="qris-wrapper" style="padding: 10px 0;">
                     <div class="qris-img-container" style="max-width: 180px; margin: 0 auto 12px auto;">
-                        <img src="images/titis_qris.png" alt="QRIS Pondok Titis" style="width: 100%; border-radius: 8px;">
+                        <img src="images/titis_qris.png" alt="QRIS Pondok Titis"
+                            style="width: 100%; border-radius: 8px;">
                     </div>
                 </div>
             </div>
 
             <!-- Primary Action Button -->
-            <button class="button-primary" id="btnRemainingAction" style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3); font-weight: 750;">
+            <button class="button-primary" id="btnRemainingAction"
+                style="width: 100%; padding: 14px 24px; border-radius: 60px; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3); font-weight: 750;">
                 Hubungi Admin via WhatsApp
             </button>
         </div>
@@ -3180,12 +3519,17 @@
 
     <!-- 6. Receipt Printable Sheet Modal -->
     <div class="modal-overlay" id="receiptModal" style="background: rgba(0,0,0,0.7);">
-        <div class="modal-content receipt-print-content" style="background: transparent; border: none; box-shadow: none; max-width: 620px; width: 95%;">
-            <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: rgba(0,0,0,0.6); padding: 8px 16px; border-radius: 16px; backdrop-filter: blur(10px);">
-                <span data-translate-key="receiptPreview" style="color: white; font-weight: 700; font-size: 0.9rem;">Pratinjau Kuitansi Cetak</span>
+        <div class="modal-content receipt-print-content"
+            style="background: transparent; border: none; box-shadow: none; max-width: 620px; width: 95%;">
+            <div class="no-print"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: rgba(0,0,0,0.6); padding: 8px 16px; border-radius: 16px; backdrop-filter: blur(10px);">
+                <span data-translate-key="receiptPreview"
+                    style="color: white; font-weight: 700; font-size: 0.9rem;">Pratinjau Kuitansi Cetak</span>
                 <div style="display: flex; gap: 8px;">
-                    <button class="button-primary" data-translate-key="receiptBtnPrint" onclick="window.print()" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 30px;">Cetak Kuitansi</button>
-                    <button data-translate-key="receiptBtnClose" onclick="closeModal('receiptModal')" style="background: white; border: none; padding: 6px 16px; font-weight: 800; font-size: 0.8rem; border-radius: 30px; cursor: pointer;">Tutup</button>
+                    <button class="button-primary" data-translate-key="receiptBtnPrint" onclick="window.print()"
+                        style="padding: 6px 16px; font-size: 0.8rem; border-radius: 30px;">Cetak Kuitansi</button>
+                    <button data-translate-key="receiptBtnClose" onclick="closeModal('receiptModal')"
+                        style="background: white; border: none; padding: 6px 16px; font-weight: 800; font-size: 0.8rem; border-radius: 30px; cursor: pointer;">Tutup</button>
                 </div>
             </div>
             <div id="receiptSheetContainer">
@@ -3333,7 +3677,7 @@
 
             // 1. Populate standard banner, title, price
             document.getElementById('detailBanner').src = room.image;
-            
+
             // Get translations for current lang
             const lang = window.currentLang || 'id';
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
@@ -3347,7 +3691,7 @@
                 vip: t ? t.detailTypeVIP : "Kamar VIP"
             };
             document.getElementById('detailTitle').innerText = typeLabels[room.type] || "Detail Kamar";
-            
+
             // Status badge with localised text
             const statusEl = document.getElementById('detailStatusBadge');
             statusEl.className = 'status-badge ' + room.status.toLowerCase().replace(/ /g, '-');
@@ -3367,7 +3711,7 @@
             const ratingLabel = t ? t.detailRating : 'Rating';
             document.getElementById('detailSubMeta').innerHTML = `${locSvg}${locStrategic} • ${locName} ${floorLbl} ${room.floor}`;
             document.getElementById('detailRatingText').innerHTML = `${starSvg}${room.rating} ${ratingLabel}`;
-            
+
             // Footer Price & sewa button
             document.getElementById('detailPriceVal').innerHTML = `Rp ${room.price.toLocaleString()}<span>${yearLbl}</span>`;
             const sewaBtn = document.getElementById('btnDetailExecuteSewa');
@@ -3375,7 +3719,7 @@
 
             // 2. Keunggulan Kos Andalan per Floor & Type (localised)
             let keunggulanListHTML = '';
-            
+
             const getKeunggulanItem = (title, desc) => `
                 <div class="keunggulan-item" style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 6px;">
                     <span class="bullet-dot" style="margin-top: 6px;"></span>
@@ -3448,7 +3792,7 @@
                     <span>${name}</span>
                 </div>
             `;
-            
+
             let fasilitasKamarHTML = '';
             fasilitasKamarHTML += getFacilityItem(t ? t.fac_kasur : "Kasur");
             fasilitasKamarHTML += getFacilityItem(t ? t.fac_dipan : "Dipan (Bed Frame)");
@@ -3472,7 +3816,7 @@
                     <span>${rule}</span>
                 </div>
             `;
-            
+
             let rulesHTML = '';
             rulesHTML += getRuleItem(t ? t.rule_1 : "Maksimal 1 orang per kamar");
             rulesHTML += getRuleItem(t ? t.rule_2 : "Dilarang membawa hewan peliharaan");
@@ -3481,7 +3825,7 @@
             document.getElementById('detailRulesList').innerHTML = rulesHTML;
 
             // 7. Wire execute sewa button action (again, to be safe)
-            document.getElementById('btnDetailExecuteSewa').onclick = function() {
+            document.getElementById('btnDetailExecuteSewa').onclick = function () {
                 closeModal('roomDetailModal');
                 openBookingForm(room.id);
             };
@@ -3497,7 +3841,7 @@
             const filterHarga = document.getElementById('filterHarga').value;
             const searchInput = document.getElementById('searchRoomInput');
             const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
-            
+
             const highlights = document.getElementById('highlightsSection');
             if (highlights) {
                 if (searchQuery.length > 0) {
@@ -3506,7 +3850,7 @@
                     highlights.style.display = 'block';
                 }
             }
-            
+
             let watchlist = [];
             try {
                 watchlist = (JSON.parse(localStorage.getItem('watchlist')) || []).map(Number).filter(id => !isNaN(id));
@@ -3599,7 +3943,7 @@
             let rejections = JSON.parse(localStorage.getItem('pt_rejection_notifications')) || {};
             let userRejection = (isLoggedIn && currentUser) ? rejections[currentUser.email] : null;
             let banner = document.getElementById('rejectionBanner');
-            
+
             if (userRejection) {
                 if (!banner) {
                     banner = document.createElement('div');
@@ -3625,7 +3969,7 @@
         document.getElementById('doLogin')?.addEventListener('click', () => {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            
+
             // Admin authentication
             if (email === 'admin@pondoktitis.com' && password === 'admin123') {
                 localStorage.setItem('pt_isAdmin', 'true');
@@ -3669,7 +4013,7 @@
             updateUI();
             closeModal('registerModal');
             alert('Pendaftaran berhasil!');
-            
+
             // Set flag for tour and trigger automatically with a small delay
             localStorage.setItem('hasSeenWebTour', 'true');
             setTimeout(() => {
@@ -3761,7 +4105,7 @@
         window.selectedRemainingPaymentType = 'cash';
         window.remainingAmountToPay = 0;
 
-        window.openRemainingPaymentModal = function(roomId, roomPrice) {
+        window.openRemainingPaymentModal = function (roomId, roomPrice) {
             window.selectedRemainingPaymentRoomId = roomId;
             window.selectedRemainingPaymentType = 'cash';
             window.remainingAmountToPay = roomPrice - 2000000;
@@ -3785,7 +4129,7 @@
             openModal('remainingPaymentModal');
         };
 
-        window.selectRemainingPaymentOption = function(type) {
+        window.selectRemainingPaymentOption = function (type) {
             window.selectedRemainingPaymentType = type;
             const lang = window.currentLang || 'id';
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
@@ -3841,7 +4185,7 @@
             if (window.selectedRemainingPaymentType === 'cash') {
                 // Submit to pt_payments_data
                 let pending = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
-                
+
                 const newRemainingPayment = {
                     id: Date.now(),
                     invoice: "INV-" + Date.now(),
@@ -3877,20 +4221,20 @@
                 const phoneAdmin = (settings && settings[room.location]?.phone) ? settings[room.location].phone : "6285128067691";
                 const message = `Halo Admin Pondok Titis, saya ingin melunasi sisa pembayaran secara Cash sebesar Rp ${window.remainingAmountToPay.toLocaleString()} untuk Kamar ${room.name} #${room.id}. Email Akun: ${currentUser.email}. Nama: ${currentUser.fullname || ''}. Mohon persetujuannya di sistem.`;
                 window.open(`https://wa.me/${phoneAdmin}?text=${encodeURIComponent(message)}`, '_blank');
-                
+
                 closeModal('remainingPaymentModal');
-                
+
                 const sentMsg = t ? t.toastRemainingSent : '✓ Konfirmasi pelunasan dikirim! Menunggu persetujuan admin.';
                 showToast(sentMsg);
 
 
-                
+
                 // Refresh open My Room Modal
                 openMyRoomModal();
             } else {
                 // QRIS option: submit to pt_payments_data
                 let pending = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
-                
+
                 const newRemainingPayment = {
                     id: Date.now(),
                     invoice: "INV-" + Date.now(),
@@ -3921,12 +4265,12 @@
                 }
 
                 closeModal('remainingPaymentModal');
-                
+
                 const sentMsg = t ? t.toastRemainingSent : '✓ Konfirmasi pelunasan dikirim! Menunggu persetujuan admin.';
                 showToast(sentMsg);
 
 
-                
+
                 // Refresh open My Room Modal
                 openMyRoomModal();
             }
@@ -4005,7 +4349,7 @@
             const optCash = document.getElementById('optCash');
             const optDPIcon = document.getElementById('optDPIcon');
             const optCashIcon = document.getElementById('optCashIcon');
-            
+
             const checkedPath = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z";
             const emptyPath = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z";
 
@@ -4070,7 +4414,7 @@
             if (!selectedBookingRoom || !currentBookingData) return;
 
             let pending = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
-            
+
             const newBooking = {
                 id: Date.now(),
                 invoice: "INV-" + Date.now(),
@@ -4100,7 +4444,7 @@
 
             closeModal('paymentModal');
             showToast('✓ Konfirmasi dikirim! Menunggu persetujuan admin.');
-            
+
             // Clean up
             selectedBookingRoom = null;
             currentBookingData = null;
@@ -4154,16 +4498,16 @@
                 const checkinLabel = t ? t.myRoomCheckin : "Check-in:";
                 const checkoutLabel = t ? t.myRoomCheckout : "Akhir Sewa (Check-out):";
                 const noteTitle = t ? t.myRoomNoteTitle : "Catatan Pengambilan Kunci:";
-                
+
                 // Fetch room price for outstanding balance calculation
                 const rooms = [...roomsData.bandung, ...roomsData.solo];
                 const roomObj = rooms.find(r => r.id === myRoom.id);
                 const roomPrice = roomObj ? roomObj.price : (myRoom.price || 13500000);
-                
+
                 // Translate note description
                 let noteDesc = t ? t.myRoomNoteDesc : "Silakan bawa KTP asli Anda beserta bukti kuitansi digital ke Pos Jaga / Security Pondok Titis ${locLabel} untuk mengambil kunci kamar fisik Anda.";
                 noteDesc = noteDesc.replace('${locLabel}', locLabel).replace('Pondok Titis', `Pondok Titis ${locLabel}`);
-                
+
                 container.innerHTML = `
                     <button class="modal-close" onclick="closeModal('myRoomModal')" style="box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-weight: bold; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 20px;">×</button>
                     <img class="detail-modal-banner" src="${myRoom.image}" alt="${myRoom.name}">
@@ -4191,18 +4535,18 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="#ffffff" d="M22.26 3.35A1 1 0 0 0 21.5 3h-9a1 1 0 0 0-.75.34a1 1 0 0 0-.24.79l1 7.5a1 1 0 1 0 2-.26l-.81-6.09a.22.22 0 0 1 .06-.19a.25.25 0 0 1 .17-.09H20a.22.22 0 0 1 .19.09a.24.24 0 0 1 .06.2l-1.09 6.57a1 1 0 1 0 2.33l1.34-8a1 1 0 0 0-.24-.84"/><path fill="#ffffff" d="M19 14h-6a.23.23 0 0 1-.22-.14L11.82 12a.5.5 0 0 0-.39-.28a.51.51 0 0 0-.45.18L9.1 14.21a.9.9 0 0 1-.59.28h-1A.5.5 0 0 0 7 15v6a.48.48 0 0 0 .2.4c2.3 1.73 4.08 2.6 5.3 2.6h5.55A1.7 1.7 0 0 0 20 22.66a56 56 0 0 0 1-7.16c0-.75-.69-1.5-2-1.5m-14.17-.5H1.75a.25.25 0 0 0-.25.25v9a.25.25 0 0 0 .25.25h3.08a.6.6 0 0 0 .67-.59v-8.32a.6.6 0 0 0-.67-.59M15.5 9a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0-3 0M10 11a1 1 0 0 0 1-1.16L9.73 2.29a.28.28 0 0 1 0-.2A.25.25 0 0 1 10 2h8a1 1 0 0 0 0-2H8.5a1 1 0 0 0-1 1.16l1.5 9a1 1 0 0 0 1 .84"/></svg> ${t ? t.myRoomBtnSisa : "Lunasi Sisa Pembayaran"}
                                 </button>
                             ` : (() => {
-                                const bookings = JSON.parse(localStorage.getItem('pendingBookings')) || [];
-                                const myPendingSisa = bookings.find(b => b.userEmail === currentUser.email && b.isRemainingPayment);
-                                const isCash = myPendingSisa && myPendingSisa.paymentType === 'sisa_cash';
-                                const titleText = t ? t.myRoomSisaStatusPending : "Pelunasan Sedang Ditinjau";
-                                const descText = isCash ? (t ? t.myRoomSisaStatusPendingCashDesc : "Pembayaran pelunasan Cash Anda sedang menunggu persetujuan Admin.") : (t ? t.myRoomSisaStatusPendingDesc : "Pembayaran pelunasan QRIS Anda sedang menunggu persetujuan Admin.");
-                                return `
+                            const bookings = JSON.parse(localStorage.getItem('pendingBookings')) || [];
+                            const myPendingSisa = bookings.find(b => b.userEmail === currentUser.email && b.isRemainingPayment);
+                            const isCash = myPendingSisa && myPendingSisa.paymentType === 'sisa_cash';
+                            const titleText = t ? t.myRoomSisaStatusPending : "Pelunasan Sedang Ditinjau";
+                            const descText = isCash ? (t ? t.myRoomSisaStatusPendingCashDesc : "Pembayaran pelunasan Cash Anda sedang menunggu persetujuan Admin.") : (t ? t.myRoomSisaStatusPendingDesc : "Pembayaran pelunasan QRIS Anda sedang menunggu persetujuan Admin.");
+                            return `
                                 <div style="border: 1px solid rgba(234, 179, 8, 0.3); background: rgba(234, 179, 8, 0.05); color: #a16207; border-radius: 12px; padding: 12px; font-size: 0.8rem; font-weight: 650; display: flex; flex-direction: column; gap: 4px; text-align: left;">
                                     <div style="font-weight: 800; display: flex; align-items: center; gap: 6px;">⏳ ${titleText}</div>
                                     <div>${descText}</div>
                                 </div>
                                 `;
-                            })()}
+                        })()}
                         </div>
                         ` : ''}
 
@@ -4258,10 +4602,10 @@
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
             const container = document.getElementById('paymentHistoryContainer');
             const history = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
-            
+
             // Filter by currentUser email (case-insensitive & trimmed)
-            const myHistory = history.filter(h => 
-                (h.userEmail && h.userEmail.trim().toLowerCase() === (currentUser.email || '').trim().toLowerCase()) || 
+            const myHistory = history.filter(h =>
+                (h.userEmail && h.userEmail.trim().toLowerCase() === (currentUser.email || '').trim().toLowerCase()) ||
                 (h.email && h.email.trim().toLowerCase() === (currentUser.email || '').trim().toLowerCase())
             );
 
@@ -4281,7 +4625,7 @@
                 const thRoom = t ? t.historyThRoom : "Kamar";
                 const thAmount = t ? t.historyThAmount : "Nominal";
                 const thPrint = t ? t.historyThPrint : "Cetak";
-                
+
                 let html = `
                     <div class="admin-table-wrapper">
                         <table class="admin-table">
@@ -4296,13 +4640,13 @@
                             </thead>
                             <tbody>
                 `;
-                
+
                 myHistory.forEach(h => {
                     const roomTypeLabel = h.room.type === 'standar' ? (t ? t.typeStandar : 'Standard') : (h.room.type === 'deluxe' ? (t ? t.typeDeluxe : 'Deluxe') : (t ? t.typeVIP : 'VIP'));
                     const locLabel = h.room.location === 'bandung' ? 'Bandung' : 'Solo';
                     const btnPrintText = t ? t.historyBtnPrint : "Cetak Kuitansi";
                     const floorLabel = t ? t.roomFloor : "Lantai";
-                    
+
                     html += `
                         <tr>
                             <td>
@@ -4327,7 +4671,7 @@
                         </tr>
                     `;
                 });
-                
+
                 html += `
                             </tbody>
                         </table>
@@ -4339,7 +4683,7 @@
         }
 
         // ======================= KUITANSI PRINT FUNCTION =======================
-        window.printReceipt = function(invoiceId) {
+        window.printReceipt = function (invoiceId) {
             const lang = window.currentLang || 'id';
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
             const history = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
@@ -4348,17 +4692,17 @@
 
             const roomTypeLabel = item.room.type === 'standar' ? (t ? t.typeStandar : 'Standard') : (item.room.type === 'deluxe' ? (t ? t.typeDeluxe : 'Deluxe') : (t ? t.typeVIP : 'VIP'));
             const locLabel = item.room.location === 'bandung' ? 'Bandung' : 'Solo';
-            const costTypeLabel = item.type === 'DP' ? (t ? t.adminPaymentDP : 'DP (Uang Muka)') : 
-                                 (item.type === 'SISA_QRIS' ? (t ? t.adminPaymentRemainingQRIS : 'Pelunasan Sisa (QRIS)') : 
-                                 (item.type === 'SISA_CASH' ? (t ? t.adminPaymentRemainingCash : 'Pelunasan Sisa (Cash)') : 
-                                 (t ? t.adminPaymentCash : 'Lunas (Cash)')));
+            const costTypeLabel = item.type === 'DP' ? (t ? t.adminPaymentDP : 'DP (Uang Muka)') :
+                (item.type === 'SISA_QRIS' ? (t ? t.adminPaymentRemainingQRIS : 'Pelunasan Sisa (QRIS)') :
+                    (item.type === 'SISA_CASH' ? (t ? t.adminPaymentRemainingCash : 'Pelunasan Sisa (Cash)') :
+                        (t ? t.adminPaymentCash : 'Lunas (Cash)')));
             const formattedTotal = item.amount.toLocaleString('id-ID');
 
             const receiptResmiText = t ? t.receiptResmi : "Kuitansi Resmi";
             const receivedFromText = t ? t.receiptReceivedFrom : "DITERIMA DARI:";
             const paymentDateText = t ? t.receiptPaymentDate : "TANGGAL PEMBAYARAN:";
             const paymentMethodText = t ? t.receiptPaymentMethod : "METODE BAYAR:";
-            
+
             let paymentMethodVal = t ? t.receiptQrisElectronic : "QRIS Transfer Elektronik";
             if (item.paymentType === 'sisa_cash' || item.paymentType === 'cash') {
                 paymentMethodVal = lang === 'id' ? "Tunai (Cash / Manual)" : "Cash (Manual)";
@@ -4471,13 +4815,13 @@
         };
 
         // ======================= PASSWORD & AUTH HELPERS =======================
-        window.togglePasswordVisibility = function(inputId, buttonEl) {
+        window.togglePasswordVisibility = function (inputId, buttonEl) {
             const input = document.getElementById(inputId);
             if (!input) return;
-            
+
             const openEyeSvg = `<svg class="eye-icon eye-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><g fill="none" stroke="#db2777" stroke-width="4"><path stroke-linejoin="round" d="M24 41c9.941 0 18-8.322 18-14s-8.059-14-18-14S6 21.328 6 27s8.059 14 18 14Z" clip-rule="evenodd"/><path stroke-linejoin="round" d="M24 33a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z"/><path stroke-linecap="round" d="m13.264 11.266l2.594 3.62m19.767-3.176l-2.595 3.62M24.009 7v6"/></g></svg>`;
             const closedEyeSvg = `<svg class="eye-icon eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z"/></svg>`;
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 buttonEl.innerHTML = openEyeSvg;
@@ -4487,30 +4831,30 @@
             }
         };
 
-        window.checkPasswordStrength = function(value) {
+        window.checkPasswordStrength = function (value) {
             const strengthText = document.getElementById('strengthText');
             const seg1 = document.getElementById('strengthSeg1');
             const seg2 = document.getElementById('strengthSeg2');
             const seg3 = document.getElementById('strengthSeg3');
             if (!strengthText || !seg1 || !seg2 || !seg3) return;
-            
+
             // Clean up old classes
             seg1.className = 'strength-meter-segment';
             seg2.className = 'strength-meter-segment';
             seg3.className = 'strength-meter-segment';
-            
+
             if (!value) {
                 strengthText.innerText = window.currentLang === 'id' ? 'Terlalu Pendek' : 'Too Short';
                 strengthText.style.color = 'var(--text-muted)';
                 return;
             }
-            
+
             let score = 0;
             if (value.length >= 8) score++;
             if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
             if (/[0-9]/.test(value)) score++;
             if (/[^A-Za-z0-9]/.test(value)) score++;
-            
+
             if (value.length < 6) {
                 strengthText.innerText = window.currentLang === 'id' ? 'Lemah' : 'Weak';
                 strengthText.style.color = '#ef4444';
@@ -4533,13 +4877,13 @@
             }
         };
 
-        window.forgotPassword = function(event) {
+        window.forgotPassword = function (event) {
             if (event && event.preventDefault) event.preventDefault();
             const savedSettings = localStorage.getItem('pt_settings');
             const settings = savedSettings ? JSON.parse(savedSettings) : null;
             const currentLoc = typeof currentLocation !== 'undefined' ? currentLocation : 'bandung';
             const phoneAdmin = (settings && settings[currentLoc]?.phone) ? settings[currentLoc].phone : "6285128067691";
-            const message = window.currentLang === 'id' 
+            const message = window.currentLang === 'id'
                 ? "Halo Admin Pondok Titis, saya lupa kata sandi akun saya. Mohon bantuan untuk reset kata sandi saya."
                 : "Hello Pondok Titis Admin, I forgot my account password. Please help me reset my password.";
             window.open(`https://wa.me/${phoneAdmin}?text=${encodeURIComponent(message)}`, '_blank');
@@ -4552,7 +4896,38 @@
         window.openHistoryModal = openHistoryModal;
         window.printReceipt = printReceipt;
         // window.renderAdminPanel = renderAdminPanel; // Commented out - function not available in inline script
-        
+
+        // Multi-tab real-time state synchronization via localStorage 'storage' event listener
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'myRoom' || e.key === 'pt_rooms_data' || e.key === 'pt_rejection_notifications' || e.key === 'currentUser' || e.key === 'pt_payments_data' || e.key === 'pt_tenants_data') {
+                // Re-read data from localStorage
+                currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+                window.currentUser = currentUser;
+
+                roomsData = JSON.parse(localStorage.getItem('pt_rooms_data'));
+                window.roomsData = roomsData;
+
+                users = JSON.parse(localStorage.getItem('users')) || [];
+                window.users = users;
+
+                // Re-run UI updates
+                updateUI();
+                if (typeof renderRooms === 'function') renderRooms();
+
+                // If My Room Modal is open, re-render it
+                const myRoomModal = document.getElementById('myRoomModal');
+                if (myRoomModal && myRoomModal.classList.contains('active') && typeof openMyRoomModal === 'function') {
+                    openMyRoomModal();
+                }
+
+                // If Payment History Modal is open, re-render it
+                const payHistModal = document.getElementById('paymentHistoryModal');
+                if (payHistModal && payHistModal.classList.contains('active') && typeof openHistoryModal === 'function') {
+                    openHistoryModal();
+                }
+            }
+        });
+
         // Initial setup
         const initWorkflow = () => {
             // Overrides for My Room and other hooks if they need initial arrays
@@ -4566,7 +4941,7 @@
         // ======================= WATCHLIST PREMIUM INTERACTIVE LOGIC =======================
         function toggleWatchlistImpl(roomId, event) {
             if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
-            
+
             roomId = Number(roomId);
             let watchlist = [];
             try {
@@ -4574,9 +4949,9 @@
             } catch (e) {
                 watchlist = [];
             }
-            
+
             const index = watchlist.indexOf(roomId);
-            
+
             if (index > -1) {
                 // Remove from watchlist
                 watchlist.splice(index, 1);
@@ -4586,9 +4961,9 @@
                 watchlist.push(roomId);
                 showToast('✓ Ditambahkan ke watchlist');
             }
-            
+
             localStorage.setItem('watchlist', JSON.stringify(watchlist));
-            
+
             // Direct DOM manipulation for butter-smooth pulse transition
             const btn = document.getElementById(`heart-btn-${roomId}`);
             if (btn) {
@@ -4601,13 +4976,13 @@
                     if (path) path.setAttribute('fill', '#db2777');
                 }
             }
-            
+
             // If the watchlist modal is currently active/open, re-render it!
             if (document.getElementById('watchlistModal').classList.contains('active')) {
                 renderWatchlistModalContent();
             }
         }
-        
+
         // Expose to window object for onclick handlers
         window.toggleWatchlist = toggleWatchlistImpl;
 
@@ -4622,9 +4997,9 @@
                 watchlist = [];
             }
             const rooms = [...roomsData.bandung, ...roomsData.solo];
-            
+
             const savedRooms = rooms.filter(r => watchlist.includes(Number(r.id)));
-            
+
             if (savedRooms.length === 0) {
                 const emptyMsg = t ? t.watchlistEmpty : "Watchlist Anda kosong. Cari kamar dan tambahkan ke favorit!";
                 container.innerHTML = `
@@ -4633,16 +5008,16 @@
                     </div>`;
                 return;
             }
-            
+
             let html = `<div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">`;
-            
+
             savedRooms.forEach(room => {
                 const roomTypeLabel = room.type === 'standar' ? (t ? t.typeStandar : 'Standard') : (room.type === 'deluxe' ? (t ? t.typeDeluxe : 'Deluxe') : (t ? t.typeVIP : 'VIP'));
                 const locLabel = room.location === 'bandung' ? 'Bandung' : 'Solo';
                 const viewBtnText = t ? t.roomDetailBtn : "Detail";
                 const deleteBtnText = window.currentLang === 'en' ? "Remove" : "Hapus";
                 const floorLabel = t ? t.roomFloor : "Lantai";
-                
+
                 html += `
                     <div style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border); padding: 12px 16px; border-radius: 20px; background: var(--bg-card); transition: all 0.2s;">
                         <div style="display: flex; align-items: center; gap: 12px;">
@@ -4660,7 +5035,7 @@
                     </div>
                 `;
             });
-            
+
             html += `</div>`;
             container.innerHTML = html;
         }
@@ -4709,7 +5084,7 @@
             }
         ];
 
-        window.startWebTour = function() {
+        window.startWebTour = function () {
             // Close any open modals and dropdowns first
             document.querySelectorAll('.modal-overlay').forEach(modal => modal.classList.remove('active'));
             document.getElementById('userDropdown')?.classList.remove('open');
@@ -4724,7 +5099,7 @@
             localStorage.setItem('hasSeenWebTour', 'true');
         };
 
-        window.endWebTour = function() {
+        window.endWebTour = function () {
             if (tourHighlightedElement) {
                 tourHighlightedElement.classList.remove('tour-highlighted-element');
                 tourHighlightedElement = null;
@@ -4745,12 +5120,12 @@
             document.getElementById('tourTooltip').classList.remove('active');
         };
 
-        window.skipTour = function() {
+        window.skipTour = function () {
             endWebTour();
             showToast('✓ Tur onboarding dilewati');
         };
 
-        window.nextTourStep = function() {
+        window.nextTourStep = function () {
             if (currentTourStep < tourSteps.length - 1) {
                 currentTourStep++;
                 showTourStep();
@@ -4760,7 +5135,7 @@
             }
         };
 
-        window.prevTourStep = function() {
+        window.prevTourStep = function () {
             if (currentTourStep > 0) {
                 currentTourStep--;
                 showTourStep();
@@ -4810,10 +5185,10 @@
                 const backdropFilter = style.getPropertyValue('backdrop-filter');
 
                 if (
-                    position !== 'static' || 
-                    zIndex !== 'auto' || 
-                    Number(opacity) < 1 || 
-                    transform !== 'none' || 
+                    position !== 'static' ||
+                    zIndex !== 'auto' ||
+                    Number(opacity) < 1 ||
+                    transform !== 'none' ||
                     filter !== 'none' ||
                     backdropFilter !== 'none'
                 ) {
@@ -4833,7 +5208,7 @@
             setTimeout(() => {
                 const rect = target.getBoundingClientRect();
                 const spotlight = document.getElementById('tourSpotlight');
-                
+
                 // Add padding around spotlight
                 const padding = 10;
                 const topPos = rect.top + window.scrollY - padding;
@@ -4853,7 +5228,7 @@
                     const y1 = rect.top - padding;
                     const x2 = rect.right + padding;
                     const y2 = rect.bottom + padding;
-                    
+
                     overlay.style.clipPath = `polygon(
                         0px 0px, 
                         ${window.innerWidth}px 0px, 
@@ -4938,7 +5313,7 @@
 
             tooltip.style.top = `${tooltipTop}px`;
             tooltip.style.left = `${tooltipLeft}px`;
-            
+
             // Re-activate with visual fade/slide transition
             setTimeout(() => {
                 tooltip.classList.add('active');
@@ -4965,4 +5340,5 @@
     </script>
     <script src="js/user.js" defer></script>
 </body>
+
 </html>

@@ -1,99 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // INITIAL DATA LOADING & SYNCHRONIZATION
-    // ==========================================
-    const getRoomsData = () => {
-        let data = localStorage.getItem('pt_rooms_data');
-        return data ? JSON.parse(data) : null;
-    };
+    const API_URL = 'https://web-pondok-titis.onrender.com/api';
+    let tenantsDatabase = [];
+    let roomsDatabase = { bandung: [], solo: [] }; // Opsional, mungkin tidak dipakai
 
-    const saveRoomsData = (data) => {
-        localStorage.setItem('pt_rooms_data', JSON.stringify(data));
-    };
-
-    // Female names pool for Pondok Titis (female-only kosan!)
-    const femaleNames = [
-        "Siti Aminah", "Ayu Lestari", "Dian Sastrowardoyo", "Ririn Indriani",
-        "Amanda Manopo", "Sri Wahyuni", "Indah Permatasari", "Fitri Handayani",
-        "Mega Utami", "Dewi Sartika", "Putri Rahayu", "Siti Rahma",
-        "Novianti Eka", "Dwi Lestari", "Endang Sulastri", "Kartika Sari",
-        "Niken Wijayanti", "Citra Kirana", "Lia Novita", "Ratih Purwasih",
-        "Wulan Guritno", "Gisella Anastasia", "Bunga Citra Lestari", "Maudy Ayunda",
-        "Chelsea Islan", "Pevita Pearce", "Tatjana Saphira", "Prilly Latuconsina"
-    ];
-
-    const originCities = ["Jakarta", "Surabaya", "Semarang", "Yogyakarta", "Medan", "Malang", "Makassar", "Palembang"];
-    const jobs = ["Mahasiswi ITB", "Karyawati BUMN", "Mahasiswi UNPAD", "Karyawati Startup", "Mahasiswi UPI", "Karyawati Bank BCA", "Karyawati Unilever"];
-
-    // Deterministic Generator of Tenants from occupied rooms
-    const generateDefaultTenants = (rooms) => {
-        if (!rooms) return [];
-        const tenants = [];
-        const allRooms = [...rooms.bandung, ...rooms.solo];
-        
-        // Scan rooms with "Tidak Tersedia" (occupied/booked) status
-        allRooms.forEach(room => {
-            if (room.status === "Terisi") {
-                const nameIndex = room.id % femaleNames.length;
-                const fullname = femaleNames[nameIndex];
-                const email = `${fullname.toLowerCase().replace(/\s+/g, '')}@gmail.com`;
-                
-                // Deterministic numbers
-                const phone = `0812-${(1000 + (room.id * 17) % 9000)}-${(1000 + (room.id * 31) % 9000)}`;
-                const emergencyPhone = `0813-${(1000 + (room.id * 23) % 9000)}-${(1000 + (room.id * 47) % 9000)}`;
-                
-                const origin = originCities[room.id % originCities.length];
-                const job = jobs[room.id % jobs.length];
-                
-                // Deterministic Check-in / Check-out dates (Annual Rental format)
-                const startMonth = 1 + (room.id % 5); // Jan to May
-                const checkInDate = `10-${String(startMonth).padStart(2, '0')}-2025`;
-                const checkOutDate = `10-${String(startMonth).padStart(2, '0')}-2026`;
-
-                tenants.push({
-                    id: room.id, // match with room ID
-                    fullname: fullname,
-                    email: email,
-                    phone: phone,
-                    emergencyPhone: emergencyPhone,
-                    origin: origin,
-                    job: job,
-                    checkIn: checkInDate,
-                    checkOut: checkOutDate,
-                    status: "Aktif",
-                    room: {
-                        id: room.id,
-                        number: room.number,
-                        type: room.type,
-                        location: room.location,
-                        floor: room.floor
-                    }
+    const fetchTenants = async () => {
+        try {
+            const res = await fetch(`${API_URL}/users`);
+            if (!res.ok) throw new Error('Failed to fetch users');
+            const data = await res.json();
+            
+            // Map data dari API ke format UI
+            tenantsDatabase = data
+                .filter(u => u.rooms && u.rooms.length > 0) // Hanya ambil yang punya kamar
+                .map(u => {
+                    const r = u.rooms[0]; // Ambil kamar pertama
+                    return {
+                        id: u.id,
+                        fullname: u.name || 'User Tanpa Nama',
+                        email: u.email,
+                        phone: u.phone || '-',
+                        emergencyPhone: '-',
+                        origin: '-',
+                        job: '-',
+                        checkIn: new Date(u.created_at).toLocaleDateString('id-ID'),
+                        checkOut: 'Sedang Berjalan',
+                        status: 'Aktif',
+                        room: {
+                            id: r.id,
+                            number: r.room_number || '-',
+                            type: r.type || '-',
+                            location: r.location || 'bandung',
+                            floor: r.floor || 1
+                        }
+                    };
                 });
-            }
-        });
-        
-        return tenants;
-    };
-
-    const getTenantsData = () => {
-        let data = localStorage.getItem('pt_tenants_data');
-        if (!data) {
-            const rooms = getRoomsData();
-            const initialTenants = generateDefaultTenants(rooms);
-            localStorage.setItem('pt_tenants_data', JSON.stringify(initialTenants));
-            return initialTenants;
+            renderTenants();
+        } catch(err) {
+            console.error(err);
+            tenantTableBody.innerHTML = `<tr><td colspan="8" class="empty-state">Gagal mengambil data dari server.</td></tr>`;
         }
-        return JSON.parse(data);
     };
-
-    const saveTenantsData = (data) => {
-        localStorage.setItem('pt_tenants_data', JSON.stringify(data));
-    };
-
-    // Load states
-    let roomsDatabase = getRoomsData();
-    let tenantsDatabase = getTenantsData();
 
     // ==========================================
     // DOM ELEMENTS
@@ -237,42 +184,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // ACTION: DELETE / EVICT RENTER
     // ==========================================
-    const evictTenant = (id) => {
+    const evictTenant = async (id) => {
         const tenant = tenantsDatabase.find(t => t.id === id);
         if (!tenant) return;
 
         const confirmation = confirm(`Apakah Anda yakin ingin menghapus penyewa "${tenant.fullname}" dari kamar "${tenant.room.number}"? Kamar ini akan dikosongkan kembali di sistem.`);
         
         if (confirmation) {
-            // 1. Remove from Tenants list
-            tenantsDatabase = tenantsDatabase.filter(t => t.id !== id);
-            saveTenantsData(tenantsDatabase);
-
-            // 2. Open up the room again in Rooms database (status -> Tersedia)
-            if (roomsDatabase) {
-                let found = false;
-                roomsDatabase.bandung = roomsDatabase.bandung.map(r => {
-                    if (r.id === id) {
-                        r.status = "Tersedia";
-                        found = true;
-                    }
-                    return r;
+            try {
+                // Remove user from room via API
+                const res = await fetch(`${API_URL}/rooms/${tenant.room.id}/evict`, {
+                    method: 'PUT'
                 });
                 
-                if (!found) {
-                    roomsDatabase.solo = roomsDatabase.solo.map(r => {
-                        if (r.id === id) {
-                            r.status = "Tersedia";
-                        }
-                        return r;
-                    });
-                }
-                saveRoomsData(roomsDatabase);
+                if (!res.ok) throw new Error('Gagal mengeluarkan penyewa');
+                
+                alert(`Penyewa "${tenant.fullname}" berhasil dikeluarkan. Kamar "${tenant.room.number}" sekarang statusnya menjadi "Tersedia".`);
+                fetchTenants(); // Refresh data dari server
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat menghubungi server.');
             }
-
-            // 3. Refresh display
-            alert(`Penyewa "${tenant.fullname}" berhasil dikeluarkan. Kamar "${tenant.room.number}" sekarang statusnya menjadi "Tersedia".`);
-            renderTenants();
         }
     };
 
@@ -353,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // INITIAL LOAD
     // ==========================================
-    renderTenants();
+    fetchTenants();
 });
 
 // Logout logic

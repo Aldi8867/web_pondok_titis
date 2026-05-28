@@ -1,104 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // DATA GENERATOR & INITIALIZER
-    // ==========================================
-    const generateRooms = (loc) => {
-        const list = [];
-        let idCounter = loc === 'bandung' ? 100 : 200;
-        
-        let countStandar = 1;
-        let countDeluxe = 1;
-        let countVip = 1;
-
-        const addRoom = (floor, type, name, price, facilities) => {
-            const images = {
-                standar: "images/room_standard.png",
-                deluxe: "images/room_deluxe.png",
-                vip: "images/room_vip.png"
-            };
-            const rating = (4.5 + ((idCounter * 7) % 5) / 10).toFixed(1);
-            const status = idCounter % 5 === 0 ? "Sedang Perbaikan" : (idCounter % 3 === 0 ? "Terisi" : (idCounter % 7 === 0 ? "Tidak Tersedia" : "Tersedia"));
-            
-            // Format dynamic Room Number Code
-            let roomCode = "";
-            const prefix = loc === 'bandung' ? 'BDG' : 'SLO';
-            if (type === 'standar') {
-                roomCode = `${prefix}-S${String(countStandar++).padStart(2, '0')}`;
-            } else if (type === 'deluxe') {
-                roomCode = `${prefix}-D${String(countDeluxe++).padStart(2, '0')}`;
-            } else {
-                roomCode = `${prefix}-V${String(countVip++).padStart(2, '0')}`;
-            }
-
-            list.push({
-                id: idCounter++,
-                name: name,
-                number: roomCode,
-                type: type,
-                price: price,
-                floor: floor,
-                image: images[type] || "images/room_standard.png",
-                location: loc,
-                facilities: facilities,
-                rating: rating,
-                status: status,
-                size: type === 'standar' ? '3x3 meter' : '3x4 meter',
-                description: `Kamar tipe ${type} yang nyaman di lantai ${floor} Pondok Titis ${loc === 'bandung' ? 'Bandung' : 'Solo'}. Dilengkapi dengan berbagai fasilitas penunjang kenyamanan produktivitas Anda.`
-            });
-        };
-
-        // Lantai 1: 4 standard, 3 deluxe
-        for (let i = 1; i <= 4; i++) addRoom(1, 'standar', 'Kamar Standar Cozy', 13500000, ["AC", "Meja", "Kasur"]);
-        for (let i = 1; i <= 3; i++) addRoom(1, 'deluxe', 'Kamar Deluxe Executive', 14500000, ["AC", "Lemari", "Kamar Mandi Dalam"]);
-
-        // Lantai 2: 6 standard, 4 vip
-        for (let i = 1; i <= 6; i++) addRoom(2, 'standar', 'Kamar Standar Cozy', 13500000, ["AC", "Meja", "Kasur"]);
-        for (let i = 1; i <= 4; i++) addRoom(2, 'vip', 'Kamar VIP Royal', 15500000, ["AC", "Lemari", "WiFi Pribadi", "Kulkas", "Balkon", "Kamar Mandi Dalam"]);
-
-        // Lantai 3: 6 standard, 4 vip
-        for (let i = 1; i <= 6; i++) addRoom(3, 'standar', 'Kamar Standar Cozy', 13500000, ["AC", "Meja", "Kasur"]);
-        for (let i = 1; i <= 4; i++) addRoom(3, 'vip', 'Kamar VIP Royal', 15500000, ["AC", "Lemari", "WiFi Pribadi", "Kulkas", "Balkon", "Kamar Mandi Dalam"]);
-
-        // Lantai 4: 5 standard
-        for (let i = 1; i <= 5; i++) addRoom(4, 'standar', 'Kamar Standar Cozy Skyline', 13500000, ["AC", "Meja", "Kasur", "Balkon"]);
-
-        return list;
-    };
-
-    // Load or initialize data in localStorage
-    const getRoomsData = () => {
-        let data = localStorage.getItem('pt_rooms_data');
-        
-        const initData = () => {
-            const initialData = {
-                bandung: generateRooms('bandung'),
-                solo: generateRooms('solo')
-            };
-            localStorage.setItem('pt_rooms_data', JSON.stringify(initialData));
-            return initialData;
-        };
-
-        if (!data || data === 'undefined' || data === 'null') {
-            return initData();
-        }
-        try {
-            const parsed = JSON.parse(data);
-            if (!parsed || !parsed.bandung || !parsed.solo) {
-                return initData();
-            }
-            return parsed;
-        } catch(e) {
-            return initData();
-        }
-    };
-
-    const saveRoomsData = (data) => {
-        localStorage.setItem('pt_rooms_data', JSON.stringify(data));
-    };
-
+    const API_URL = 'https://web-pondok-titis.onrender.com/api';
+    
     // Global memory state for active rooms database
-    let roomsDatabase = getRoomsData();
+    let roomsDatabase = { bandung: [], solo: [] };
+    let tempImageBase64 = "";
+
+    const fetchRooms = async () => {
+        try {
+            const res = await fetch(`${API_URL}/rooms`);
+            if (!res.ok) throw new Error('Network error');
+            const data = await res.json();
+            
+            // Re-map flat array to nested object
+            roomsDatabase = { bandung: [], solo: [] };
+            data.forEach(r => {
+                // Konversi type dan fasilitas dari backend jika perlu
+                const room = {
+                    id: r.id,
+                    name: r.name || 'Kamar',
+                    number: r.room_number || '',
+                    type: r.type || 'standar',
+                    price: r.price,
+                    floor: r.floor,
+                    image: r.image || "images/room_standard.png",
+                    location: r.location || 'bandung',
+                    facilities: typeof r.facilities === 'string' ? JSON.parse(r.facilities || "[]") : (r.facilities || []),
+                    rating: r.rating || 4.8,
+                    status: r.status || 'Tersedia',
+                    size: r.size || '3x3 meter',
+                    description: r.description || ''
+                };
+                if (room.location === 'bandung') {
+                    roomsDatabase.bandung.push(room);
+                } else {
+                    roomsDatabase.solo.push(room);
+                }
+            });
+            renderRooms();
+        } catch (error) {
+            console.error('Error fetching rooms:', error);
+            roomsGrid.innerHTML = `<div class="rooms-empty-state">Gagal mengambil data kamar dari server.</div>`;
+        }
+    };
+
     let tempImageBase64 = ""; // hold upload image base64 temporarily
 
     // ==========================================
@@ -478,44 +423,39 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Toggle Maintenance Status quickly
-    const toggleMaintenance = (id) => {
-        let found = false;
-        // Check Bandung
-        roomsDatabase.bandung = roomsDatabase.bandung.map(r => {
-            if (r.id === id) {
-                found = true;
-                r.status = r.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
-            }
-            return r;
-        });
+    const toggleMaintenance = async (id) => {
+        const allRooms = [...roomsDatabase.bandung, ...roomsDatabase.solo];
+        const room = allRooms.find(r => r.id === id);
+        if (!room) return;
 
-        // Check Solo if not found in Bandung
-        if (!found) {
-            roomsDatabase.solo = roomsDatabase.solo.map(r => {
-                if (r.id === id) {
-                    r.status = r.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
-                }
-                return r;
+        const newStatus = room.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
+        
+        try {
+            const res = await fetch(`${API_URL}/rooms/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
             });
+            if (!res.ok) throw new Error('Failed to update status');
+            fetchRooms(); // Refresh
+        } catch (err) {
+            console.error(err);
+            alert('Gagal mengubah status kamar.');
         }
-
-        saveRoomsData(roomsDatabase);
-        renderRooms();
     };
 
     // Delete Room
-    const deleteRoom = (id) => {
+    const deleteRoom = async (id) => {
         if (confirm('Apakah Anda yakin ingin menghapus kamar ini secara permanen dari sistem?')) {
-            const prevLen = roomsDatabase.bandung.length + roomsDatabase.solo.length;
-            
-            roomsDatabase.bandung = roomsDatabase.bandung.filter(r => r.id !== id);
-            roomsDatabase.solo = roomsDatabase.solo.filter(r => r.id !== id);
-            
-            const postLen = roomsDatabase.bandung.length + roomsDatabase.solo.length;
-            
-            if (prevLen > postLen) {
-                saveRoomsData(roomsDatabase);
-                renderRooms();
+            try {
+                const res = await fetch(`${API_URL}/rooms/${id}`, {
+                    method: 'DELETE'
+                });
+                if (!res.ok) throw new Error('Failed to delete room');
+                fetchRooms(); // Refresh
+            } catch (err) {
+                console.error(err);
+                alert('Gagal menghapus kamar.');
             }
         }
     };
@@ -663,15 +603,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkBoxes = facilitiesGrid.querySelectorAll('input[type="checkbox"]');
         checkBoxes.forEach(cb => {
             if (["AC", "Meja", "Kasur", "WiFi Pribadi"].includes(cb.value)) {
-                cb.checked = true;
-            } else {
-                cb.checked = false;
-            }
-        });
-    };
+                } else {
+                    cb.checked = false;
+                }
+            });
+        };
+
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
+    const roomsGrid = document.getElementById('roomsGrid');
 
     // Save Room form submit
-    roomForm.addEventListener('submit', (e) => {
+    roomForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const loc = document.querySelector('input[name="roomLocation"]:checked').value;
@@ -689,14 +633,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Price stored in normal integer
         const price = Math.round(priceMillions * 1000000);
+        const checkedFacilities = Array.from(facilitiesGrid.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
 
-        // Gather facilities
-        const checkedFacilities = Array.from(facilitiesGrid.querySelectorAll('input[type="checkbox"]:checked'))
-                                       .map(cb => cb.value);
-
-        // Photo fallback if not uploaded
         let roomImage = tempImageBase64;
         if (!roomImage) {
             const defaultImages = {
@@ -708,95 +647,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const isEdit = editRoomId.value !== "";
+        const payload = {
+            room_number: num,
+            type: type,
+            floor: floor,
+            price: price,
+            description: desc || `Kamar tipe ${type} yang nyaman di lantai ${floor} Pondok Titis ${loc === 'bandung' ? 'Bandung' : 'Solo'}.`,
+            status: status,
+            name: title,
+            location: loc,
+            image: roomImage,
+            facilities: checkedFacilities,
+            size: size,
+            rating: isEdit ? undefined : 4.8
+        };
 
-        if (isEdit) {
-            // Edit existing room
-            const editId = parseInt(editRoomId.value, 10);
-            
-            // Delete from both locations first (to handle location changes safely!)
-            let prevRoom = null;
-            
-            roomsDatabase.bandung = roomsDatabase.bandung.filter(r => {
-                if (r.id === editId) {
-                    prevRoom = r;
-                    return false;
-                }
-                return true;
-            });
-            roomsDatabase.solo = roomsDatabase.solo.filter(r => {
-                if (r.id === editId) {
-                    prevRoom = r;
-                    return false;
-                }
-                return true;
-            });
+        const btnSave = document.getElementById('btnSaveRoom');
+        const oldText = btnSave.innerText;
+        btnSave.innerText = "Menyimpan...";
+        btnSave.disabled = true;
 
-            // Re-insert with updated parameters into correct location
-            const updatedRoom = {
-                id: editId,
-                name: title,
-                number: num,
-                type: type,
-                price: price,
-                floor: floor,
-                image: roomImage,
-                location: loc,
-                facilities: checkedFacilities,
-                rating: prevRoom ? prevRoom.rating : "4.8",
-                status: status,
-                size: size,
-                description: desc || `Kamar tipe ${type} yang nyaman di lantai ${floor} Pondok Titis ${loc === 'bandung' ? 'Bandung' : 'Solo'}.`
-            };
-
-            if (loc === 'bandung') {
-                roomsDatabase.bandung.push(updatedRoom);
+        try {
+            let res;
+            if (isEdit) {
+                const editId = parseInt(editRoomId.value, 10);
+                res = await fetch(`${API_URL}/rooms/${editId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
             } else {
-                roomsDatabase.solo.push(updatedRoom);
+                res = await fetch(`${API_URL}/rooms`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
             }
 
-            alert('Kamar berhasil diperbarui!');
-        } else {
-            // Add new room
-            const allRooms = [...roomsDatabase.bandung, ...roomsDatabase.solo];
+            if (!res.ok) throw new Error('Gagal menyimpan kamar');
             
-            // ID counters
-            let nextId = 100;
-            if (loc === 'bandung') {
-                const bdgIds = roomsDatabase.bandung.map(r => r.id);
-                nextId = bdgIds.length > 0 ? Math.max(...bdgIds) + 1 : 100;
-            } else {
-                const soloIds = roomsDatabase.solo.map(r => r.id);
-                nextId = soloIds.length > 0 ? Math.max(...soloIds) + 1 : 200;
-            }
-
-            const newRoom = {
-                id: nextId,
-                name: title,
-                number: num,
-                type: type,
-                price: price,
-                floor: floor,
-                image: roomImage,
-                location: loc,
-                facilities: checkedFacilities,
-                rating: "4.8",
-                status: status,
-                size: size,
-                description: desc || `Kamar tipe ${type} yang nyaman di lantai ${floor} Pondok Titis ${loc === 'bandung' ? 'Bandung' : 'Solo'}.`
-            };
-
-            if (loc === 'bandung') {
-                roomsDatabase.bandung.push(newRoom);
-            } else {
-                roomsDatabase.solo.push(newRoom);
-            }
-
-            alert('Kamar baru berhasil ditambahkan!');
+            alert(isEdit ? 'Kamar berhasil diperbarui!' : 'Kamar baru berhasil ditambahkan!');
+            closeModalWindow();
+            
+            // Refresh data from server
+            fetchRooms();
+        } catch (err) {
+            console.error(err);
+            alert('Terjadi kesalahan saat menyimpan data ke server.');
+        } finally {
+            btnSave.innerText = oldText;
+            btnSave.disabled = false;
         }
-
-        saveRoomsData(roomsDatabase);
-        closeModalWindow();
-        renderRooms();
     });
 
     // Modal listeners
@@ -816,10 +717,8 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDate.innerText = new Date().toLocaleDateString('id-ID', options);
     }
 
-    // ==========================================
-    // INITIAL LOAD
-    // ==========================================
-    renderRooms();
+    // Initial fetch from API
+    fetchRooms();
 });
 
 // Logout logic

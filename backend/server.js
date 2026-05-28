@@ -73,10 +73,19 @@ app.get('/api/rooms', async (req, res) => {
 });
 
 app.post('/api/rooms', async (req, res) => {
-    const { room_number, type, floor, price, description, status } = req.body;
+    const { room_number, type, floor, price, description, status, name, location, image, facilities, size, rating } = req.body;
     const { data, error } = await supabase
         .from('rooms')
-        .insert([{ room_number, type, floor, price, description, status: status || 'Tersedia' }])
+        .insert([{ 
+            room_number, type, floor, price, description, 
+            status: status || 'Tersedia',
+            name: name || 'Kamar',
+            location: location || 'bandung',
+            image: image || '',
+            facilities: facilities || [],
+            size: size || '3x3 meter',
+            rating: rating || 4.8
+        }])
         .select();
     if (error) return res.status(400).json({ error: error.message });
     res.json(data[0]);
@@ -92,6 +101,18 @@ app.put('/api/rooms/:id', async (req, res) => {
         .select();
     if (error) return res.status(400).json({ error: error.message });
     res.json(data[0]);
+});
+
+app.get('/api/users', async (req, res) => {
+    // Digunakan oleh admin untuk melihat penyewa kamar (Tenant Data)
+    const { data, error } = await supabase
+        .from('users')
+        .select(`
+            id, name, email, role, phone, created_at,
+            rooms ( id, room_number, location, floor, type )
+        `);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json(data);
 });
 
 app.delete('/api/rooms/:id', async (req, res) => {
@@ -164,8 +185,34 @@ app.put('/api/payments/:id', async (req, res) => {
         .update({ status })
         .eq('id', id)
         .select();
+        
     if (error) return res.status(400).json({ error: error.message });
+    
+    if (status === 'approved' && data && data.length > 0) {
+        // Link room to user
+        await supabase.from('rooms').update({ 
+            user_id: data[0].user_id, 
+            status: 'Terisi' 
+        }).eq('id', data[0].room_id);
+    } else if (status === 'rejected' && data && data.length > 0) {
+        // Bebaskan kamar jika ditolak
+        await supabase.from('rooms').update({ 
+            user_id: null, 
+            status: 'Tersedia' 
+        }).eq('id', data[0].room_id);
+    }
+    
     res.json(data[0]);
+});
+
+app.put('/api/rooms/:id/evict', async (req, res) => {
+    const { id } = req.params;
+    const { error } = await supabase
+        .from('rooms')
+        .update({ user_id: null, status: 'Tersedia' })
+        .eq('id', id);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Tenant evicted successfully' });
 });
 
 app.listen(port, () => {

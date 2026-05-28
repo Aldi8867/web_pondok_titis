@@ -1,139 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // INITIAL DATABASE STATE SETUP
-    // ==========================================
-    const getRoomsData = () => {
-        let data = localStorage.getItem('pt_rooms_data');
-        return data ? JSON.parse(data) : null;
-    };
+    const API_URL = 'https://web-pondok-titis.onrender.com/api';
+    let paymentsDatabase = [];
 
-    const saveRoomsData = (data) => {
-        localStorage.setItem('pt_rooms_data', JSON.stringify(data));
-    };
-
-    const getTenantsData = () => {
-        let data = localStorage.getItem('pt_tenants_data');
-        return data ? JSON.parse(data) : [];
-    };
-
-    const saveTenantsData = (data) => {
-        localStorage.setItem('pt_tenants_data', JSON.stringify(data));
-    };
-
-    // Deterministic Payment History Generator based on occupied rooms + some mock entries
-    const generateDefaultPayments = (rooms, tenants) => {
-        const list = [];
-
-        // 1. Generate PENDING (Waiting) bookings to let Admin test setujui/tolak
-        list.push({
-            id: 901,
-            date: "24-05-2026",
-            invoice: "INV-20260524-03",
-            fullname: "Amanda Kirana",
-            phone: "0812-5555-8888",
-            email: "amanda.kirana@gmail.com",
-            amount: 13500000,
-            type: "Lunas",
-            status: "Waiting",
-            room: {
-                id: 103, // BDG-S04 standard
-                number: "BDG-S04",
-                type: "standar",
-                location: "bandung",
-                floor: 1
-            }
-        });
-
-        list.push({
-            id: 902,
-            date: "25-05-2026",
-            invoice: "INV-20260525-09",
-            fullname: "Riri Indriani",
-            phone: "0857-4444-9999",
-            email: "riri.indriani@gmail.com",
-            amount: 5000000,
-            type: "DP",
-            status: "Waiting",
-            room: {
-                id: 210, // Solo VIP
-                number: "SLO-V01",
-                type: "vip",
-                location: "solo",
-                floor: 2
-            }
-        });
-
-        // 2. Generate CONFIRMED payments from all occupied (Terisi) rooms
-        if (rooms && tenants) {
-            tenants.forEach(t => {
-                const startMonth = 1 + (t.room.id % 5);
-                const paymentDate = `08-${String(startMonth).padStart(2, '0')}-2025`;
-                const amount = t.room.type === 'standar' ? 13500000 : (t.room.type === 'deluxe' ? 14500000 : 15500000);
+    const fetchPayments = async () => {
+        try {
+            const res = await fetch(`${API_URL}/payments`);
+            if (!res.ok) throw new Error('Failed to fetch payments');
+            const data = await res.json();
+            
+            // Map data dari API ke format UI paymentsDatabase
+            paymentsDatabase = data.map(p => {
+                let mappedStatus = "Waiting";
+                if (p.status === 'approved') mappedStatus = "Confirmed";
+                else if (p.status === 'rejected') mappedStatus = "Rejected";
+                else mappedStatus = "Waiting"; // 'pending'
                 
-                list.push({
-                    id: t.id,
-                    date: paymentDate,
-                    invoice: `INV-2025${String(startMonth).padStart(2, '0')}10-${t.id}`,
-                    fullname: t.fullname,
-                    phone: t.phone,
-                    email: t.email,
-                    amount: amount,
-                    type: "Lunas",
-                    status: "Confirmed",
-                    room: t.room
-                });
+                return {
+                    id: p.id,
+                    date: new Date(p.created_at).toLocaleDateString('id-ID'),
+                    invoice: `INV-${p.id}`,
+                    fullname: p.users ? p.users.name : 'Unknown',
+                    email: p.users ? p.users.email : '-',
+                    phone: '-', // Backend payments tak simpan phone, atau ambil dari users.phone jika ada
+                    amount: p.amount,
+                    type: "Lunas", // Asumsi
+                    status: mappedStatus,
+                    proofImage: p.proof_image || '',
+                    room: p.rooms ? {
+                        id: p.rooms.id,
+                        number: p.rooms.room_number,
+                        type: p.rooms.type || 'Kamar',
+                        location: p.rooms.location || 'bandung',
+                        floor: p.rooms.floor || 1
+                    } : null
+                };
             });
+            renderPayments();
+        } catch (err) {
+            console.error(err);
+            paymentsTableBody.innerHTML = `<tr><td colspan="7" class="empty-state">Gagal mengambil data dari server.</td></tr>`;
         }
-
-        // 3. Generate some REJECTED transactions
-        list.push({
-            id: 903,
-            date: "12-04-2026",
-            invoice: "INV-20260412-07",
-            fullname: "Fitri Eka",
-            phone: "0899-7777-6666",
-            email: "fitri.eka@gmail.com",
-            amount: 14500000,
-            type: "Lunas",
-            status: "Rejected",
-            room: {
-                id: 104, // Bandung Deluxe
-                number: "BDG-D01",
-                type: "deluxe",
-                location: "bandung",
-                floor: 1
-            }
-        });
-
-        return list;
     };
 
-    const getPaymentsData = () => {
-        let data = localStorage.getItem('pt_payments_data');
-        if (!data) {
-            const rooms = getRoomsData();
-            const tenants = getTenantsData();
-            const initialPayments = generateDefaultPayments(rooms, tenants);
-            localStorage.setItem('pt_payments_data', JSON.stringify(initialPayments));
-            return initialPayments;
-        }
-        return JSON.parse(data);
-    };
-
-    const savePaymentsData = (data) => {
-        localStorage.setItem('pt_payments_data', JSON.stringify(data));
-    };
-
-    // Load active states from local storage
-    let roomsDatabase = getRoomsData();
-    let tenantsDatabase = getTenantsData();
-    let paymentsDatabase = getPaymentsData();
+    fetchPayments();
 
     window.addEventListener('storage', (e) => {
         if (e.key === 'pt_payments_data') {
-            paymentsDatabase = getPaymentsData();
-            renderPayments();
+            fetchPayments();
         }
     });
 
@@ -277,185 +191,92 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // ACTION: APPROVE PAYMENT (SETUJUI)
     // ==========================================
-    const approvePayment = (id) => {
+    const approvePayment = async (id) => {
         const tx = paymentsDatabase.find(p => p.id === id);
         if (!tx) return;
 
-        const roomNameStr = tx.room.number || tx.room.name || 'Kamar';
+        const roomNameStr = tx.room ? (tx.room.number || tx.room.type) : 'Kamar';
         const confirmation = confirm(`Apakah Anda yakin ingin menyetujui pembayaran sewa atas nama "${tx.fullname}" untuk kamar "${roomNameStr}"?`);
         
         if (confirmation) {
-            // 1. Update transaction status
-            tx.status = "Confirmed";
-            savePaymentsData(paymentsDatabase);
-
-            // 2. Lock room status in pt_rooms_data (status -> Terisi)
-            if (roomsDatabase) {
-                let found = false;
-                roomsDatabase.bandung = roomsDatabase.bandung.map(r => {
-                    if (r.id === tx.room.id) {
-                        r.status = "Terisi";
-                        found = true;
-                    }
-                    return r;
+            try {
+                const res = await fetch(`${API_URL}/payments/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: 'approved' })
                 });
+                if (!res.ok) throw new Error('Gagal menyetujui pembayaran');
                 
-                if (!found) {
-                    roomsDatabase.solo = roomsDatabase.solo.map(r => {
-                        if (r.id === tx.room.id) {
-                            r.status = "Terisi";
-                        }
-                        return r;
-                    });
-                }
-                saveRoomsData(roomsDatabase);
+                // Backward compatibility untuk Sinkronisasi User UI
+                const myRoomData = {
+                    id: tx.room ? tx.room.id : 0,
+                    name: `Kamar ${tx.room ? tx.room.type : ''} #${tx.room ? tx.room.number : ''}`,
+                    type: tx.room ? tx.room.type : '',
+                    floor: tx.room ? tx.room.floor : 1,
+                    location: tx.room ? tx.room.location : 'bandung',
+                    checkin: tx.date,
+                    checkout: "Tahun Depan",
+                    status: "Aktif",
+                    tenantEmail: tx.email,
+                    fullname: tx.fullname,
+                    paymentStatus: 'lunas'
+                };
+                localStorage.setItem('myRoom', JSON.stringify(myRoomData));
+                
+                let rejections = JSON.parse(localStorage.getItem('pt_rejection_notifications')) || {};
+                delete rejections[tx.email];
+                localStorage.setItem('pt_rejection_notifications', JSON.stringify(rejections));
+
+                alert(`Pembayaran sewa "${tx.fullname}" sukses disetujui!\nKamar "${roomNameStr}" sekarang berstatus "Terisi".`);
+                fetchPayments(); // Refresh dari server
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat menyetujui pembayaran.');
             }
-
-            // 3. Add to Active Tenants list (pt_tenants_data)
-            tenantsDatabase = getTenantsData();
-            
-            const startMonth = 1 + (tx.room.id % 5);
-            const checkOutYear = 2027; // 1 year after sewa
-            
-            const fallbackOrigins = ["Jakarta", "Surabaya", "Semarang", "Yogyakarta", "Medan", "Malang", "Makassar", "Palembang"];
-            const fallbackJobs = ["Mahasiswi ITB", "Karyawati BUMN", "Mahasiswi UNPAD", "Karyawati Startup", "Mahasiswi UPI", "Karyawati Bank BCA", "Karyawati Unilever"];
-            const originVal = tx.origin || fallbackOrigins[tx.room.id % fallbackOrigins.length];
-            const jobVal = tx.job || fallbackJobs[tx.room.id % fallbackJobs.length];
-
-            const newTenant = {
-                id: tx.room.id,
-                fullname: tx.fullname,
-                email: tx.email,
-                phone: tx.phone,
-                emergencyPhone: tx.emergencyPhone || `0813-${(1000 + (tx.room.id * 23) % 9000)}-${(1000 + (tx.room.id * 47) % 9000)}`,
-                origin: originVal,
-                job: jobVal,
-                checkIn: tx.date,
-                checkOut: tx.date.replace("-2026", `-${checkOutYear}`).replace("-2025", `-${checkOutYear}`),
-                status: "Aktif",
-                room: tx.room
-            };
-            
-            // Prevent duplicates in tenants list
-            tenantsDatabase = tenantsDatabase.filter(t => t.id !== tx.room.id);
-            tenantsDatabase.push(newTenant);
-            saveTenantsData(tenantsDatabase);
-
-            // 4. AUTOMATIC USER 'KAMAR SAYA' SYNCHRONIZATION
-            // Update myRoom in localStorage for the buyer's email account!
-            // When user logs in using this email on user.html, it will read myRoom and load it instantly!
-            // Format checkin and checkout dates
-            let checkinFormatted = tx.date;
-            let checkoutFormatted = tx.date.replace("-2026", `-${checkOutYear}`).replace("-2025", `-${checkOutYear}`);
-            
-            // Try to parse if it is in DD-MM-YYYY format
-            const parts = tx.date.split('-');
-            if (parts.length === 3) {
-                const day = parseInt(parts[0], 10);
-                const month = parseInt(parts[1], 10) - 1;
-                const year = parseInt(parts[2], 10);
-                const monthsId = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-                if (!isNaN(day) && !isNaN(month) && !isNaN(year) && month >= 0 && month < 12) {
-                    checkinFormatted = `${day} ${monthsId[month]} ${year}`;
-                    checkoutFormatted = `${day} ${monthsId[month]} ${checkOutYear}`;
-                }
-            }
-
-            // Find full room details in database if possible to get properties like type, floor, location, image, name
-            let roomDetails = null;
-            if (roomsDatabase) {
-                roomDetails = roomsDatabase.bandung.find(r => r.id === tx.room.id) || 
-                              roomsDatabase.solo.find(r => r.id === tx.room.id);
-            }
-            const roomObj = roomDetails || tx.room || {};
-
-            const myRoomData = {
-                id: roomObj.id,
-                name: roomObj.name || `Kamar ${roomObj.type === 'standar' ? 'Standard' : (roomObj.type === 'deluxe' ? 'Deluxe' : 'VIP')} #${roomObj.number || roomObj.id}`,
-                type: roomObj.type,
-                floor: roomObj.floor,
-                location: roomObj.location,
-                checkin: checkinFormatted,
-                checkout: checkoutFormatted,
-                image: roomObj.image || `images/room-${roomObj.type || 'standar'}.jpg`,
-                status: "Aktif",
-                tenantEmail: tx.email,
-                fullname: tx.fullname,
-                paymentStatus: tx.type === 'DP' ? 'dp' : 'lunas'
-            };
-            
-            // Save user specific room booking locally
-            localStorage.setItem('myRoom', JSON.stringify(myRoomData));
-            
-            // Remove any potential rejection notifications for this user
-            let rejections = JSON.parse(localStorage.getItem('pt_rejection_notifications')) || {};
-            delete rejections[tx.email];
-            localStorage.setItem('pt_rejection_notifications', JSON.stringify(rejections));
-
-            // 5. Refresh table
-            alert(`Pembayaran sewa "${tx.fullname}" sukses disetujui!\nKamar "${tx.room.number}" sekarang berstatus "Terisi" dan detail penyewa telah terdaftar.`);
-            renderPayments();
         }
     };
 
     // ==========================================
     // ACTION: REJECT PAYMENT (TOLAK)
     // ==========================================
-    const rejectPayment = (id) => {
+    const rejectPayment = async (id) => {
         const tx = paymentsDatabase.find(p => p.id === id);
         if (!tx) return;
 
-        const roomNameStr = tx.room.number || tx.room.name || 'Kamar';
+        const roomNameStr = tx.room ? (tx.room.number || tx.room.type) : 'Kamar';
         const confirmation = confirm(`Apakah Anda yakin ingin MENOLAK pembayaran sewa atas nama "${tx.fullname}" untuk kamar "${roomNameStr}"?`);
         
         if (confirmation) {
-            // 1. Update status to Rejected
-            tx.status = "Rejected";
-            savePaymentsData(paymentsDatabase);
-
-            // 2. Open room again (ensure it remains Tersedia/Available)
-            if (roomsDatabase) {
-                let found = false;
-                roomsDatabase.bandung = roomsDatabase.bandung.map(r => {
-                    if (r.id === tx.room.id) {
-                        r.status = "Tersedia";
-                        found = true;
-                    }
-                    return r;
+            try {
+                const res = await fetch(`${API_URL}/payments/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: 'rejected' })
                 });
+                if (!res.ok) throw new Error('Gagal menolak pembayaran');
+
+                // Sinkronisasi lokal untuk notifikasi User UI
+                let rejections = JSON.parse(localStorage.getItem('pt_rejection_notifications')) || {};
+                rejections[tx.email] = {
+                    invoice: tx.invoice,
+                    roomNumber: tx.room ? tx.room.number : '-',
+                    amount: tx.amount,
+                    date: tx.date,
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('pt_rejection_notifications', JSON.stringify(rejections));
                 
-                if (!found) {
-                    roomsDatabase.solo = roomsDatabase.solo.map(r => {
-                        if (r.id === tx.room.id) {
-                            r.status = "Tersedia";
-                        }
-                        return r;
-                    });
+                const myRoom = JSON.parse(localStorage.getItem('myRoom'));
+                if (myRoom && myRoom.tenantEmail === tx.email) {
+                    localStorage.removeItem('myRoom');
                 }
-                saveRoomsData(roomsDatabase);
-            }
 
-            // 3. Save a rejection notification record in localStorage linked to this email!
-            // When they open user.html, it will read this rejection and display the red notification
-            let rejections = JSON.parse(localStorage.getItem('pt_rejection_notifications')) || {};
-            rejections[tx.email] = {
-                invoice: tx.invoice,
-                roomNumber: tx.room.number,
-                amount: tx.amount,
-                date: tx.date,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('pt_rejection_notifications', JSON.stringify(rejections));
-            
-            // Clear any potential myRoom bookings
-            const myRoom = JSON.parse(localStorage.getItem('myRoom'));
-            if (myRoom && myRoom.tenantEmail === tx.email) {
-                localStorage.removeItem('myRoom');
+                alert(`Transaksi sewa "${tx.fullname}" ditolak.\nPengguna akan melihat notifikasi di dasbor user.`);
+                fetchPayments(); // Refresh dari server
+            } catch(err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat menolak pembayaran.');
             }
-
-            // 4. Refresh display
-            alert(`Transaksi sewa "${tx.fullname}" ditolak.\nPengguna akan melihat notifikasi di dasbor user untuk segera menghubungi admin kos via WhatsApp.`);
-            renderPayments();
         }
     };
 

@@ -977,11 +977,6 @@ window.showToast = showToast;
 
 // Add to watchlist function (can be called from room cards)
 window.addToWatchlist = function (roomId) {
-    if (!window.currentUser) {
-        showToast('Silakan login terlebih dahulu');
-        if (window.openModal) window.openModal('loginModal');
-        return;
-    }
     let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
     if (!watchlist.includes(roomId)) {
         watchlist.push(roomId);
@@ -1163,7 +1158,7 @@ init();
 // ========== PAYMENT MODAL STRUCTURE (if needed) ==========
 // Add payment modal HTML dynamically or it's already there from main HTML
 // For completeness, ensure payment variables work
-window.bookRoom = bookRoom;
+if (typeof bookRoom !== 'undefined') window.bookRoom = bookRoom;
 
 // Export for debugging
 console.log('Pondok Titis v2.0 - Liquid Crystal iOS 2026 Style 🚀');

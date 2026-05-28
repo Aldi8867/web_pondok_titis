@@ -4566,11 +4566,6 @@
         // ======================= WATCHLIST PREMIUM INTERACTIVE LOGIC =======================
         function toggleWatchlistImpl(roomId, event) {
             if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
-            if (!currentUser) {
-                showToast('Silakan login terlebih dahulu');
-                openModal('loginModal');
-                return;
-            }
             
             roomId = Number(roomId);
             let watchlist = [];

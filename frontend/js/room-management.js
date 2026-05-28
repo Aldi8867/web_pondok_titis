@@ -603,16 +603,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkBoxes = facilitiesGrid.querySelectorAll('input[type="checkbox"]');
         checkBoxes.forEach(cb => {
             if (["AC", "Meja", "Kasur", "WiFi Pribadi"].includes(cb.value)) {
-                } else {
-                    cb.checked = false;
-                }
-            });
-        };
-
-    // ==========================================
-    // DOM ELEMENTS
-    // ==========================================
-    const roomsGrid = document.getElementById('roomsGrid');
+                cb.checked = true;
+            } else {
+                cb.checked = false;
+            }
+        });
+    };
 
     // Save Room form submit
     roomForm.addEventListener('submit', async (e) => {

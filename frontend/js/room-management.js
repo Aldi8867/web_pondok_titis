@@ -69,23 +69,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load or initialize data in localStorage
     const getRoomsData = () => {
         let data = localStorage.getItem('pt_rooms_data');
-        if (!data || data === 'undefined') {
+        
+        const initData = () => {
             const initialData = {
                 bandung: generateRooms('bandung'),
                 solo: generateRooms('solo')
             };
             localStorage.setItem('pt_rooms_data', JSON.stringify(initialData));
             return initialData;
+        };
+
+        if (!data || data === 'undefined' || data === 'null') {
+            return initData();
         }
         try {
-            return JSON.parse(data);
+            const parsed = JSON.parse(data);
+            if (!parsed || !parsed.bandung || !parsed.solo) {
+                return initData();
+            }
+            return parsed;
         } catch(e) {
-            const initialData = {
-                bandung: generateRooms('bandung'),
-                solo: generateRooms('solo')
-            };
-            localStorage.setItem('pt_rooms_data', JSON.stringify(initialData));
-            return initialData;
+            return initData();
         }
     };
 
@@ -158,7 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const pattern = new RegExp(`^${prefix}-${typeLetter}(\\d+)$`);
         
         matches.forEach(r => {
-            const match = r.number.match(pattern);
+            const numStr = r.number || "";
+            const match = numStr.match(pattern);
             if (match) {
                 const index = parseInt(match[1], 10);
                 if (index > maxIndex) maxIndex = index;
@@ -337,9 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Apply filters
         displayList = displayList.filter(room => {
             // Search filter
-            const matchesSearch = room.type.toLowerCase().includes(searchVal) ||
-                                  room.number.toLowerCase().includes(searchVal) ||
-                                  room.name.toLowerCase().includes(searchVal);
+            const typeStr = room.type || "";
+            const numStr = room.number || "";
+            const nameStr = room.name || "";
+            const matchesSearch = typeStr.toLowerCase().includes(searchVal) ||
+                                  numStr.toLowerCase().includes(searchVal) ||
+                                  nameStr.toLowerCase().includes(searchVal);
                                   
             // Status filter
             let matchesStatus = true;
@@ -400,8 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="room-card-body">
                     <div class="room-card-title">
-                        <span>${room.name}</span>
-                        <span class="room-card-number">${room.number}</span>
+                        <span>${room.name || ''}</span>
+                        <span class="room-card-number">${room.number || ''}</span>
                     </div>
                     <div class="room-card-meta">
                         <span style="font-weight: 600; color: var(--primary);">${room.location === 'bandung' ? 'Bandung' : 'Solo'}</span>

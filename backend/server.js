@@ -49,6 +49,21 @@ app.post('/api/login', async (req, res) => {
     res.json(data);
 });
 
+app.put('/api/users/:id/reset-password', async (req, res) => {
+    const { id } = req.params;
+    const { newPassword } = req.body;
+    if (!supabase) return res.status(500).json({ error: 'Database not connected' });
+
+    const { data, error } = await supabase
+        .from('users')
+        .update({ password: newPassword })
+        .eq('id', id)
+        .select();
+
+    if (error) return res.status(400).json({ error: error.message });
+    res.json(data[0]);
+});
+
 // --- ROOMS ENDPOINTS ---
 app.get('/api/rooms', async (req, res) => {
     if (!supabase) return res.status(500).json({ error: 'Database not connected' });

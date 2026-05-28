@@ -609,6 +609,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // ==========================================
+    // CARD ACTION LISTENERS (Ubah, Maint, Hapus)
+    // ==========================================
+    const attachCardListeners = () => {
+        roomsGrid.querySelectorAll('[data-action]').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const action = btn.getAttribute('data-action');
+                const id = parseInt(btn.getAttribute('data-id'), 10);
+
+                if (action === 'edit') {
+                    openEditModal(id);
+                } else if (action === 'toggle-maint') {
+                    const allRooms = [...roomsDatabase.bandung, ...roomsDatabase.solo];
+                    const room = allRooms.find(r => r.id === id);
+                    if (!room) return;
+
+                    const newStatus = room.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
+                    try {
+                        const res = await fetch(`${API_URL}/rooms/${id}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ status: newStatus })
+                        });
+                        if (!res.ok) throw new Error('Gagal update status');
+                        fetchRooms();
+                    } catch (err) {
+                        console.error(err);
+                        alert('Gagal mengubah status kamar.');
+                    }
+                } else if (action === 'delete') {
+                    const allRooms = [...roomsDatabase.bandung, ...roomsDatabase.solo];
+                    const room = allRooms.find(r => r.id === id);
+                    if (!room) return;
+
+                    const ok = confirm(`Hapus kamar "${room.number}"? Tindakan ini tidak bisa dibatalkan.`);
+                    if (ok) {
+                        try {
+                            const res = await fetch(`${API_URL}/rooms/${id}`, { method: 'DELETE' });
+                            if (!res.ok) throw new Error('Gagal hapus kamar');
+                            fetchRooms();
+                        } catch (err) {
+                            console.error(err);
+                            alert('Gagal menghapus kamar.');
+                        }
+                    }
+                }
+            });
+        });
+    };
+
     // Save Room form submit
     roomForm.addEventListener('submit', async (e) => {
         e.preventDefault();

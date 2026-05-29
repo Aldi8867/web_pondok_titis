@@ -2,36 +2,9 @@ const API_URL = 'https://web-pondok-titis.onrender.com/api';
 let roomsDatabase = { bandung: [], solo: [] };
 let tempImageBase64 = "";
 
-// Global functions for inline onclick handlers
-window.openEditRoomModal = function(id) {
-    openEditModal(id);
-};
-
-window.toggleRoomMaint = async function(id) {
-    const room = [...roomsDatabase.bandung, ...roomsDatabase.solo].find(r => r.id === id);
-    if (!room) return;
-    const newStatus = room.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
-    try {
-        const res = await fetch(`${API_URL}/rooms/${id}`, {
-            method: 'PUT', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: newStatus })
-        });
-        if (!res.ok) throw new Error();
-        fetchRooms();
-    } catch { alert('Gagal mengubah status kamar.'); }
-};
-
-window.deleteRoom = async function(id) {
-    const room = [...roomsDatabase.bandung, ...roomsDatabase.solo].find(r => r.id === id);
-    if (!room) return;
-    if (confirm(`Hapus kamar "${room.number}"? Tindakan ini tidak bisa dibatalkan.`)) {
-        try {
-            const res = await fetch(`${API_URL}/rooms/${id}`, { method: 'DELETE' });
-            if (!res.ok) throw new Error();
-            fetchRooms();
-        } catch { alert('Gagal menghapus kamar.'); }
-    }
-};
+const API_URL = 'https://web-pondok-titis.onrender.com/api';
+let roomsDatabase = { bandung: [], solo: [] };
+let tempImageBase64 = "";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -480,6 +453,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentDate) {
         currentDate.innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     }
+
+    // Expose functions to window object for inline HTML onclick handlers
+    window.openEditRoomModal = function(id) {
+        openEditModal(id);
+    };
+
+    window.toggleRoomMaint = async function(id) {
+        const room = [...roomsDatabase.bandung, ...roomsDatabase.solo].find(r => r.id === id);
+        if (!room) return;
+        const newStatus = room.status === 'Sedang Perbaikan' ? 'Tersedia' : 'Sedang Perbaikan';
+        try {
+            const res = await fetch(`${API_URL}/rooms/${id}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+            if (!res.ok) throw new Error();
+            fetchRooms();
+        } catch { alert('Gagal mengubah status kamar.'); }
+    };
+
+    window.deleteRoom = async function(id) {
+        const room = [...roomsDatabase.bandung, ...roomsDatabase.solo].find(r => r.id === id);
+        if (!room) return;
+        if (confirm(`Hapus kamar "${room.number}"? Tindakan ini tidak bisa dibatalkan.`)) {
+            try {
+                const res = await fetch(`${API_URL}/rooms/${id}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error();
+                fetchRooms();
+            } catch { alert('Gagal menghapus kamar.'); }
+        }
+    };
 
     // Initial load
     fetchRooms();

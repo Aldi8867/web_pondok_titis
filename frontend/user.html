@@ -3866,6 +3866,7 @@
             }
 
             let filtered = rooms.filter(room => {
+                if (room.status === 'Sedang Perbaikan') return false;
                 if (filterLantai !== 'all' && room.floor != filterLantai) return false;
                 if (filterTipe !== 'all' && room.type !== filterTipe) return false;
                 if (filterHarga === '<14jt' && room.price >= 14000000) return false;
@@ -4951,6 +4952,49 @@
             }
         });
 
+        const syncRoomsWithAPI = async () => {
+            try {
+                const res = await fetch('https://web-pondok-titis.onrender.com/api/rooms');
+                if (!res.ok) throw new Error('API error');
+                const data = await res.json();
+                
+                const bandung = [];
+                const solo = [];
+                
+                data.forEach(r => {
+                    const room = {
+                        id: Number(r.id),
+                        name: r.name || 'Kamar',
+                        number: r.room_number || '',
+                        type: r.type || 'standar',
+                        price: Number(r.price),
+                        floor: Number(r.floor),
+                        image: r.image || "images/room_standard.png",
+                        location: r.location || 'bandung',
+                        facilities: typeof r.facilities === 'string' ? JSON.parse(r.facilities || "[]") : (r.facilities || []),
+                        rating: Number(r.rating || 4.8),
+                        status: r.status || 'Tersedia',
+                        size: r.size || '3x3 meter',
+                        description: r.description || ''
+                    };
+                    if (room.location === 'bandung') {
+                        bandung.push(room);
+                    } else {
+                        solo.push(room);
+                    }
+                });
+                
+                roomsData = { bandung, solo };
+                window.roomsData = roomsData;
+                localStorage.setItem('pt_rooms_data', JSON.stringify(roomsData));
+                
+                // Re-render rooms on page
+                if (typeof renderRooms === 'function') renderRooms();
+            } catch (err) {
+                console.error("Gagal menyinkronkan data kamar dari server:", err);
+            }
+        };
+
         // Initial setup
         const initWorkflow = () => {
             // Overrides for My Room and other hooks if they need initial arrays
@@ -4960,6 +5004,9 @@
             if (!localStorage.getItem('paymentHistory')) {
                 localStorage.setItem('paymentHistory', JSON.stringify([]));
             }
+            
+            // Sync rooms from live Supabase API
+            syncRoomsWithAPI();
         };
         // ======================= WATCHLIST PREMIUM INTERACTIVE LOGIC =======================
         function toggleWatchlistImpl(roomId, event) {

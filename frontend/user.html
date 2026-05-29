@@ -4254,7 +4254,7 @@
             }
         });
 
-        function openBookingForm(roomId) {
+        async function openBookingForm(roomId) {
             if (!currentUser) {
                 showToast('Silakan login terlebih dahulu untuk mengajukan sewa.');
                 openModal('loginModal');
@@ -4270,12 +4270,19 @@
                 return;
             }
 
-            // 2. Check if user has a pending booking request
-            const paymentsData = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
-            const hasPending = paymentsData.some(p => p.userEmail === currentUser.email && p.status === 'Waiting' && !p.isRemainingPayment);
-            if (hasPending) {
-                alert(window.currentLang === 'en' ? 'You have a pending booking request. Please wait for admin confirmation.' : 'Anda masih memiliki pengajuan sewa yang sedang diproses admin. Harap tunggu konfirmasi sebelum mengajukan lagi.');
-                return;
+            // 2. Check if user has a pending booking request via API
+            try {
+                const res = await fetch('https://web-pondok-titis.onrender.com/api/payments');
+                if (res.ok) {
+                    const allPayments = await res.json();
+                    const hasPending = allPayments.some(p => ((p.users && p.users.id === currentUser.id) || p.user_id === currentUser.id) && (p.status === 'pending' || p.status === 'Waiting'));
+                    if (hasPending) {
+                        alert(window.currentLang === 'en' ? 'You have a pending booking request. Please wait for admin confirmation.' : 'Anda masih memiliki pengajuan sewa yang sedang diproses admin. Harap tunggu konfirmasi sebelum mengajukan lagi.');
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch pending payments", err);
             }
             // --------------------------------
 

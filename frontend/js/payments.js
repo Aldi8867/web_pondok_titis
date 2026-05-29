@@ -19,6 +19,7 @@ const init = () => {
                 return {
                     id: p.id,
                     date: new Date(p.created_at).toLocaleDateString('id-ID'),
+                    createdAt: p.created_at,
                     invoice: `INV-${p.id}`,
                     fullname: p.users ? p.users.name : 'Unknown',
                     email: p.users ? p.users.email : '-',
@@ -108,8 +109,8 @@ const init = () => {
             return;
         }
 
-        // Sort descending by date / ID (latest transaction first)
-        displayList.sort((a, b) => b.id - a.id);
+        // Sort descending by date (latest transaction first)
+        displayList.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
         displayList.forEach(p => {
             const tr = document.createElement('tr');
@@ -142,7 +143,7 @@ const init = () => {
                 actionCol = `
                     <div style="text-align: center;">
                         <span class="room-card-badge badge-tersedia" style="position: static; font-size: 9px; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 4px;">Disetujui</span><br>
-                        <button class="btn-card-action" onclick="printReceipt(${p.id})" style="width: auto; padding: 4px 10px; font-size: 9px; align-items: center; border-radius: 4px; background: var(--primary); color: white; border: none; cursor: pointer;">Cetak Kuitansi</button>
+                        <button class="btn-card-action" onclick="printReceipt('${p.id}')" style="width: auto; padding: 4px 10px; font-size: 9px; align-items: center; border-radius: 4px; background: var(--primary); color: white; border: none; cursor: pointer;">Cetak Kuitansi</button>
                     </div>
                 `;
             } else {
@@ -176,7 +177,7 @@ const init = () => {
     const attachActionListeners = () => {
         document.querySelectorAll('[data-action]').forEach(btn => {
             btn.addEventListener('click', () => {
-                const id = parseInt(btn.getAttribute('data-id'), 10);
+                const id = btn.getAttribute('data-id');
                 const action = btn.getAttribute('data-action');
                 
                 if (action === "approve") {

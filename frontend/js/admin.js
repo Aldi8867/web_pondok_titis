@@ -102,6 +102,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 currentDate.innerText = new Date().toLocaleDateString('id-ID', options);
             }
+            // Fetch Pending Payments
+            try {
+                const payRes = await fetch(`${API_URL}/payments`);
+                if (payRes.ok) {
+                    const payData = await payRes.json();
+                    const pendingList = payData.filter(p => p.status === 'pending');
+                    
+                    const tbody = document.getElementById('pendingPaymentsBody');
+                    const countEl = document.getElementById('pendingPaymentsCount');
+                    if (countEl) countEl.innerText = pendingList.length;
+                    
+                    if (tbody) {
+                        if (pendingList.length === 0) {
+                            tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tidak ada pembayaran tertunda</td></tr>`;
+                        } else {
+                            tbody.innerHTML = pendingList.slice(0, 5).map(p => `
+                                <tr>
+                                    <td><span style="font-family: monospace; font-weight: 600;">INV-${p.id.substring(0,6)}</span></td>
+                                    <td>${p.users ? p.users.name : 'Unknown'}</td>
+                                    <td>Rp ${p.amount.toLocaleString()}</td>
+                                    <td><button onclick="window.location.href='payments.html'" style="padding: 4px 10px; font-size: 11px; border-radius: 4px; background: var(--primary); color: white; border: none; cursor: pointer;">Tinjau</button></td>
+                                </tr>
+                            `).join('');
+                        }
+                    }
+                }
+            } catch(e) {
+                console.error("Failed to fetch pending payments preview", e);
+            }
+
         } catch (err) {
             console.error('Failed to load dashboard:', err);
         }

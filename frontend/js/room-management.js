@@ -2,10 +2,6 @@ const API_URL = 'https://web-pondok-titis.onrender.com/api';
 let roomsDatabase = { bandung: [], solo: [] };
 let tempImageBase64 = "";
 
-const API_URL = 'https://web-pondok-titis.onrender.com/api';
-let roomsDatabase = { bandung: [], solo: [] };
-let tempImageBase64 = "";
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================

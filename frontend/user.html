@@ -4597,6 +4597,11 @@
                         invNumber: `INV-${p.id}`,
                         date: new Date(p.created_at).toLocaleDateString('id-ID'),
                         amount: p.amount,
+                        fullname: p.users ? p.users.name : '',
+                        email: p.users ? p.users.email : '',
+                        phone: '-',
+                        type: 'Lunas',
+                        paymentType: 'qris',
                         status: p.status === 'approved' ? 'Confirmed' : (p.status === 'rejected' ? 'Rejected' : 'Waiting'),
                         room: p.rooms ? {
                             id: p.rooms.id,
@@ -4606,6 +4611,7 @@
                             floor: p.rooms.floor || 1
                         } : { number: '-', type: 'standar', location: 'bandung', floor: 1 }
                     }));
+                    window.myHistoryData = myHistory;
                 }
             } catch (err) {
                 console.error("Gagal memuat riwayat pembayaran dari API", err);
@@ -4668,7 +4674,7 @@
                                 </div>
                             </td>
                             <td style="text-align: center;">
-                                <button class="btn-action-sm ${(h.status === 'Confirmed' || h.status === 'Approved') ? 'btn-approve' : 'btn-disabled'}" ${(h.status === 'Confirmed' || h.status === 'Approved') ? `onclick="printReceipt(${h.id})"` : 'disabled'} style="padding: 6px 14px; ${(h.status === 'Confirmed' || h.status === 'Approved') ? '' : 'background: #e2e8f0; color: #94a3b8; border: none; cursor: not-allowed;'}" >${btnPrintText}</button>
+                                <button class="btn-action-sm ${(h.status === 'Confirmed' || h.status === 'Approved') ? 'btn-approve' : 'btn-disabled'}" ${(h.status === 'Confirmed' || h.status === 'Approved') ? `onclick="printReceipt('${h.id}')"` : 'disabled'} style="padding: 6px 14px; ${(h.status === 'Confirmed' || h.status === 'Approved') ? '' : 'background: #e2e8f0; color: #94a3b8; border: none; cursor: not-allowed;'}" >${btnPrintText}</button>
                             </td>
                         </tr>
                     `;
@@ -4688,9 +4694,12 @@
         window.printReceipt = function (invoiceId) {
             const lang = window.currentLang || 'id';
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
-            const history = JSON.parse(localStorage.getItem('pt_payments_data')) || [];
+            const history = window.myHistoryData || [];
             const item = history.find(h => String(h.id) === String(invoiceId));
-            if (!item) return;
+            if (!item) {
+                alert("Data pembayaran tidak ditemukan!");
+                return;
+            }
 
             const roomTypeLabel = item.room.type === 'standar' ? (t ? t.typeStandar : 'Standard') : (item.room.type === 'deluxe' ? (t ? t.typeDeluxe : 'Deluxe') : (t ? t.typeVIP : 'VIP'));
             const locLabel = item.room.location === 'bandung' ? 'Bandung' : 'Solo';

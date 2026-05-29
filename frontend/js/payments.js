@@ -1,7 +1,7 @@
-const init = () => {
+let paymentsDatabase = [];
 
+const init = () => {
     const API_URL = 'https://web-pondok-titis.onrender.com/api';
-    let paymentsDatabase = [];
 
     const fetchPayments = async () => {
         try {

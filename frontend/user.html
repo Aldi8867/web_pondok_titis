@@ -4446,13 +4446,46 @@
             document.getElementById('userDropdown').classList.remove('open');
         });
 
-        function openMyRoomModal() {
+        async function openMyRoomModal() {
             const lang = window.currentLang || 'id';
             const t = (typeof window.translations !== 'undefined' && window.translations[lang]) ? window.translations[lang] : null;
             const container = document.getElementById('myRoomContainer');
-            const myRoom = JSON.parse(localStorage.getItem('myRoom'));
+            
+            let myRoom = null;
+            try {
+                const res = await fetch('https://web-pondok-titis.onrender.com/api/payments');
+                if (res.ok) {
+                    const allPayments = await res.json();
+                    const approvedPayment = allPayments.find(p => 
+                        (p.user_id === currentUser.id || (p.users && p.users.id === currentUser.id)) && 
+                        p.status === 'approved'
+                    );
+                    if (approvedPayment && approvedPayment.rooms) {
+                        myRoom = {
+                            id: approvedPayment.rooms.id,
+                            name: `Kamar ${approvedPayment.rooms.type} #${approvedPayment.rooms.room_number}`,
+                            type: approvedPayment.rooms.type,
+                            floor: approvedPayment.rooms.floor,
+                            location: approvedPayment.rooms.location,
+                            checkin: new Date(approvedPayment.created_at).toLocaleDateString('id-ID'),
+                            checkout: "Tahun Depan",
+                            status: "Aktif",
+                            tenantEmail: currentUser.email,
+                            fullname: currentUser.name,
+                            paymentStatus: approvedPayment.amount < 10000000 ? 'dp' : 'lunas',
+                            price: approvedPayment.amount,
+                            image: approvedPayment.rooms.location === 'bandung' ? 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop&q=80'
+                        };
+                    }
+                }
+            } catch(e) { console.error("Failed fetching my room", e); }
 
-            // Check if active room exists and matches current user email (case-insensitive & trimmed)
+            // Fallback to local storage if API fails
+            if (!myRoom) {
+                myRoom = JSON.parse(localStorage.getItem('myRoom'));
+            }
+
+            // Check if active room exists
             if (!myRoom || !currentUser || (myRoom.tenantEmail || '').trim().toLowerCase() !== (currentUser.email || '').trim().toLowerCase()) {
                 const emptyTitle = t ? t.myRoomTitle : "Kamar Saya";
                 const emptyMsg = t ? t.myRoomEmpty : "Anda belum memiliki kamar sewa aktif. Silakan cari kamar kosan andalan Anda dan ajukan sewa!";

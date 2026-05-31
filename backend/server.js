@@ -231,6 +231,34 @@ app.put('/api/rooms/:id/evict', async (req, res) => {
     res.json({ message: 'Tenant evicted successfully' });
 });
 
+app.get('/api/payments/user/:id', async (req, res) => {
+    const { id } = req.params;
+    const { data, error } = await supabase
+        .from('payments')
+        .select('*')
+        .eq('user_id', id);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json(data);
+});
+
+app.post('/api/users/:id/kick', async (req, res) => {
+    const { id } = req.params;
+    if (!supabase) return res.status(500).json({ error: 'Database not connected' });
+    
+    // Bebaskan semua kamar yang dimiliki user ini
+    await supabase.from('rooms').update({ 
+        user_id: null, 
+        status: 'Tersedia' 
+    }).eq('user_id', id);
+    
+    // Ubah status payment aktif menjadi expired agar tidak terhitung lagi
+    await supabase.from('payments').update({
+        status: 'expired'
+    }).eq('user_id', id).eq('status', 'approved');
+
+    res.json({ message: 'User kicked and rooms freed successfully' });
+});
+
 // --- RESET DATA ENDPOINT (DANGER) ---
 app.post('/api/reset-data', async (req, res) => {
     if (!supabase) return res.status(500).json({ error: 'Database not connected' });

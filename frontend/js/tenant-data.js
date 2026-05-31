@@ -239,14 +239,23 @@ const init = () => {
         
         if (confirmation) {
             try {
-                // Remove user from room via API
-                const res = await fetch(`${API_URL}/rooms/${tenant.room.id}/evict`, {
-                    method: 'PUT'
+                // Remove user from room and expire their payments via new API
+                const res = await fetch(`${API_URL}/users/${tenant.id}/kick`, {
+                    method: 'POST'
                 });
                 
                 if (!res.ok) throw new Error('Gagal mengeluarkan penyewa');
                 
-                alert(`Penyewa "${tenant.fullname}" berhasil dikeluarkan. Kamar "${tenant.room.number}" sekarang statusnya menjadi "Tersedia".`);
+                // Clear user profile from local storage fallback
+                try {
+                    let allMeta = JSON.parse(localStorage.getItem('allUsersMeta') || '{}');
+                    if (allMeta[tenant.email]) {
+                        delete allMeta[tenant.email];
+                        localStorage.setItem('allUsersMeta', JSON.stringify(allMeta));
+                    }
+                } catch(e) {}
+
+                alert(`Penyewa "${tenant.fullname}" berhasil dikeluarkan. Kamar "${tenant.room.number}" sekarang statusnya menjadi "Tersedia". Penyewa ini di-reset menjadi User Baru.`);
                 fetchTenants(); // Refresh data dari server
             } catch (err) {
                 console.error(err);

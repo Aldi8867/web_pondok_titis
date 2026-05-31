@@ -934,28 +934,68 @@ document.getElementById('btnWatchlist')?.addEventListener('click', () => {
 });
 
 // Change Password Modal (API implementation)
-document.getElementById('btnChangePasswordMenu')?.addEventListener('click', async () => {
+document.getElementById('btnChangePasswordMenu')?.addEventListener('click', () => {
     userDropdown.classList.remove('open');
     if (!window.currentUser) {
         if (window.openModal) window.openModal('loginModal');
         return;
     }
-    const newPass = prompt('Masukkan password baru (min 8 karakter):');
-    if (newPass && newPass.length >= 8) {
-        try {
-            const res = await fetch(`https://web-pondok-titis.onrender.com/api/users/${window.currentUser.id}/reset-password`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password: newPass })
-            });
-            if (!res.ok) throw new Error('Gagal mereset sandi di server');
-            alert('Password berhasil diubah!');
-        } catch (err) {
-            console.error(err);
-            alert('Terjadi kesalahan saat mengubah sandi.');
-        }
-    } else if (newPass) {
+    
+    // Reset form
+    document.getElementById('cpNewPassword').value = '';
+    document.getElementById('cpConfirmPassword').value = '';
+    
+    // Buka modal ganti password
+    if (window.openModal) window.openModal('changePasswordModal');
+});
+
+document.getElementById('btnSubmitChangePassword')?.addEventListener('click', async () => {
+    if (!window.currentUser) return;
+    
+    const newPass = document.getElementById('cpNewPassword').value;
+    const confirmPass = document.getElementById('cpConfirmPassword').value;
+    
+    if (!newPass || newPass.length < 8) {
         alert('Password terlalu pendek! Minimal 8 karakter.');
+        return;
+    }
+    
+    if (newPass !== confirmPass) {
+        alert('Konfirmasi password tidak cocok dengan password baru!');
+        return;
+    }
+    
+    const btn = document.getElementById('btnSubmitChangePassword');
+    const originalText = btn.innerText;
+    btn.innerText = 'Menyimpan...';
+    btn.disabled = true;
+    
+    try {
+        const res = await fetch(`https://web-pondok-titis.onrender.com/api/users/${window.currentUser.id}/reset-password`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ newPassword: newPass })
+        });
+        
+        if (!res.ok) throw new Error('Gagal mereset sandi di server');
+        
+        alert('Password berhasil diubah! Silakan login kembali dengan password baru Anda.');
+        
+        // Log user out
+        window.currentUser = null;
+        if (typeof currentUser !== 'undefined') currentUser = null;
+        localStorage.removeItem('currentUser');
+        if (typeof updateUI === 'function') updateUI();
+        
+        if (window.closeModal) window.closeModal('changePasswordModal');
+        if (window.openModal) window.openModal('loginModal');
+        
+    } catch (err) {
+        console.error(err);
+        alert('Terjadi kesalahan saat mengubah sandi.');
+    } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
     }
 });
 

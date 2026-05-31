@@ -3108,6 +3108,32 @@
         </div>
     </div>
 
+    <!-- Ganti Password Modal -->
+    <div class="modal-overlay" id="changePasswordModal">
+        <div class="modal-content" style="max-width: 450px; padding: 32px; border-radius: 24px;">
+            <button class="modal-close" onclick="closeModal('changePasswordModal')">×</button>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 8px;">Ganti Password</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Silakan masukkan password baru Anda. Setelah berhasil, Anda akan otomatis logout.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Password Baru</label>
+                    <input type="password" id="cpNewPassword" placeholder="Minimal 8 karakter" style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--bg-section); color: var(--text); font-size: 0.95rem; outline: none;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Konfirmasi Password</label>
+                    <input type="password" id="cpConfirmPassword" placeholder="Ketik ulang password baru" style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--bg-section); color: var(--text); font-size: 0.95rem; outline: none;">
+                </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="button-primary" id="btnSubmitChangePassword" style="width: 100%; padding: 16px; border-radius: 16px; font-weight: 800; font-size: 1rem; box-shadow: 0 4px 15px rgba(219,39,119,0.3); transition: transform 0.2s;">
+                    Simpan Password Baru
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="watchlistModal">
         <div class="modal-content" style="max-width: 500px; padding: 32px;">
             <button class="modal-close" onclick="closeModal('watchlistModal')">×</button>

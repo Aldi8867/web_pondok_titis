@@ -1,46 +1,28 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const API_URL = 'https://web-pondok-titis.onrender.com/api';
 
     // ==========================================
     // INITIAL DATA LOADING & CALCULATIONS
     // ==========================================
-    const getRoomsData = () => {
-        let data = localStorage.getItem('pt_rooms_data');
-        if (!data) {
-            // Default rooms generator fallback (same logic)
-            const generateDefaultRooms = (loc) => {
-                const list = [];
-                let idCounter = loc === 'bandung' ? 100 : 200;
-                let countStandar = 1; let countDeluxe = 1; let countVip = 1;
-                
-                const addRoom = (floor, type, price) => {
-                    const prefix = loc === 'bandung' ? 'BDG' : 'SLO';
-                    let code = "";
-                    if (type === 'standar') code = `${prefix}-S${String(countStandar++).padStart(2, '0')}`;
-                    else if (type === 'deluxe') code = `${prefix}-D${String(countDeluxe++).padStart(2, '0')}`;
-                    else code = `${prefix}-V${String(countVip++).padStart(2, '0')}`;
-                    
-                    const status = idCounter % 5 === 0 ? "Sedang Perbaikan" : (idCounter % 3 === 0 ? "Terisi" : (idCounter % 7 === 0 ? "Tidak Tersedia" : "Tersedia"));
-                    list.push({ id: idCounter++, number: code, type: type, price: price, floor: floor, location: loc, status: status });
-                };
-
-                for (let i = 1; i <= 4; i++) addRoom(1, 'standar', 13500000);
-                for (let i = 1; i <= 3; i++) addRoom(1, 'deluxe', 14500000);
-                for (let i = 1; i <= 6; i++) addRoom(2, 'standar', 13500000);
-                for (let i = 1; i <= 4; i++) addRoom(2, 'vip', 15500000);
-                for (let i = 1; i <= 6; i++) addRoom(3, 'standar', 13500000);
-                for (let i = 1; i <= 4; i++) addRoom(3, 'vip', 15500000);
-                for (let i = 1; i <= 5; i++) addRoom(4, 'standar', 13500000);
-                return list;
-            };
-
-            const initialRooms = { bandung: generateDefaultRooms('bandung'), solo: generateDefaultRooms('solo') };
-            localStorage.setItem('pt_rooms_data', JSON.stringify(initialRooms));
-            return initialRooms;
+    const getRoomsData = async () => {
+        try {
+            const res = await fetch(`${API_URL}/rooms`);
+            if (!res.ok) throw new Error('Failed to fetch rooms');
+            const data = await res.json();
+            
+            // Organize into bandung and solo arrays like the old data structure
+            const bandung = data.filter(r => r.location === 'bandung');
+            const solo = data.filter(r => r.location === 'solo');
+            
+            return { bandung, solo };
+        } catch (err) {
+            console.error(err);
+            return { bandung: [], solo: [] };
         }
-        return JSON.parse(data);
     };
 
-    const roomsDatabase = getRoomsData();
+    const roomsDatabase = await getRoomsData();
 
     // ==========================================
     // METRICS COMPUTATION

@@ -147,8 +147,11 @@ const init = () => {
     const tenantDetailModal = document.getElementById('tenantDetailModal');
     const btnCloseDetailModal = document.getElementById('btnCloseDetailModal');
     const btnCancelDetailModal = document.getElementById('btnCancelDetailModal');
+    const btnResetPasswordModal = document.getElementById('btnResetPasswordModal');
+    let currentDetailTenantId = null;
 
     const openDetailModal = (id) => {
+        currentDetailTenantId = id;
         const tenant = tenantsDatabase.find(t => t.id === id);
         if (!tenant) return;
 
@@ -180,6 +183,29 @@ const init = () => {
 
     btnCloseDetailModal.addEventListener('click', closeDetailModal);
     btnCancelDetailModal.addEventListener('click', closeDetailModal);
+
+    if (btnResetPasswordModal) {
+        btnResetPasswordModal.addEventListener('click', async () => {
+            if (!currentDetailTenantId) return;
+            const newPassword = prompt('Masukkan sandi baru untuk pengguna ini:');
+            if (newPassword === null || newPassword.trim() === '') return;
+            
+            if (confirm('Apakah Anda yakin ingin mereset sandi pengguna ini?')) {
+                try {
+                    const res = await fetch(`${API_URL}/users/${currentDetailTenantId}/reset-password`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ newPassword: newPassword.trim() })
+                    });
+                    if (!res.ok) throw new Error('Gagal mereset sandi');
+                    alert('Sandi berhasil direset!');
+                } catch(err) {
+                    console.error(err);
+                    alert('Terjadi kesalahan saat mereset sandi.');
+                }
+            }
+        });
+    }
 
     // ==========================================
     // ACTION: DELETE / EVICT RENTER

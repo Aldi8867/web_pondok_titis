@@ -5237,60 +5237,112 @@
                 return;
             }
 
-            // Sync with backend API if logged in
+            // Sync with backend API in the background (Optimistic UI)
+            let watchlist = [];
             try {
-                const existingItem = (window.watchlistDb || []).find(item => item.rooms && String(item.rooms.id) === roomId);
-                
-                if (existingItem) {
-                    const res = await fetch(`https://web-pondok-titis.onrender.com/api/watchlist/${existingItem.id}`, {
-                        method: 'DELETE'
-                    });
-                    if (res.ok) {
-                        showToast('✓ Dihapus dari watchlist');
-                    } else {
-                        throw new Error('Gagal menghapus dari server');
-                    }
-                } else {
-                    const res = await fetch(`https://web-pondok-titis.onrender.com/api/watchlist`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            user_id: currentUser.id,
-                            room_id: roomId
-                        })
-                    });
-                    if (res.ok) {
-                        showToast('✓ Ditambahkan ke watchlist');
-                    } else {
-                        throw new Error('Gagal menyimpan ke server');
-                    }
-                }
-                
-                await syncWatchlistWithAPI();
-
-                // Direct UI updates
-                const saved = localStorage.getItem('watchlist');
-                const roomIds = saved ? JSON.parse(saved) : [];
-                const hasItem = roomIds.includes(roomId);
-                const btn = document.getElementById(`heart-btn-${roomId}`);
-                if (btn) {
-                    const path = btn.querySelector('path');
-                    if (!hasItem) {
-                        btn.classList.remove('active');
-                        if (path) path.setAttribute('fill', 'none');
-                    } else {
-                        btn.classList.add('active');
-                        if (path) path.setAttribute('fill', '#db2777');
-                    }
-                }
-
-                if (document.getElementById('watchlistModal').classList.contains('active')) {
-                    renderWatchlistModalContent();
-                }
-            } catch (err) {
-                console.error(err);
-                showToast('Gagal memproses watchlist');
+                watchlist = (JSON.parse(localStorage.getItem('watchlist')) || []).map(String);
+            } catch (e) {
+                watchlist = [];
             }
+            const index = watchlist.indexOf(roomId);
+            const willAdd = index === -1;
+
+            // 1. Instantly trigger DOM visual feedback
+            const btn = document.getElementById(`heart-btn-${roomId}`);
+            if (btn) {
+                const path = btn.querySelector('path');
+                if (willAdd) {
+                    btn.classList.add('active');
+                    if (path) path.setAttribute('fill', '#db2777');
+                } else {
+                    btn.classList.remove('active');
+                    if (path) path.setAttribute('fill', 'none');
+                }
+            }
+
+            // 2. Instantly update local storage cache & show toast
+            if (willAdd) {
+                watchlist.push(roomId);
+                showToast('✓ Ditambahkan ke watchlist');
+            } else {
+                watchlist.splice(index, 1);
+                showToast('✓ Dihapus dari watchlist');
+            }
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+
+            // 3. Instantly re-render watchlist modal if it is active
+            if (document.getElementById('watchlistModal').classList.contains('active')) {
+                renderWatchlistModalContent();
+            }
+
+            // 4. Execute backend API query in the background
+            (async () => {
+                try {
+                    const existingItem = (window.watchlistDb || []).find(item => item.rooms && String(item.rooms.id) === roomId);
+                    
+                    if (willAdd) {
+                        // Avoid duplicates if already stored
+                        if (!existingItem) {
+                            const res = await fetch(`https://web-pondok-titis.onrender.com/api/watchlist`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    user_id: currentUser.id,
+                                    room_id: roomId
+                                })
+                            });
+                            if (!res.ok) throw new Error('Gagal menambahkan ke watchlist');
+                        }
+                    } else {
+                        if (existingItem) {
+                            const res = await fetch(`https://web-pondok-titis.onrender.com/api/watchlist/${existingItem.id}`, {
+                                method: 'DELETE'
+                            });
+                            if (!res.ok) throw new Error('Gagal menghapus dari watchlist');
+                        }
+                    }
+                    
+                    // Resync data to align database IDs in window.watchlistDb
+                    await syncWatchlistWithAPI();
+
+                    // Soft re-render to update onclick handlers with new DB IDs if modal is open
+                    if (document.getElementById('watchlistModal').classList.contains('active')) {
+                        renderWatchlistModalContent();
+                    }
+                } catch (err) {
+                    console.error("Gagal sinkronisasi watchlist ke database:", err);
+                    showToast('⚠️ Gagal menyinkronkan ke server');
+                    
+                    // Gracefully revert UI states on API failure
+                    try {
+                        const currentList = (JSON.parse(localStorage.getItem('watchlist')) || []).map(String);
+                        const revIdx = currentList.indexOf(roomId);
+                        if (willAdd) {
+                            if (revIdx > -1) currentList.splice(revIdx, 1);
+                        } else {
+                            if (revIdx === -1) currentList.push(roomId);
+                        }
+                        localStorage.setItem('watchlist', JSON.stringify(currentList));
+                        
+                        const revertBtn = document.getElementById(`heart-btn-${roomId}`);
+                        if (revertBtn) {
+                            const path = revertBtn.querySelector('path');
+                            if (willAdd) {
+                                revertBtn.classList.remove('active');
+                                if (path) path.setAttribute('fill', 'none');
+                            } else {
+                                revertBtn.classList.add('active');
+                                if (path) path.setAttribute('fill', '#db2777');
+                            }
+                        }
+                        if (document.getElementById('watchlistModal').classList.contains('active')) {
+                            renderWatchlistModalContent();
+                        }
+                    } catch (revertErr) {
+                        console.error("Gagal melakukan revert UI:", revertErr);
+                    }
+                }
+            })();
         }
 
         // Expose to window object for onclick handlers

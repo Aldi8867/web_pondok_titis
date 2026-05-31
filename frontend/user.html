@@ -49,6 +49,11 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        #headerNotifBell, #dropdownNotifBell { display: none !important; }
+        body.lease-expiring #headerNotifBell { display: block !important; }
+        body.lease-expiring .user-menu-btn:has(+ .user-dropdown.open) #headerNotifBell { display: none !important; }
+        body.lease-expiring .user-dropdown.open #dropdownNotifBell { display: block !important; }
+
         * {
             margin: 0;
             padding: 0;
@@ -4125,6 +4130,7 @@
                                             delete allMeta[currentUser.email];
                                             localStorage.setItem('allUsersMeta', JSON.stringify(allMeta));
                                         }
+                                        localStorage.removeItem('myRoom');
                                     } catch(e) {}
                                     
                                     alert('Masa sewa kamar Anda telah HABIS. Sistem telah secara otomatis memutuskan kontrak Anda.');
@@ -4135,23 +4141,14 @@
                                 // Warning Lonceng > 1 menit
                                 if (diffMinutes > 1) {
                                     window.leaseExpiringSoon = true;
-                                    const isDropdownOpen = document.getElementById('userDropdown').classList.contains('open');
-                                    if (isDropdownOpen) {
-                                        if (headerBell) headerBell.style.display = 'none';
-                                        if (dropBell) dropBell.style.display = 'block';
-                                    } else {
-                                        if (headerBell) headerBell.style.display = 'block';
-                                        if (dropBell) dropBell.style.display = 'none';
-                                    }
+                                    document.body.classList.add('lease-expiring');
                                 } else {
                                     window.leaseExpiringSoon = false;
-                                    if (headerBell) headerBell.style.display = 'none';
-                                    if (dropBell) dropBell.style.display = 'none';
+                                    document.body.classList.remove('lease-expiring');
                                 }
                             } else {
                                 window.leaseExpiringSoon = false;
-                                if (headerBell) headerBell.style.display = 'none';
-                                if (dropBell) dropBell.style.display = 'none';
+                                document.body.classList.remove('lease-expiring');
                             }
                         }
                     } catch(e) {}

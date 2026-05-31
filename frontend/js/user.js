@@ -933,8 +933,8 @@ document.getElementById('btnWatchlist')?.addEventListener('click', () => {
     if (window.openModal) window.openModal('watchlistModal');
 });
 
-// Change Password Modal (simple implementation)
-document.getElementById('btnChangePasswordMenu')?.addEventListener('click', () => {
+// Change Password Modal (API implementation)
+document.getElementById('btnChangePasswordMenu')?.addEventListener('click', async () => {
     userDropdown.classList.remove('open');
     if (!window.currentUser) {
         if (window.openModal) window.openModal('loginModal');
@@ -942,14 +942,20 @@ document.getElementById('btnChangePasswordMenu')?.addEventListener('click', () =
     }
     const newPass = prompt('Masukkan password baru (min 8 karakter):');
     if (newPass && newPass.length >= 8) {
-        window.currentUser.password = newPass;
-        localStorage.setItem('currentUser', JSON.stringify(window.currentUser));
-        const idx = (window.users || []).findIndex(u => u.email === window.currentUser.email);
-        if (idx !== -1) window.users[idx] = window.currentUser;
-        localStorage.setItem('users', JSON.stringify(window.users));
-        alert('Password berhasil diubah!');
+        try {
+            const res = await fetch(`https://web-pondok-titis.onrender.com/api/users/${window.currentUser.id}/reset-password`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: newPass })
+            });
+            if (!res.ok) throw new Error('Gagal mereset sandi di server');
+            alert('Password berhasil diubah!');
+        } catch (err) {
+            console.error(err);
+            alert('Terjadi kesalahan saat mengubah sandi.');
+        }
     } else if (newPass) {
-        alert('Password minimal 8 karakter');
+        alert('Password terlalu pendek! Minimal 8 karakter.');
     }
 });
 

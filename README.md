@@ -1,7 +1,7 @@
-# Web Kosan "Pondok Titis"
+# Web Kosan Pondok Titis
 
 ## Deskripsi Singkat Aplikasi
-Web Kosan "Pondok Titis" adalah aplikasi manajemen indekos berbasis web yang dirancang untuk memudahkan interaksi antara admin (pengelola) dan user (penghuni/calon penghuni). Aplikasi ini menyediakan fitur komprehensif mulai dari manajemen data kamar, pencatatan pengguna dan penyewa, pengelolaan tagihan dan pembayaran, hingga pembuatan laporan keuangan. Penghuni dapat dengan mudah melihat ketersediaan kamar, melakukan pemesanan, mengunggah bukti pembayaran, serta memantau riwayat transaksi mereka secara langsung melalui antarmuka yang ramah pengguna.
+Web Kosan "Pondok Titis" adalah aplikasi manajemen kos berbasis web yang dirancang untuk memudahkan interaksi antara admin (pengelola) dan user (penghuni/calon penghuni). Aplikasi ini menyediakan fitur komprehensif mulai dari manajemen data kamar, pencatatan pengguna dan penyewa, pengelolaan tagihan dan pembayaran, hingga pembuatan laporan keuangan. Penghuni dapat dengan mudah melihat ketersediaan kamar, melakukan pemesanan, mengunggah bukti pembayaran, serta memantau riwayat transaksi mereka secara langsung melalui antarmuka yang ramah pengguna.
 
 ## Arsitektur Sistem Berbasis 3 VM
 Sistem ini mengimplementasikan arsitektur *Distributed System* berbasis 3 Virtual Machine (VM) yang dikelola dan diprovisioning secara otomatis menggunakan **Vagrant** dan **VirtualBox**.

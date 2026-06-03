@@ -1,0 +1,194 @@
+---
+# ============================================================
+# Playbook: Pondok Titis - Full Stack Provisioning
+# Windows 11 version (sesuai modul dosen)
+# ============================================================
+
+# ── PLAY 1: Konfigurasi vm-database ─────────────────────────
+- name: Konfigurasi vm-database
+  hosts: database
+  become: true
+  vars:
+    ansible_user: vagrant
+    ansible_password: vagrant
+    db_name: kasrw
+    db_user: kasrw_user
+    db_password: "password123"
+    db_host: "192.168.56.10"
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install MySQL server
+      ansible.builtin.apt:
+        name: mysql-server
+        state: present
+
+    - name: Install python3-pymysql
+      ansible.builtin.apt:
+        name: python3-pymysql
+        state: present
+
+    - name: Pastikan MySQL berjalan
+      ansible.builtin.service:
+        name: mysql
+        state: started
+        enabled: true
+
+    - name: Buat database kasrw
+      community.mysql.mysql_db:
+        name: "{{ db_name }}"
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+
+    - name: Buat user MySQL untuk backend
+      community.mysql.mysql_user:
+        name: "{{ db_user }}"
+        password: "{{ db_password }}"
+        priv: "{{ db_name }}.*:ALL"
+        host: "{{ db_host }}"
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+
+    - name: Set bind-address agar bisa diakses dari vm-backend
+      ansible.builtin.lineinfile:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        regexp: '^bind-address'
+        line: 'bind-address = 0.0.0.0'
+        backup: true
+
+    - name: Restart MySQL agar bind-address berlaku
+      ansible.builtin.service:
+        name: mysql
+        state: restarted
+
+# ── PLAY 2: Konfigurasi vm-backend ──────────────────────────
+- name: Konfigurasi vm-backend
+  hosts: backend
+  become: true
+  vars:
+    ansible_user: vagrant
+    ansible_password: vagrant
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install PHP dan ekstensi yang dibutuhkan
+      ansible.builtin.apt:
+        name:
+          - php8.1
+          - php8.1-cli
+          - php8.1-mysql
+          - php8.1-mbstring
+          - php8.1-xml
+          - php8.1-curl
+          - php8.1-zip
+          - unzip
+          - curl
+          - mysql-client
+        state: present
+
+    - name: Install Composer
+      ansible.builtin.shell: |
+        curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
+        chmod +x /usr/local/bin/composer
+      args:
+        creates: /usr/local/bin/composer
+
+# ── PLAY 3: Konfigurasi vm-frontend ─────────────────────────
+- name: Konfigurasi vm-frontend
+  hosts: frontend
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Pastikan Nginx berjalan
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Hapus konfigurasi Nginx default
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: Reload Nginx
+
+    - name: Buat konfigurasi Nginx untuk Pondok Titis
+      ansible.builtin.copy:
+        dest: /etc/nginx/sites-available/pondok-titis
+        content: |
+          server {
+              listen 80;
+              server_name 192.168.56.12;
+
+              root /var/www/pondok-titis;
+              index user.html index.html;
+
+              location / {
+                  try_files $uri $uri/ =404;
+              }
+
+              location ~* \.(png|jpg|jpeg|gif|ico|css|js|woff2?)$ {
+                  expires 7d;
+                  add_header Cache-Control "public, immutable";
+              }
+
+              access_log /var/log/nginx/pondok-titis-access.log;
+              error_log  /var/log/nginx/pondok-titis-error.log;
+          }
+        mode: "0644"
+      notify: Reload Nginx
+
+    - name: Aktifkan site pondok-titis
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/pondok-titis
+        dest: /etc/nginx/sites-enabled/pondok-titis
+        state: link
+      notify: Reload Nginx
+
+    - name: Buat folder web root
+      ansible.builtin.file:
+        path: /var/www/pondok-titis
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: "0755"
+
+    - name: Copy semua file web ke web root
+      ansible.builtin.shell: |
+        cp -r /vagrant/css /var/www/pondok-titis/
+        cp -r /vagrant/images /var/www/pondok-titis/
+        cp -r /vagrant/js /var/www/pondok-titis/
+        cp /vagrant/*.html /var/www/pondok-titis/
+        chown -R www-data:www-data /var/www/pondok-titis/
+      args:
+        creates: /var/www/pondok-titis/user.html
+
+    - name: Test konfigurasi Nginx
+      ansible.builtin.command: nginx -t
+      register: nginx_test
+      changed_when: false
+
+    - name: Tampilkan hasil test Nginx
+      ansible.builtin.debug:
+        msg: "{{ nginx_test.stderr }}"
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded

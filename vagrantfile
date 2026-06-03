@@ -1,0 +1,60 @@
+Vagrant.configure("2") do |config|
+
+  # Pakai insecure_key yang sama untuk semua VM (tidak di-replace)
+  config.ssh.insert_key = false
+
+  # ── VM 1: Database ──────────────────────────────────────────────
+  config.vm.define "database" do |db|
+    db.vm.box = "ubuntu/jammy64"
+    db.vm.hostname = "database"
+    db.vm.network "private_network", ip: "192.168.56.11"
+
+    db.vm.provider "virtualbox" do |vb|
+      vb.name   = "pondok-titis-database"
+      vb.memory = "1024"
+      vb.cpus   = 1
+    end
+  end
+
+  # ── VM 2: Backend (Ansible controller) ──────────────────────────
+  config.vm.define "backend" do |be|
+    be.vm.box = "ubuntu/jammy64"
+    be.vm.hostname = "backend"
+    be.vm.network "private_network", ip: "192.168.56.10"
+
+    be.vm.provider "virtualbox" do |vb|
+      vb.name   = "pondok-titis-backend"
+      vb.memory = "1024"
+      vb.cpus   = 1
+    end
+
+    # Windows: copy insecure_key ke /home/vagrant/ dan set chmod 600
+    be.vm.provision "shell", inline: <<-SHELL
+      cp /vagrant/ansible/insecure_private_key /home/vagrant/insecure_private_key
+      chmod 600 /home/vagrant/insecure_private_key
+      chown vagrant:vagrant /home/vagrant/insecure_private_key
+    SHELL
+
+    be.vm.provision "ansible_local" do |ansible|
+      ansible.playbook       = "ansible/playbook.yml"
+      ansible.inventory_path = "ansible/inventory"
+      ansible.limit          = "all"
+    end
+  end
+
+  # ── VM 3: Frontend ──────────────────────────────────────────────
+  config.vm.define "frontend" do |fe|
+    fe.vm.box = "ubuntu/jammy64"
+    fe.vm.hostname = "frontend"
+    fe.vm.network "private_network", ip: "192.168.56.12"
+
+    fe.vm.synced_folder ".", "/vagrant"
+
+    fe.vm.provider "virtualbox" do |vb|
+      vb.name   = "pondok-titis-frontend"
+      vb.memory = "1024"
+      vb.cpus   = 1
+    end
+  end
+
+end

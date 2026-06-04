@@ -1,97 +1,206 @@
-# Web Kosan "Pondok Titis"
+# SISTEM MANAJEMEN INDEKOS "PONDOK TITIS"
+> **BERBASIS WEB MENGGUNAKAN ARSITEKTUR CLOUD**
 
-## Deskripsi Singkat Aplikasi
-Web Kosan "Pondok Titis" adalah aplikasi manajemen indekos berbasis web yang dirancang untuk memudahkan interaksi antara admin (pengelola) dan user (penghuni/calon penghuni). Aplikasi ini menyediakan fitur komprehensif mulai dari manajemen data kamar, pencatatan pengguna dan penyewa, pengelolaan tagihan dan pembayaran, hingga pembuatan laporan keuangan. Penghuni dapat dengan mudah melihat ketersediaan kamar, melakukan pemesanan, mengunggah bukti pembayaran, serta memantau riwayat transaksi mereka secara langsung melalui antarmuka yang ramah pengguna.
+**Kelompok:** Kelompok 1  
+**Mata Kuliah:** Komputasi Awan  
+**Universitas:** Telkom University  
 
-## Arsitektur Sistem Berbasis 3 VM
-Sistem ini mengimplementasikan arsitektur *Distributed System* berbasis 3 Virtual Machine (VM) yang dikelola dan diprovisioning secara otomatis menggunakan **Vagrant** dan **VirtualBox**.
+---
 
-### Pembagian Fungsi VM:
-1. **VM Database (IP: `192.168.56.11`)**
-   - **Fungsi:** Bertindak sebagai *Database Server*.
-   - **Deskripsi:** Menyimpan seluruh data operasional aplikasi secara terpusat, seperti data pengguna, informasi kamar, riwayat pembayaran, dan konfigurasi aplikasi. VM ini dikonfigurasi untuk menjalankan **MySQL Server**.
+## 📌 DESKRIPSI APLIKASI
 
-2. **VM Backend (IP: `192.168.56.10`)**
-   - **Fungsi:** Bertindak sebagai *Application Programming Interface (API) Server* dan *Ansible Controller*.
-   - **Deskripsi:** Menangani seluruh logika bisnis (Business Logic), proses autentikasi, serta menjembatani komunikasi data antara Frontend dan Database. VM ini menjalankan environment **Node.js** dengan framework **Express.js** untuk menyediakan RESTful API. Selain itu, VM ini juga berperan sebagai master controller Ansible untuk mendistribusikan konfigurasi ke VM lain.
+**Web Kosan "Pondok Titis"** adalah aplikasi manajemen indekos berbasis web yang dirancang untuk memudahkan interaksi antara admin (pengelola) dan user (penghuni/calon penghuni). Sistem ini mengimplementasikan arsitektur komputasi awan (*Distributed System*) dengan 3 Virtual Machine: **Database**, **Backend API**, dan **Frontend Web** yang saling terintegrasi.
 
-3. **VM Frontend (IP: `192.168.56.12`)**
-   - **Fungsi:** Bertindak sebagai *Web Server* untuk UI/UX.
-   - **Deskripsi:** Bertugas untuk menyajikan antarmuka pengguna (User Interface) aplikasi. VM ini dikonfigurasi menggunakan **Nginx** yang melayani file-file statis seperti HTML, CSS, dan JavaScript kepada klien/browser.
+### ✨ Fitur Utama:
+- Manajemen data kamar kos (Tersedia/Terisi)
+- Pencatatan pengguna dan penyewa kamar
+- Pengelolaan tagihan dan bukti pembayaran (Upload & Approve)
+- Fitur *Watchlist* (Simpan kamar favorit)
+- Dashboard web admin dan user yang responsif
+- API REST untuk komunikasi data
+- Otomatisasi *provisioning* menggunakan Vagrant & Ansible
 
-## Tools & Teknologi yang Digunakan
-- **Infrastruktur & Provisioning:** Vagrant, Oracle VirtualBox, Ansible.
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript.
-- **Backend API:** Node.js, Express.js, Cors, Dotenv.
-- **Database / BaaS:** MySQL (Provisioning default), Supabase (PostgreSQL untuk Cloud Database).
-- **Web Server:** Nginx.
+---
 
-## Dokumentasi Source Code dan Konfigurasi Sistem (Struktur Folder)
-Proyek ini dikumpulkan melalui repositori GitHub dengan struktur direktori sebagai berikut:
+## 🏗️ ARSITEKTUR SISTEM (3 VIRTUAL MACHINE)
 
+### Diagram Alur:
 ```text
-web_kosan/
-├── ansible/                  # Konfigurasi Ansible untuk otomatisasi instalasi & provisioning
-│   ├── inventory             # Daftar IP dan target hosts VM
-│   ├── playbook.yml          # Script utama Ansible untuk setup MySQL, Nginx, PHP/Composer
-│   └── insecure_private_key  # Kunci SSH untuk komunikasi antar VM
-├── backend/                  # Source code API (Node.js)
-│   ├── .env                  # File environment variable (Kredensial Supabase/Database)
-│   ├── package.json          # Konfigurasi project Node.js dan daftar dependensi
-│   ├── server.js             # File utama backend server (Routes, Middleware, Logic)
-│   ├── seed-rooms.js         # Script utilitas untuk inisialisasi/seeding data kamar
-│   └── delete_rooms.js       # Script utilitas untuk mengosongkan data kamar
-├── frontend/                 # Source code Antarmuka Web (UI)
-│   ├── css/                  # File styling (Cascading Style Sheets)
-│   ├── js/                   # Script frontend (logika interaksi UI & Fetch API)
-│   ├── images/               # Aset gambar aplikasi (logo, foto kamar, dsb)
-│   ├── index.html            # Halaman Landing Page
-│   ├── admin.html            # Halaman Dashboard khusus Admin (Manajemen)
-│   └── user.html             # Halaman Dashboard khusus User (Penyewa)
-├── Vagrantfile               # Konfigurasi topologi jaringan dan spesifikasi hardware ke-3 VM
-└── README.md                 # Dokumentasi proyek (File ini)
+     [Browser User]
+           |
+           | HTTP GET/POST
+           v
+  +-------------------+
+  | VM Frontend       |  Port: 80
+  | Nginx + HTML      |  IP: 192.168.56.12
+  | UI/UX Web Kosan   |
+  +-------------------+
+           |
+           | Fetch API (AJAX)
+           v
+  +-------------------+
+  | VM Backend        |  Port: 3000
+  | Node.js + Express |  IP: 192.168.56.10
+  | /api/*            |
+  | Ansible Controller|
+  +--------+-----------
+           |
+           | DB Query
+           v
+  +-------------------+
+  | VM Database       |  Port: 3306
+  | MySQL Server      |  IP: 192.168.56.11
+  | Supabase (Cloud)  |
+  +-------------------+
 ```
 
-## Cara Instalasi dan Menjalankan Aplikasi pada VM
+### Fungsi Tiap VM:
 
-Berikut adalah langkah-langkah untuk mendeploy aplikasi ini menggunakan Vagrant:
+1. **VM Database (`192.168.56.11`)**
+   - Bertindak sebagai Database Server.
+   - Menyimpan seluruh data operasional aplikasi secara terpusat (`users`, `rooms`, `payments`).
+   - Dikonfigurasi untuk menjalankan **MySQL Server** (Sistem juga *support* Supabase Cloud Database).
 
-1. **Persiapan Sistem**
-   - Pastikan Anda telah menginstal **Oracle VirtualBox** dan **Vagrant** di komputer Anda.
-   - Buka Terminal / Command Prompt / PowerShell.
+2. **VM Backend (`192.168.56.10`)**
+   - Bertindak sebagai API Server (Node.js & Express.js) di port **3000**.
+   - Menyediakan Endpoint `/api/*` untuk autentikasi, manajemen kamar, pembayaran, dan user.
+   - Berperan sebagai **Ansible Controller** yang mendistribusikan konfigurasi ke VM lain.
 
-2. **Clone Repositori**
-   Unduh source code proyek ini dari GitHub:
+3. **VM Frontend (`192.168.56.12`)**
+   - Bertindak sebagai Web Server (Nginx).
+   - Menyajikan antarmuka (*User Interface*) aplikasi.
+   - Melayani file statis HTML, CSS, dan Vanilla JavaScript.
+   - Akses melalui `http://192.168.56.12/` di browser host.
+
+---
+
+## 🛠️ TOOLS & TEKNOLOGI YANG DIGUNAKAN
+
+**Infrastructure & Provisioning:**
+- **VirtualBox:** Container virtual machine
+- **Vagrant:** Infrastructure as Code (IaC) & provisioning VM
+- **Ansible:** Configuration management & otomatisasi instalasi
+
+**Backend API:**
+- **Node.js:** Runtime environment
+- **Express.js:** Web framework untuk REST API
+- **Cors & Dotenv:** Middleware & environment management
+
+**Database:**
+- **MySQL:** Relational database (Default VM provisioning)
+- **Supabase (PostgreSQL):** Cloud database alternative
+
+**Frontend:**
+- **Nginx:** Web server
+- **HTML5 & CSS3:** Markup language & styling web (Responsive design)
+- **JavaScript (Vanilla):** Client-side scripting & API fetch
+
+**Operating System:**
+- **Ubuntu 22.04 (Jammy):** VM OS untuk Database, Backend, Frontend
+- **Windows / Linux / macOS:** Host machine OS
+
+---
+
+## 🚀 INSTALASI & MENJALANKAN SISTEM
+
+### Prerequisite:
+- VirtualBox
+- Vagrant
+- Terminal / PowerShell / Command Prompt
+
+### Langkah Instalasi:
+
+1. **Buka terminal di folder web_kosan**
    ```bash
-   git clone <URL_REPOSITORI_GITHUB_ANDA>
-   cd web_kosan
+   cd E:\web_kosan
    ```
 
-3. **Jalankan Vagrant**
-   Lakukan provisioning dan nyalakan ketiga mesin virtual sekaligus dengan perintah berikut (proses ini akan memakan waktu beberapa menit tergantung koneksi internet karena akan mengunduh Box OS Ubuntu dan menginstal berbagai paket):
+2. **Jalankan Vagrant untuk spin-up 3 VM**
    ```bash
    vagrant up
    ```
+   > *Proses ini akan memakan waktu beberapa menit tergantung koneksi internet (download OS & packages).*
+   
+   Setup otomatis yang dilakukan:
+   - MySQL di VM Database (melalui Ansible)
+   - Node.js & dependencies di VM Backend
+   - Nginx di VM Frontend
 
-4. **Menjalankan Backend Server (Node.js)**
-   Secara default, Vagrant akan mengonfigurasi web server Nginx di VM Frontend. Untuk mengaktifkan API backend, Anda perlu masuk ke VM Backend dan menjalankan servernya:
+3. **Menjalankan Backend Server (Node.js)**
+   Setelah VM menyala, masuk ke VM Backend untuk menjalankan server API:
    ```bash
-   # Masuk ke dalam VM Backend
    vagrant ssh backend
-   
-   # Berpindah ke folder sinkronisasi backend
    cd /vagrant/backend
-   
-   # Instalasi dependensi Node.js (hanya dilakukan pertama kali)
-   npm install
-   
-   # Jalankan server
+   npm install      # (Hanya dilakukan untuk pertama kali)
    npm start
    ```
-   *Catatan: Server API akan berjalan pada port 3000 (dapat dilihat di console).*
+   *Output: `Server is running on port 3000`*
 
-5. **Akses Aplikasi melalui Browser**
-   Setelah semua layanan berjalan, buka browser web Anda dan ketikkan alamat IP dari VM Frontend:
-   - **Frontend URL:** `http://192.168.56.12/`
-   
-   Anda akan diarahkan ke halaman utama aplikasi Pondok Titis dan dapat mulai menggunakannya.
+4. **Akses Aplikasi di Browser**
+   Dari host machine, buka browser dan akses alamat:  
+   👉 **http://192.168.56.12**
+
+5. **Mematikan Sistem**
+   Buka terminal baru di folder `web_kosan` dan jalankan:
+   ```bash
+   vagrant halt
+   ```
+
+---
+
+## 📁 STRUKTUR FOLDER PROYEK
+
+```text
+web_kosan/
+│
+├── README.md                 # Dokumentasi proyek (File ini)
+├── Vagrantfile               # Konfigurasi 3 VM & jaringan
+├── ansible/                  # Konfigurasi Ansible
+│   ├── inventory             # Daftar IP dan target hosts
+│   ├── playbook.yml          # Script provisioning Nginx, MySQL, dll
+│   └── insecure_private_key  # Kunci SSH komunikasi antar VM (Dikecualikan dari Repositori)
+│
+├── backend/                  # Source code API
+│   ├── package.json          # Dependensi Node.js
+│   ├── server.js             # File utama API (Routes & Logic)
+│   ├── seed-rooms.js         # Script isi data kamar (Seeding)
+│   └── delete_rooms.js       # Script hapus data kamar
+│
+└── frontend/                 # Source code Antarmuka Web (UI)
+    ├── css/                  # Styling web
+    ├── js/                   # Logika frontend & API fetch
+    ├── images/               # Aset gambar aplikasi
+    ├── index.html            # Halaman Landing Page
+    ├── admin.html            # Dashboard Admin
+    └── user.html             # Dashboard User/Penyewa
+```
+*(Catatan: File konfigurasi rahasia seperti `.env` sengaja tidak di-upload untuk alasan keamanan).*
+
+---
+
+## ⚙️ CARA KERJA SISTEM
+
+1. **Interaksi Pengguna:** User membuka `http://192.168.56.12` dan berinteraksi dengan UI (Nginx Frontend).
+2. **Permintaan Data (Fetch API):** Ketika user login atau melihat daftar kamar, Vanilla JavaScript pada frontend mengirimkan request HTTP (AJAX) ke `http://192.168.56.10:3000/api/*`.
+3. **Pemrosesan Backend:** Node.js (Express.js) di VM Backend menerima request, memproses logika bisnis, dan melakukan query data ke Database (Supabase / VM Database).
+4. **Respons & Update UI:** Backend mengirimkan balasan berformat JSON ke Frontend. Frontend merender data tersebut ke layar secara dinamis tanpa perlu reload halaman penuh.
+
+---
+
+## 🗄️ DATABASE SCHEMA (GAMBARAN UMUM)
+
+**Tabel Utama:**
+1. `users`: Data akun (`id`, `email`, `password`, `name`, `role`, `phone`, `origin`, dll)
+2. `rooms`: Data kamar kos (`id`, `room_number`, `type`, `price`, `status`, `location`, dll)
+3. `payments`: Data transaksi/pembayaran (`id`, `user_id`, `room_id`, `amount`, `status`, `proof_image`)
+4. `watchlist`: Kamar favorit user (`id`, `user_id`, `room_id`)
+5. `settings`: Konfigurasi aplikasi (info kosan, kontak, alamat)
+
+- **Status Kamar:** `"Tersedia"` atau `"Terisi"`
+- **Role User:** `"admin"` atau `"user"`
+
+---
+
+## 💡 KETERANGAN TAMBAHAN
+- Untuk *troubleshooting* backend, cek console terminal tempat `npm start` dijalankan.
+- Konfigurasi alamat database/Supabase biasanya diatur melalui file `backend/.env` (File ini tidak disertakan di repositori untuk keamanan).

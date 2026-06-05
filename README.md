@@ -7,6 +7,12 @@
 
 ---
 
+## 👥 KREDIT PENGEMBANG
+- **Frontend & UI/UX:** Aldi
+- **Backend API & Database:** Razan
+
+---
+
 ## 📌 DESKRIPSI APLIKASI
 
 **Web Kosan "Pondok Titis"** adalah aplikasi manajemen indekos berbasis web yang dirancang untuk memudahkan interaksi antara admin (pengelola) dan user (penghuni/calon penghuni). Sistem ini mengimplementasikan arsitektur komputasi awan (*Distributed System*) dengan 3 Virtual Machine: **Database**, **Backend API**, dan **Frontend Web** yang saling terintegrasi.

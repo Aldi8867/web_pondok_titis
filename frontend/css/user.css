@@ -1,12 +1,16 @@
 /* ========== ADDITIONAL LIQUID CRYSTAL STYLES ========== */
 
 /* Glass morphism cards */
-.room-card,
 .modal-content,
 .user-dropdown,
 .filter-bar-location select {
     backdrop-filter: blur(0px);
     transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.room-card {
+    backdrop-filter: blur(0px);
+    transition: all 0.3s ease;
 }
 
 .room-card:hover {
@@ -77,7 +81,7 @@
 .glass-btn-secondary {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
     padding: 12px 24px;
     border-radius: 40px;
     color: var(--text);
@@ -249,3 +253,8 @@ input[type="checkbox"] {
         width: 100%;
     }
 }
+/* Custom room card hover auras */
+.room-card-standar:hover { transform: translateY(-5px) !important; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4) !important; border-color: rgba(16, 185, 129, 0.5) !important; }
+.room-card-deluxe:hover { transform: translateY(-5px) !important; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4) !important; border-color: rgba(59, 130, 246, 0.5) !important; }
+.room-card-vip:hover { transform: translateY(-5px) !important; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4) !important; border-color: rgba(239, 68, 68, 0.5) !important; }
+

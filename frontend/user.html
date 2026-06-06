@@ -2836,7 +2836,233 @@
             </div>
         </div>
 
-        <!-- Kunjungi Lokasi Kami Section -->
+        <!-- Ulasan Penghuni Section -->
+        <style>
+            .reviews-section {
+                padding: 60px 0;
+            }
+            .reviews-header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .reviews-title {
+                font-size: 2rem;
+                font-weight: 800;
+                color: var(--text);
+                margin-bottom: 12px;
+            }
+            .reviews-subtitle {
+                color: var(--text-muted);
+                font-size: 1.1rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .rating-overview {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin-top: 20px;
+            }
+            .rating-score {
+                font-size: 3rem;
+                font-weight: 900;
+                color: var(--text);
+                line-height: 1;
+            }
+            .rating-stars {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .stars-svg {
+                display: flex;
+                gap: 4px;
+                color: #f59e0b;
+            }
+            .rating-text {
+                font-size: 0.9rem;
+                color: var(--text-muted);
+                font-weight: 600;
+            }
+            .reviews-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+                margin-top: 40px;
+            }
+            .review-card {
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 24px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                transition: all 0.3s ease;
+                cursor: default;
+            }
+            .review-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(219, 39, 119, 0.4);
+                border-color: rgba(219, 39, 119, 0.5);
+            }
+            .review-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .review-avatar {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: var(--primary);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 1.2rem;
+            }
+            .review-user {
+                display: flex;
+                flex-direction: column;
+            }
+            .review-name {
+                font-weight: 700;
+                color: var(--text);
+                font-size: 1.05rem;
+            }
+            .review-location {
+                font-size: 0.8rem;
+                color: var(--primary);
+                font-weight: 600;
+                background: rgba(219, 39, 119, 0.1);
+                padding: 2px 8px;
+                border-radius: 12px;
+                width: fit-content;
+                margin-top: 4px;
+            }
+            .review-text {
+                color: var(--text-muted);
+                font-size: 0.95rem;
+                line-height: 1.6;
+                font-style: italic;
+            }
+            .review-stars {
+                color: #f59e0b;
+                display: flex;
+                gap: 2px;
+            }
+            .review-stars svg {
+                width: 16px;
+                height: 16px;
+            }
+        </style>
+        
+        <div class="reviews-section">
+            <svg width="0" height="0" style="position:absolute; visibility:hidden;">
+                <defs>
+                    <linearGradient id="starHalfFill" x1="0" x2="1" y1="0" y2="0">
+                        <stop offset="50%" stop-color="#db2777" />
+                        <stop offset="50%" stop-color="transparent" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="reviews-header">
+                <h2 class="reviews-title">Kata Mereka Tentang Kami</h2>
+                <p class="reviews-subtitle">Lebih dari 500 penghuni telah merasakan kenyamanan tinggal di Pondok Titis. Berikut adalah beberapa ulasan asli dari mereka.</p>
+                <div class="rating-overview">
+                    <div class="rating-score">4,5</div>
+                    <div class="rating-stars">
+                        <div class="stars-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="url(#starHalfFill)" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                        </div>
+                        <div class="rating-text">Berdasarkan ulasan asli Google Maps</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background: #3b82f6;">B</div>
+                        <div class="review-user">
+                            <div class="review-name">Bogas Karunia</div>
+                            <div class="review-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            </div>
+                            <div class="review-location">Cabang Bandung</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Lokasinya enak, deket jalan raya and Universitas Telkom."</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background: #10b981;">T</div>
+                        <div class="review-user">
+                            <div class="review-name">Tegar Ditya</div>
+                            <div class="review-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            </div>
+                            <div class="review-location">Cabang Bandung</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Trmpat kos putri yang nyaman, aman dan strategis"</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background: #8b5cf6;">L</div>
+                        <div class="review-user">
+                            <div class="review-name">Laras Heraswati</div>
+                            <div class="review-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            </div>
+                            <div class="review-location">Cabang Solo</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Mahasiswa/pelajar/bekerja. Sedang cari tempat kos, terdapat 20 kamar di pondok titis. Tersedia dapur juga dengan masing-masing 2 kamar mandi disetiap lantainya... Bisa bayar per 6 bulan ataupun 12 bulan."</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar" style="background: #ec4899;">A</div>
+                        <div class="review-user">
+                            <div class="review-name">A_024 _Bintang</div>
+                            <div class="review-stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#db2777" stroke="#db2777" stroke-dasharray="34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l-2.35 5.76l-6.21 0.46l4.76 4.02l-1.49 6.04l5.29 -3.28M12 3l2.35 5.76l6.21 0.46l-4.76 4.02l1.49 6.04l-5.29 -3.28"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="34;0"/></path></svg>
+                            </div>
+                            <div class="review-location">Cabang Solo</div>
+                        </div>
+                    </div>
+                    <div class="review-text">"Tempatnya bersih sangat cocok untuk mahasiswa , dan tempat strategis mencari makan sangat mudah , dekat dengan supermarket (indomart) , kenyamanan dan keamanan sangat aman..."</div>
+                </div>
+            </div>
+        </div>
+
         <div class="locations-section">
             <h2 class="locations-title" id="locationsTitle">Kunjungi Lokasi Kami</h2>
             <div class="locations-grid">
@@ -2847,9 +3073,7 @@
                         <p class="location-card-address">Jl. Jayasari No. 34, Bojongsoang, Bandung</p>
                     </div>
                     <div class="location-map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3960.3010366132953!2d107.6328743!3d-6.9737661!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9b23c875a71%3A0x620136e5d548749d!2sPondok%20Titis%20%26%20GG%20Jayasari!5e0!3m2!1sid!2sid!4v1780754353174!5m2!1sid!2sid"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3960.3010366132953!2d107.6328743!3d-6.9737661!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9b23c875a71%3A0x620136e5d548749d!2sPondok%20Titis%20%26%20GG%20Jayasari!5e0!3m2!1sid!2sid!4v1780754353174!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         <!-- Buka di Maps Floating Button Overlay -->
                         <a href="https://www.google.com/maps/place/Pondok+Titis+%26+GG+Jayasari/@-6.9727871,107.6350985,19z/"
                             target="_blank" class="buka-maps-btn">
@@ -2861,40 +3085,6 @@
                             <span>Buka di Maps</span>
                         </a>
                     </div>
-                    
-                    <div class="location-reviews" style="padding: 16px; border-top: 1px solid var(--border); background: var(--bg-card); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-                            <span style="font-size: 1.8rem; font-weight: 800; color: var(--text);">4,5</span>
-                            <div style="display: flex; color: #f59e0b; font-size: 1.2rem;">
-                                ★★★★<span style="position: relative; display: inline-block; width: 1em; overflow: hidden; color: #e2e8f0;"><span style="position: absolute; left: 0; top: 0; width: 50%; overflow: hidden; color: #f59e0b;">★</span>★</span>
-                            </div>
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">(Beberapa ulasan asli)</span>
-                        </div>
-                        
-                        <div class="review-item" style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <div style="width: 36px; height: 36px; background: #5c6bc0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem;">B</div>
-                                <div>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: var(--text);">Bogas Karunia</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Local Guide · 82 ulasan</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; color: #f59e0b; font-size: 0.85rem; margin-bottom: 6px;">★★★★<span style="color: #e2e8f0;">★</span></div>
-                            <p style="font-size: 0.9rem; color: var(--text); line-height: 1.5; margin: 0;">"Lokasinya enak, deket jalan raya and Universitas Telkom."</p>
-                        </div>
-                        
-                        <div class="review-item" style="margin-bottom: 0;">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <div style="width: 36px; height: 36px; background: #00897b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem;">T</div>
-                                <div>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: var(--text);">Tegar Ditya</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Local Guide · 64 ulasan</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; color: #f59e0b; font-size: 0.85rem; margin-bottom: 6px;">★★★★★</div>
-                            <p style="font-size: 0.9rem; color: var(--text); line-height: 1.5; margin: 0;">"Trmpat kos putri yang nyaman, aman dan strategis"</p>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Location 2: Solo -->
@@ -2904,9 +3094,7 @@
                         <p class="location-card-address">Ketinggilan, Jebres, Surakarta, Jawa Tengah</p>
                     </div>
                     <div class="location-map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.216453814143!2d110.86040987476333!3d-7.551360492462293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a171bdccf99a5%3A0x305730521ef5cc80!2sPONDOK%20%22TITIS%22!5e0!3m2!1sid!2sid!4v1780754609061!5m2!1sid!2sid"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.216453814143!2d110.86040987476333!3d-7.551360492462293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a171bdccf99a5%3A0x305730521ef5cc80!2sPONDOK%20%22TITIS%22!5e0!3m2!1sid!2sid!4v1780754609061!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         <!-- Buka di Maps Floating Button Overlay -->
                         <a href="https://www.google.com/maps/place/PONDOK+%22TITIS%22/@-7.5294174,110.8454407,17z/"
                             target="_blank" class="buka-maps-btn">
@@ -2917,40 +3105,6 @@
                             </svg>
                             <span>Buka di Maps</span>
                         </a>
-                    </div>
-                    
-                    <div class="location-reviews" style="padding: 16px; border-top: 1px solid var(--border); background: var(--bg-card); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-                            <span style="font-size: 1.8rem; font-weight: 800; color: var(--text);">4,5</span>
-                            <div style="display: flex; color: #f59e0b; font-size: 1.2rem;">
-                                ★★★★<span style="position: relative; display: inline-block; width: 1em; overflow: hidden; color: #e2e8f0;"><span style="position: absolute; left: 0; top: 0; width: 50%; overflow: hidden; color: #f59e0b;">★</span>★</span>
-                            </div>
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">(Beberapa ulasan asli)</span>
-                        </div>
-                        
-                        <div class="review-item" style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <div style="width: 36px; height: 36px; background: #1e88e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem;">L</div>
-                                <div>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: var(--text);">Laras Heraswati</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Local Guide · 39 ulasan</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; color: #f59e0b; font-size: 0.85rem; margin-bottom: 6px;">★★★★<span style="color: #e2e8f0;">★</span></div>
-                            <p style="font-size: 0.9rem; color: var(--text); line-height: 1.5; margin: 0;">"Mahasiswa/pelajar/bekerja. Sedang cari tempat kos, terdapat 20 kamar di pondok titis. Tersedia dapur juga dengan masing-masing 2 kamar mandi disetiap lantainya..."</p>
-                        </div>
-                        
-                        <div class="review-item" style="margin-bottom: 0;">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <div style="width: 36px; height: 36px; background: #d81b60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem;">A</div>
-                                <div>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: var(--text);">A_024 _Bintang</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">2 ulasan</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; color: #f59e0b; font-size: 0.85rem; margin-bottom: 6px;">★★★★★</div>
-                            <p style="font-size: 0.9rem; color: var(--text); line-height: 1.5; margin: 0;">"Tempatnya bersih sangat cocok untuk mahasiswa , dan tempat strategis mencarian makan sangat mudah , dekat dengan supermarket..."</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -4055,7 +4209,7 @@
             grid.innerHTML = filtered.map(room => {
                 const isInWatchlist = watchlist.includes(String(room.id));
                 return `
-                <div class="room-card">
+                <div class="room-card room-card-${room.type.toLowerCase()}">
                     <div class="room-card-img-container">
                         <img class="room-card-img" src="${room.image}" alt="${room.name}" style="height: 100%; width: 100%; object-fit: cover;">
                         <button id="heart-btn-${room.id}" class="watchlist-heart-btn ${isInWatchlist ? 'active' : ''}" onclick="window.toggleWatchlist('${room.id}', event)" aria-label="Add to Watchlist">
